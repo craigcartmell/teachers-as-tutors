@@ -1,0 +1,22 @@
+@import "variables";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "jumbotron";
+
+.container.hero {
+  background: url('../../img/bg_apple.jpg') no-repeat;
+  background-size: 100%;
+  background-position-y: -100px;
+  color: #fff;
+  margin-top: 6px;
+  overflow-y: visible;
+
+  @media (min-width: $screen-sm-min) {
+    width: 100%;
+  }
+  @media (min-width: $screen-md-min) {
+    width: 100%;
+  }
+  @media (min-width: $screen-lg-min) {
+    width: 100%;
+  }
+}
