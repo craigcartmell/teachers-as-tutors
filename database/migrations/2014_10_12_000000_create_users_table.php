@@ -1,10 +1,15 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
+use TeachersAsTutors\Database\Migration;
+use TeachersAsTutors\Database\Schema\Blueprint;
 
 class CreateUsersTable extends Migration
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Run the migrations.
      *
@@ -12,12 +17,14 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
+        $this->schema->create('users', function (Blueprint $table) {
+            $table->integer('id', true)->unsigned();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->rememberToken();
+            $table->integer('permission')->unsigned()->nullable();
+            $table->authors();
             $table->timestamps();
         });
     }
@@ -29,6 +36,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        $this->schema->dropIfExists('users');
     }
 }

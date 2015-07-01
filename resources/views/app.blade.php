@@ -69,71 +69,38 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse pull-right">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Tuition <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Tutors <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Blog <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Login <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="{{ url() }}">Home <span class="sr-only">(current)</span></a></li>
+                <li><a href="{{ url('tuition') }}">Tuition <span class="sr-only">(current)</span></a></li>
+                <li><a href="{{ url('tutors') }}">Tutors <span class="sr-only">(current)</span></a></li>
+                <li><a href="{{ url('blog') }}">Blog <span class="sr-only">(current)</span></a></li>
+
+                @if(auth()->check())
+                    <li><a href="{{ route('logout') }}">Logout <span class="sr-only">(current)</span></a></li>
+                @else
+                    <li><a href="{{ route('login') }}">Login <span class="sr-only">(current)</span></a></li>
+                @endif
+
             </ul>
         </div>
         <!--/.navbar-collapse -->
     </div>
 </nav>
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-    <div class="container hero">
-        <h1>Hello, world!</h1>
+@section('hero')
+    @include('partials.hero', ['hero_image_uri' => asset('img/heroes/hero_apple.jpg'), 'hero_text' => 'Default website intro.'])
+@show
 
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a
-            jumbotron and three supporting pieces of content. Use it as a starting point to create something more
-            unique.</p>
+@yield('content')
 
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
-    </div>
-</div>
+<hr>
 
 <div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Heading</h2>
-
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
-                euismod. Donec sed odio dui. </p>
-
-            <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
-
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
-                euismod. Donec sed odio dui. </p>
-
-            <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Heading</h2>
-
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-                porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                fermentum massa justo sit amet risus.</p>
-
-            <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
-        </div>
-    </div>
-
-    <hr>
-
     <footer>
         <p>&copy; {{ env('APP_NAME') }} {{ \Carbon\Carbon::now()->year }}</p>
     </footer>
 </div>
-<!-- /container -->
 
 <script src="{{ elixir('js/app.js') }}" type="text/javascript"></script>
-
 </body>
+
 </html>

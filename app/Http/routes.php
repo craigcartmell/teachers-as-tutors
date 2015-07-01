@@ -11,8 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::group(['prefix' => 'auth'], function () {
+    Route::get('login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
+    Route::post('login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
+    Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']);
 });
 
-Route::get('tuition', ['as' => 'tuition', 'uses' => 'index@PageController']);
+Route::group(['prefix' => 'password'], function () {
+    Route::get('email', ['as' => 'password.email', 'uses' => 'Auth\PasswordController@getEmail']);
+    Route::post('email', ['as' => 'password.email', 'uses' => 'Auth\PasswordController@postEmail']);
+    Route::get('reset/{token}', ['as' => 'password.reset', 'uses' => 'Auth\PasswordController@getReset']);
+    Route::post('reset/{token}', ['as' => 'password.reset', 'uses' => 'Auth\PasswordController@postReset']);
+});
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('', ['as' => 'admin.index', 'uses' => 'AdminController@index']);
+});
+
+Route::any('{uri}', 'PageController@index')->where('uri', '(.*)');
