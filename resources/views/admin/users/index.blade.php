@@ -4,6 +4,7 @@
 
 @section('content')
     <div class="container">
+        <a href="{{ route('admin.users.add') }}" class="btn btn-primary">Add New</a>
            <table class="table table-responsive table-striped">
                <thead>
                 <tr>
@@ -26,10 +27,12 @@
                    <td><a href="{{ route('admin.users.edit', ['id' => $user->id]) }}" class="btn btn-default">Edit</a></td>
                    <td><a href="{{ route('admin.users.delete', ['id' => $user->id]) }}" class="btn btn-danger delete-record">Delete</a></td>
                </tr>
-               </tbody>
                @empty
-
+                   <tr>
+                       <td colspan="10">There are currently no records available.</td>
+                   </tr>
                @endforelse
+               </tbody>
            </table>
     </div>
     <!-- /container -->

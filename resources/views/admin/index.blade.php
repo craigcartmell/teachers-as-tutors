@@ -9,18 +9,16 @@
             <div class="col-md-4">
                 <h2>Manage Users</h2>
 
-                <p>Here you can create, edit and delete users. You can also manage their access.</p>
+                <p>Here you can create, edit and delete users. You can also manage the level of access they are allowed.</p>
 
                 <p><a class="btn btn-default" href="{{ route('admin.users') }}" role="button">Manage Users »</a></p>
             </div>
             <div class="col-md-4">
-                <h2>Heading</h2>
+                <h2>Manage Pages</h2>
 
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                    condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis
-                    euismod. Donec sed odio dui. </p>
+                <p>Here you can edit the content of the dynamic pages.</p>
 
-                <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+                <p><a class="btn btn-default" href="{{ route('admin.pages') }}" role="button">Manage Pages »</a></p>
             </div>
             <div class="col-md-4">
                 <h2>Heading</h2>

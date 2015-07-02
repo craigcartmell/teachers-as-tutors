@@ -75,8 +75,20 @@
                 <li><a href="{{ url('blog') }}">Blog <span class="sr-only">(current)</span></a></li>
 
                 @if(auth()->check())
-                    <li><a href="{{ route('admin') }}">Admin <span class="sr-only">(current)</span></a></li>
-                    <li><a href="{{ route('logout') }}">Logout <span class="sr-only">(current)</span></a></li>
+                    <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="true">
+                            Welcome {{ auth()->user()->name }}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="{{ route('account') }}">My Account</a></li>
+                            @if(auth()->user()->is_admin)
+                                <li><a href="{{ route('admin') }}">Admin</a></li>
+                            @endif
+                            <li><a href="{{ route('logout') }}">Logout <span class="sr-only">(current)</span></a></li>
+                        </ul>
+                    </li>
                 @else
                     <li><a href="{{ route('login') }}">Login <span class="sr-only">(current)</span></a></li>
                 @endif

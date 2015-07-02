@@ -4151,8 +4151,8 @@ tbody.collapse.in {
       color: #ccc; }
 
 .navbar-inverse {
-  background-color: transparent;
-  border-color: transparent; }
+  background-color: #fff;
+  border-color: #fff; }
   .navbar-inverse .navbar-brand {
     color: #0b2171; }
     .navbar-inverse .navbar-brand:hover,
@@ -4186,7 +4186,7 @@ tbody.collapse.in {
       background-color: #fff; }
   .navbar-inverse .navbar-collapse,
   .navbar-inverse .navbar-form {
-    border-color: transparent; }
+    border-color: #ededed; }
   .navbar-inverse .navbar-nav > .open > a,
   .navbar-inverse .navbar-nav > .open > a:hover,
   .navbar-inverse .navbar-nav > .open > a:focus {
@@ -4194,9 +4194,9 @@ tbody.collapse.in {
     color: black; }
   @media (max-width: 767px) {
     .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
-      border-color: transparent; }
+      border-color: #fff; }
     .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
-      background-color: transparent; }
+      background-color: #fff; }
     .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
       color: #0b2171; }
       .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
@@ -6354,8 +6354,8 @@ button.close {
       color: #ccc; }
 
 .navbar-inverse {
-  background-color: transparent;
-  border-color: transparent; }
+  background-color: #fff;
+  border-color: #fff; }
   .navbar-inverse .navbar-brand {
     color: #0b2171; }
     .navbar-inverse .navbar-brand:hover,
@@ -6390,7 +6390,7 @@ button.close {
       background-color: #fff; }
   .navbar-inverse .navbar-collapse,
   .navbar-inverse .navbar-form {
-    border-color: transparent; }
+    border-color: #ededed; }
   .navbar-inverse .navbar-nav > .open > a,
   .navbar-inverse .navbar-nav > .open > a:hover,
   .navbar-inverse .navbar-nav > .open > a:focus {
@@ -6398,9 +6398,9 @@ button.close {
     color: black; }
   @media (max-width: 767px) {
     .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
-      border-color: transparent; }
+      border-color: #fff; }
     .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
-      background-color: transparent; }
+      background-color: #fff; }
     .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
       color: #0b2171; }
       .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,

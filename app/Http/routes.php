@@ -24,17 +24,30 @@ Route::group(['prefix' => 'password'], function () {
     Route::post('reset/{token}', ['as' => 'password.reset', 'uses' => 'Auth\PasswordController@postReset']);
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'enabled']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'enabled']], function () {
     Route::get('', ['as' => 'admin', 'uses' => 'AdminController@index']);
-    Route::group(['prefix' => 'users', 'middleware' => 'admin'], function () {
+    Route::group(['prefix' => 'users'], function () {
         Route::get('', ['as' => 'admin.users', 'uses' => 'AdminController@getUsers']);
-        Route::get('add', ['as' => 'admin.users.new', 'uses' => 'AdminController@getEditUser']);
-        Route::post('add', ['as' => 'admin.users.new', 'uses' => 'AdminController@postEditUser']);
+        Route::get('add', ['as' => 'admin.users.add', 'uses' => 'AdminController@getEditUser']);
+        Route::post('add', ['as' => 'admin.users.add', 'uses' => 'AdminController@postEditUser']);
         Route::get('{id}/edit', ['as' => 'admin.users.edit', 'uses' => 'AdminController@getEditUser']);
         Route::post('{id}/edit', ['as' => 'admin.users.edit', 'uses' => 'AdminController@postEditUser']);
         Route::get('{id}/enable', ['as' => 'admin.users.enable', 'uses' => 'AdminController@enableUser']);
         Route::get('{id}/delete', ['as' => 'admin.users.delete', 'uses' => 'AdminController@deleteUser']);
     });
+    Route::group(['prefix' => 'pages'], function () {
+        Route::get('', ['as' => 'admin.pages', 'uses' => 'AdminController@getPages']);
+        Route::get('add', ['as' => 'admin.pages.add', 'uses' => 'AdminController@getEditPage']);
+        Route::post('add', ['as' => 'admin.pages.add', 'uses' => 'AdminController@postEditPage']);
+        Route::get('{id}/edit', ['as' => 'admin.pages.edit', 'uses' => 'AdminController@getEditPage']);
+        Route::post('{id}/edit', ['as' => 'admin.pages.edit', 'uses' => 'AdminController@postEditPage']);
+        Route::get('{id}/enable', ['as' => 'admin.pages.enable', 'uses' => 'AdminController@enablePage']);
+        Route::get('{id}/delete', ['as' => 'admin.pages.delete', 'uses' => 'AdminController@deletePage']);
+    });
+});
+
+Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'enabled']], function () {
+    Route::get('', ['as' => 'account', 'uses' => 'AccountController@index']);
 });
 
 Route::any('{uri}', 'PageController@index')->where('uri', '(.*)');

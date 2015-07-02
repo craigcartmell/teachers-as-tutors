@@ -23,7 +23,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'is_enabled'];
+    protected $fillable = ['name', 'email', 'password', 'is_enabled',];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -39,7 +39,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             'is_admin'   => 'boolean',
             'is_tutor'   => 'boolean',
             'is_parent'  => 'boolean',
-            'is_enabled' => 'boolean'
+            'is_enabled' => 'boolean',
         ];
 
     public function permission()
