@@ -18,7 +18,7 @@ class CreateForeignKeys extends Migration
     public function up()
     {
         $this->schema->table('users', function (Blueprint $table) {
-            $table->foreign('permission')->references('id')->on('user_permissions')->onDelete('set null');
+            $table->foreign('permission_id')->references('id')->on('user_permissions')->onDelete('set null');
         });
     }
 

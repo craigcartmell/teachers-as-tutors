@@ -75,6 +75,7 @@
                 <li><a href="{{ url('blog') }}">Blog <span class="sr-only">(current)</span></a></li>
 
                 @if(auth()->check())
+                    <li><a href="{{ route('admin') }}">Admin <span class="sr-only">(current)</span></a></li>
                     <li><a href="{{ route('logout') }}">Logout <span class="sr-only">(current)</span></a></li>
                 @else
                     <li><a href="{{ route('login') }}">Login <span class="sr-only">(current)</span></a></li>

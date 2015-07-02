@@ -23,7 +23,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password', 'is_enabled'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -34,25 +34,32 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     protected $appends = ['is_admin', 'is_tutor', 'is_parent'];
 
-    protected $casts = ['is_admin' => 'boolean', 'is_tutor' => 'boolean', 'is_parent' => 'boolean'];
+    protected $casts
+        = [
+            'is_admin'   => 'boolean',
+            'is_tutor'   => 'boolean',
+            'is_parent'  => 'boolean',
+            'is_enabled' => 'boolean'
+        ];
 
     public function permission()
     {
-        return $this->hasOne('TeachersAsTutors\UserPermission', 'id', 'permission');
+        return $this->hasOne('TeachersAsTutors\UserPermission', 'id', 'permission_id');
     }
 
+    // TODO: Don't hardcode keys!
     public function getIsAdminAttribute()
     {
-        return $this->permission->name === 'Admin';
+        return $this->permission_id === 1;
     }
 
     public function getIsTutorAttribute()
     {
-        return $this->permission->name === 'Tutor';
+        return $this->permission_id === 2;
     }
 
     public function getIsParentAttribute()
     {
-        return $this->permission->name === 'Parent';
+        return $this->permission_id === 3;
     }
 }

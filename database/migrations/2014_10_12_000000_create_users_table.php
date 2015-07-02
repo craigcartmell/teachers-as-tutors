@@ -23,7 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->rememberToken();
-            $table->integer('permission')->unsigned()->nullable();
+            $table->integer('permission_id')->unsigned()->nullable();
+            $table->boolean('is_enabled');
             $table->authors();
             $table->timestamps();
         });

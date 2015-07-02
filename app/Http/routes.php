@@ -24,8 +24,17 @@ Route::group(['prefix' => 'password'], function () {
     Route::post('reset/{token}', ['as' => 'password.reset', 'uses' => 'Auth\PasswordController@postReset']);
 });
 
-Route::group(['prefix' => 'admin'], function () {
-    Route::get('', ['as' => 'admin.index', 'uses' => 'AdminController@index']);
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'enabled']], function () {
+    Route::get('', ['as' => 'admin', 'uses' => 'AdminController@index']);
+    Route::group(['prefix' => 'users', 'middleware' => 'admin'], function () {
+        Route::get('', ['as' => 'admin.users', 'uses' => 'AdminController@getUsers']);
+        Route::get('add', ['as' => 'admin.users.new', 'uses' => 'AdminController@getEditUser']);
+        Route::post('add', ['as' => 'admin.users.new', 'uses' => 'AdminController@postEditUser']);
+        Route::get('{id}/edit', ['as' => 'admin.users.edit', 'uses' => 'AdminController@getEditUser']);
+        Route::post('{id}/edit', ['as' => 'admin.users.edit', 'uses' => 'AdminController@postEditUser']);
+        Route::get('{id}/enable', ['as' => 'admin.users.enable', 'uses' => 'AdminController@enableUser']);
+        Route::get('{id}/delete', ['as' => 'admin.users.delete', 'uses' => 'AdminController@deleteUser']);
+    });
 });
 
 Route::any('{uri}', 'PageController@index')->where('uri', '(.*)');
