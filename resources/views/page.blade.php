@@ -13,7 +13,7 @@
         <h1>{{ $page->name }}</h1>
 
         <p>
-            {!! nl2br($page->content) !!}
+            {!! $page->content_formatted !!}
         </p>
     </div>
     <!-- /container -->

@@ -63,11 +63,8 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label for="is_enabled" class="label label-info">Enable/Disable</label>
-                    <select name="is_enabled">
-                        <option value="0" class="form-control" {{ ! $user->is_enabled ? 'selected' : ''}}>Disabled</option>
-                        <option value="1" class="form-control" {{ $user->is_enabled ? 'selected' : '' }}>Enabled</option>
-                    </select>
+                    <label for="is_enabled" class="label label-info">Enabled</label>
+                    <input type="checkbox" name="is_enabled" value="1" {{ $user->is_enabled ? 'checked' : '' }}>
                 </div>
             </div>
 

@@ -13,6 +13,9 @@
     @yield('meta')
 
     <link href="{{ elixir('css/all.css') }}" rel="stylesheet" type="text/css">
+
+    @yield('css')
+
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,900italic,400,700,900'
           rel='stylesheet' type='text/css'>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">

@@ -2,6 +2,10 @@
 
 @section('title', 'Admin - ' . $page->name)
 
+@section('css')
+    <link href="{{ asset('build/css/bootstrap-markdown.min.css') }}" rel="stylesheet" type="text/css">
+@endsection
+
 @section('content')
     <div class="container">
         <h1>{{ $page->name }}</h1>
@@ -36,24 +40,21 @@
             <div class="row">
                 <div class="col-md-12">
                     <label for="hero_text" class="label label-info">Hero Text</label>
-                    <input type="text" name="hero_text" value="{{ old('hero_text', $page->hero_text) }}" class="form-control" placeholder="Welcome to my page!">
+                    <textarea name="hero_text" data-provide="markdown" placeholder="Welcome to my page!" rows="10">{{ old('hero_text', $page->hero_text) }}</textarea>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
                     <label for="content" class="label label-info">Content</label>
-                    <textarea name="content" class="form-control">{{ old('content', $page->content) }}</textarea>
+                    <textarea name="content" data-provide="markdown" rows="30">{{ old('content', $page->content) }}</textarea>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <label for="is_enabled" class="label label-info">Enable/Disable</label>
-                    <select name="is_enabled">
-                        <option value="0" class="form-control" {{ ! $page->is_enabled ? 'selected' : ''}}>Disabled</option>
-                        <option value="1" class="form-control" {{ $page->is_enabled ? 'selected' : '' }}>Enabled</option>
-                    </select>
+                    <label for="is_enabled" class="label label-info">Enabled</label>
+                    <input type="checkbox" name="is_enabled" value="1" {{ $page->is_enabled ? 'checked' : '' }}>
                 </div>
             </div>
 

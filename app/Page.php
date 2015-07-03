@@ -25,7 +25,14 @@ class Page extends Model
      */
     protected $hidden = [];
 
-    protected $appends = [];
+    protected $appends = ['content_formatted'];
 
     protected $casts = ['is_enabled' => 'boolean'];
+
+    public function getContentFormattedAttribute()
+    {
+        $parsedown = new \Parsedown();
+
+        return $parsedown->text($this->content);
+    }
 }
