@@ -5,7 +5,7 @@
 @endsection
 
 @section('hero')
-    @include('partials.hero', ['hero_image_uri' => $page->hero_image_uri, 'hero_text' => $page->hero_text])
+    @include('partials.hero', ['hero_image_uri' => $page->hero_image_uri, 'hero_text' => $page->hero_text_formatted])
 @overwrite
 
 @section('content')

@@ -25,7 +25,7 @@ class Page extends Model
      */
     protected $hidden = [];
 
-    protected $appends = ['content_formatted'];
+    protected $appends = ['content_formatted', 'hero_text_formatted'];
 
     protected $casts = ['is_enabled' => 'boolean'];
 
@@ -34,5 +34,12 @@ class Page extends Model
         $parsedown = new \Parsedown();
 
         return $parsedown->text($this->content);
+    }
+
+    public function getHeroTextFormattedAttribute()
+    {
+        $parsedown = new \Parsedown();
+
+        return $parsedown->text($this->hero_text);
     }
 }
