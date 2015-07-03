@@ -42,4 +42,9 @@ class Page extends Model
 
         return $parsedown->text($this->hero_text);
     }
+
+    public function children()
+    {
+        return $this->hasMany('TeachersAsTutors\Page', 'parent_id', 'id');
+    }
 }

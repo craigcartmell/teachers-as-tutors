@@ -118,7 +118,7 @@ class AdminController extends Controller
 
     public function getPages()
     {
-        $pages = Page::all();
+        $pages = Page::query()->with('children')->whereNull('parent_id')->get();
 
         return view('admin.pages.index', ['pages' => $pages]);
     }
@@ -131,7 +131,9 @@ class AdminController extends Controller
             $page = Page::query()->findOrFail($id);
         }
 
-        return view('admin.pages.edit', ['page' => $page]);
+        $pages = Page::query()->where('id', '!=', $id)->get();
+
+        return view('admin.pages.edit', ['page' => $page, 'pages' => $pages]);
     }
 
     public function postEditPage(Request $request, $id = 0)
@@ -142,14 +144,20 @@ class AdminController extends Controller
             $page = Page::query()->findOrFail($id);
         }
 
-        $this->validate($request,
-            [
-                'name'       => 'required|unique:pages,name,' . $id,
-                'uri'        => 'required|unique:pages,uri,' . $id,
-                'content'    => 'required',
-                'is_enabled' => 'boolean'
-            ]);
+        $rules = [
+            'name'       => 'required|unique:pages,name,' . $id,
+            'uri'        => 'required|unique:pages,uri,' . $id,
+            'content'    => 'required',
+            'is_enabled' => 'boolean'
+        ];
 
+        if (! empty($request->input('parent_id'))) {
+            $rules['parent_id'] = 'exists:pages,id';
+        }
+
+        $this->validate($request, $rules);
+
+        $page->parent_id      = $request->input('parent_id') ?: null;
         $page->name           = $request->input('name');
         $page->uri            = $request->input('uri');
         $page->hero_image_uri = $request->input('hero_image_uri');

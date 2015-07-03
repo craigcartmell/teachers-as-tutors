@@ -74,5 +74,9 @@ class PagesTableSeeder extends Seeder
             'uri'            => 'tutors',
             'hero_image_uri' => env('APP_URL') . '/img/heroes/hero_coffee.jpg'
         ]);
+        factory('TeachersAsTutors\Page', 1)->create([
+            'name' => 'Blog',
+            'uri'  => 'blog',
+        ]);
     }
 }

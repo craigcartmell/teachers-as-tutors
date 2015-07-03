@@ -19,9 +19,19 @@
         <form method="post">
             {!! csrf_field() !!}
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <label for="name" class="label label-info">Name</label>
                     <input type="text" name="name" value="{{ old('name', $page->name) }}" class="form-control" placeholder="Example Page">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="parent_id" class="label label-info">Parent Page (Optional)</label>
+                    <select name="parent_id" class="form-control">
+                        <option value="0">-- Please Select --</option>
+                        @foreach($pages as $p)
+                            <option value="{{ $p->getKey() }}" {{ $p->getKey() === $page->parent_id ? 'selected' : '' }}>{{ $p->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 

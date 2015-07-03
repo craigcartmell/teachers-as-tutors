@@ -33,14 +33,6 @@ class CreateUserPermissionsTable extends Migration
      */
     public function down()
     {
-        try {
-            $this->schema->table('users', function (Blueprint $table) {
-                $table->dropForeign('users_permission_foreign');
-            });
-        } catch (Exception $e) {
-
-        }
-
         $this->schema->dropIfExists('user_permissions');
     }
 }

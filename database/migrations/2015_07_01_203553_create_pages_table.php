@@ -19,6 +19,7 @@ class CreatePagesTable extends Migration
     {
         $this->schema->create('pages', function (Blueprint $table) {
             $table->integer('id', true)->unsigned();
+            $table->integer('parent_id')->unsigned()->nullable();
             $table->string('name');
             $table->string('uri')->unique();
             $table->string('hero_image_uri');
@@ -27,6 +28,8 @@ class CreatePagesTable extends Migration
             $table->boolean('is_enabled')->default(0);
             $table->authors();
             $table->timestamps();
+
+            $table->foreign('parent_id')->references('id')->on('pages')->onDelete('cascade');
         });
     }
 
