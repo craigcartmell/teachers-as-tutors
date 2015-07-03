@@ -17,7 +17,9 @@ class PageController extends Controller
      */
     public function index($uri)
     {
-        $page = Page::query()->where('uri', $uri)->where('is_enabled', true)->first();
+        $page = Page::with(['children' => function ($query) {
+            $query->where('is_enabled', true);
+        }])->where('uri', $uri)->where('is_enabled', true)->first();
 
         if (! $page) {
             abort(404);

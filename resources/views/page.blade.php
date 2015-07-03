@@ -20,6 +20,7 @@
                 <span class="pull-right text-muted">Posted {{ $child->created_at->format('d/m/Y H:i:s') }} by {{ $child->creator->name }}</span>
 
                 {!! $child->content_formatted !!}
+                <hr>
             @endforeach
         @endif
     </div>
