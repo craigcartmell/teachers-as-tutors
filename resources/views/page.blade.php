@@ -12,9 +12,16 @@
     <div class="container">
         <h1>{{ $page->name }}</h1>
 
-        <p>
-            {!! $page->content_formatted !!}
-        </p>
+        {!! $page->content_formatted !!}
+
+        @if(count($page->children))
+            @foreach($page->children as $child)
+                <h3>{{ $child->name }}</h3>
+                <span class="pull-right text-muted">Posted {{ $child->created_at->format('d/m/Y H:i:s') }} by {{ $child->creator->name }}</span>
+
+                {!! $child->content_formatted !!}
+            @endforeach
+        @endif
     </div>
     <!-- /container -->
 @endsection
