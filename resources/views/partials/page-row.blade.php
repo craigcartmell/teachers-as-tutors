@@ -1,4 +1,7 @@
 <tr>
+    @if($page->parent_id)
+        <td><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></td>
+    @endif
     <td>{{ $page->name }}</td>
     <td><a href="{{ url($page->uri) }}" target="_blank">{{ url($page->uri) }}</a></td>
     <td>{{ $page->created_at->format('d/m/Y H:i:s') }} by {{ $page->creator['name'] or 'System' }}</td>

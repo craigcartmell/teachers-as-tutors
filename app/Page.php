@@ -29,18 +29,27 @@ class Page extends Model
 
     protected $casts = ['is_enabled' => 'boolean'];
 
+    protected $parsedown;
+
+    public function __construct()
+    {
+        $this->parsedown = new \Parsedown();
+    }
+
     public function getContentFormattedAttribute()
     {
-        $parsedown = new \Parsedown();
-
-        return $parsedown->text($this->content);
+        return $this->parsedown->text($this->content);
     }
 
     public function getHeroTextFormattedAttribute()
     {
-        $parsedown = new \Parsedown();
+        return $this->parsedown->text($this->hero_text);
+    }
 
-        return $parsedown->text($this->hero_text);
+    // TODO: Check relationship works
+    public function parent()
+    {
+        return $this->belongsTo('TeachersAsTutors\Page', 'id', 'parent_id');
     }
 
     public function children()

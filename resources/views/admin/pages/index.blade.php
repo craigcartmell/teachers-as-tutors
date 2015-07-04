@@ -19,13 +19,16 @@
                    @include('partials.page-row', ['page' => $page])
 
                    @if(count($page->children))
-                       <table class="table table-responsive table-striped">
-                           <tbody>
-                               @foreach($page->children as $child)
-                                   @include('partials.page-row', ['page' => $child])
-                               @endforeach
-                           </tbody>
-                       </table>
+                       <tr>
+                           <th></th>
+                           <th>Name</th>
+                           <th>Uri</th>
+                           <th>Created</th>
+                           <th colspan="4">Updated</th>
+                       </tr>
+                       @foreach($page->children as $child)
+                           @include('partials.page-row', ['page' => $child])
+                       @endforeach
                    @endif
                @empty
                    <tr>

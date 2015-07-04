@@ -153,13 +153,22 @@ class AdminController extends Controller
 
         if (! empty($request->input('parent_id'))) {
             $rules['parent_id'] = 'exists:pages,id';
+
+            unset($rules['uri']);
         }
 
         $this->validate($request, $rules);
 
-        $page->parent_id      = $request->input('parent_id') ?: null;
+        if ($request->input('parent_id')) {
+            $page->parent_id = $request->input('parent_id');
+
+            $parent    = Page::query()->find($request->input('parent_id'));
+            $page->uri = $parent->uri . '/' . str_slug($request->input('name'));
+        } else {
+            $page->uri = $request->input('uri');
+        }
+
         $page->name           = $request->input('name');
-        $page->uri            = $request->input('uri');
         $page->hero_image_uri = $request->input('hero_image_uri');
         $page->hero_text      = $request->input('hero_text');
         $page->content        = $request->input('content');
