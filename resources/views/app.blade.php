@@ -18,9 +18,9 @@
 
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,900italic,400,700,900'
           rel='stylesheet' type='text/css'>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">-->
 
-    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <!--<script src="https://www.google.com/recaptcha/api.js"></script>-->
 
     @if(app()->environment() === 'production')
         <script>
@@ -105,6 +105,14 @@
 @section('hero')
     @include('partials.hero', ['hero_image_uri' => asset('img/heroes/hero_apple.jpg'), 'hero_text' => 'Default website intro.'])
 @show
+
+<div class="container">
+    <div class="row">
+        @section('breadcrumb')
+            @include('partials.breadcrumb', ['breadcrumbs' => [['uri' => url(), 'text' => 'Home']]])
+        @show
+    </div>
+</div>
 
 @yield('content')
 

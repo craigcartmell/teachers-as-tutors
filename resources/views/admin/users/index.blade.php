@@ -3,9 +3,9 @@
 @section('title', 'Admin - Manage Users')
 
 @section('content')
-    <div class="container">
+    <div class="container table-responsive">
         <a href="{{ route('admin.users.add') }}" class="btn btn-primary">Add New</a>
-           <table class="table table-responsive table-striped">
+           <table class="table table-striped">
                <thead>
                 <tr>
                     <th>Name</th>

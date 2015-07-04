@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('title')
-    {{ $page->name }})
+    {{ $page->name }}
 @endsection
 
 @section('hero')
@@ -19,12 +19,12 @@
             </div>
 
             @if(count($page->children))
-                <div class="col-md-4">
+                <div class="col-md-4 pull-right recent">
                     <h4>Recent</h4>
 
-                    <ul>
-                        @foreach($page->children as $child)
-                            <li><a href="{{ $child->uri }}">{{ $child->name }}</a> <span class="text-muted">{{ $child->created_at->diffForHumans() }}</span></li>
+                    <ul class="list-group">
+                        @foreach($page->children->take(5) as $child)
+                            <li class="list-group-item"><a href="{{ $child->uri }}">{{ $child->name }}</a> <span class="text-muted pull-right">{{ $child->created_at->diffForHumans() }}</span></li>
                         @endforeach
                     </ul>
                 </div>

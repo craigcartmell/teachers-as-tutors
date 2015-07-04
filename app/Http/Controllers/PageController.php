@@ -17,14 +17,16 @@ class PageController extends Controller
      */
     public function index($uri)
     {
-        $page = Page::with(['children' => function ($query) {
-            $query->where('is_enabled', true);
-        }])->where('uri', $uri)->where('is_enabled', true)->first();
+        $page = Page::with([
+            'children' => function ($query) {
+                $query->where('is_enabled', true)->orderBy('id', 'desc');
+            }
+        ])->where('uri', $uri)->where('is_enabled', true)->first();
 
         if (! $page) {
             abort(404);
         }
-
+        
         return view('page', ['page' => $page]);
     }
 }
