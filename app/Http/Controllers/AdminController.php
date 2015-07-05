@@ -2,6 +2,7 @@
 
 namespace TeachersAsTutors\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Auth\Passwords\TokenRepositoryInterface;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Http\Request;
@@ -163,7 +164,7 @@ class AdminController extends Controller
             $page->parent_id = $request->input('parent_id');
 
             $parent    = Page::query()->find($request->input('parent_id'));
-            $page->uri = $parent->uri . '/' . str_slug($request->input('name'));
+            $page->uri = $parent->uri . '/' . Carbon::now()->format('Y-m-d') . '/' . str_slug($request->input('name'));
         } else {
             $page->uri = $request->input('uri');
         }

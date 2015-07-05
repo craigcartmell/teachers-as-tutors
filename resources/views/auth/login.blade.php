@@ -10,28 +10,36 @@
         <form method="post">
             {!! csrf_field() !!}
 
-            <div>
-                <label for="email" class="label label-info">Email</label>
-                <input type="text" name="email" value="{{ old('email') }}" placeholder="bob@smith.co.uk" class="form-control">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" value="{{ old('email') }}" placeholder="bob@smith.co.uk" class="form-control">
+                </div>
+                <div class="col-md-6">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" value="{{ old('password') }}" class="form-control">
+                </div>
             </div>
 
-            <div>
-                <label for="password" class="label label-info">Password</label>
-                <input type="password" name="password" value="{{ old('password') }}" class="form-control">
+            <br>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="remember">Remember Me?</label>
+                    <input type="checkbox" name="remember" value="1" class="form-control-static" {{ old('remember') ? 'checked' : '' }}>
+                </div>
             </div>
 
-            <div>
-                <label for="remember" class="label label-info">Remember Me?</label>
-                <input type="checkbox" name="remember" value="1" {{ old('remember') }} class="form-control-static">
-            </div>
+            <br>
 
             <div>
                 <input type="submit" name="submit" value="Login" class="form-control-static btn btn-primary">
             </div>
         </form>
 
-        <div>
-            <a href="{{ route('password.email') }}">Forgotten Password?</a>
-        </div>
+        <br>
+
+        <a href="{{ route('password.email') }}">Forgotten Password?</a>
+
     </div>
 @endsection

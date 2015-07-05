@@ -27,7 +27,7 @@ $brand-danger:          #d9534f !default;
 //## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-$body-bg:               #fff !default;
+$body-bg: #fff !default;
 //** Global text color on `<body>`.
 $text-color:            $gray-dark !default;
 
@@ -396,21 +396,21 @@ $navbar-default-toggle-border-color:       #ddd !default;
 //=== Inverted navbar
 // Reset inverted navbar basics
 $navbar-inverse-color:                      $brand-primary !default;
-$navbar-inverse-bg:                         #fff !default;
+$navbar-inverse-bg:                         $body-bg !default;
 $navbar-inverse-border:                     $navbar-inverse-bg !default;
 
 // Inverted navbar links
 $navbar-inverse-link-color:                 $brand-primary !default;
-$navbar-inverse-link-hover-color:           darken($brand-primary, 50%) !default;
-$navbar-inverse-link-hover-bg:              transparent !default;
-$navbar-inverse-link-active-color:          $navbar-inverse-link-hover-color !default;
-$navbar-inverse-link-active-bg:             transparent !default;
+$navbar-inverse-link-hover-color:           $body-bg !default;
+$navbar-inverse-link-hover-bg:              $brand-primary !default;
+$navbar-inverse-link-active-color:          $body-bg !default;
+$navbar-inverse-link-active-bg:             $brand-primary !default;
 $navbar-inverse-link-disabled-color:        #444 !default;
 $navbar-inverse-link-disabled-bg:           transparent !default;
 
 // Inverted navbar brand label
-$navbar-inverse-brand-color:                $navbar-inverse-link-color !default;
-$navbar-inverse-brand-hover-color:          #fff !default;
+$navbar-inverse-brand-color:                $brand-primary !default;
+$navbar-inverse-brand-hover-color:          $brand-primary !default;
 $navbar-inverse-brand-hover-bg:             transparent !default;
 
 // Inverted navbar toggle
@@ -629,19 +629,19 @@ $alert-padding:               15px !default;
 $alert-border-radius:         $border-radius-base !default;
 $alert-link-font-weight:      bold !default;
 
-$alert-success-bg:            $state-success-bg !default;
+$alert-success-bg:            transparent !default;
 $alert-success-text:          $state-success-text !default;
 $alert-success-border:        $state-success-border !default;
 
-$alert-info-bg:               $state-info-bg !default;
+$alert-info-bg:               transparent !default;
 $alert-info-text:             $state-info-text !default;
 $alert-info-border:           $state-info-border !default;
 
-$alert-warning-bg:            $state-warning-bg !default;
+$alert-warning-bg:            transparent !default;
 $alert-warning-text:          $state-warning-text !default;
 $alert-warning-border:        $state-warning-border !default;
 
-$alert-danger-bg:             $state-danger-bg !default;
+$alert-danger-bg:             transparent !default;
 $alert-danger-text:           $state-danger-text !default;
 $alert-danger-border:         $state-danger-border !default;
 

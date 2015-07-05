@@ -68,14 +68,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">{{ env('APP_NAME') }}</a>
+            <a class="navbar-brand" href="{{ url('') }}">{{ env('APP_NAME') }}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse pull-right">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ url() }}">Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="{{ url('tuition') }}">Tuition <span class="sr-only">(current)</span></a></li>
-                <li><a href="{{ url('tutors') }}">Tutors <span class="sr-only">(current)</span></a></li>
-                <li><a href="{{ url('blog') }}">Blog <span class="sr-only">(current)</span></a></li>
+                <li class="{{ url() === Request::url() ? 'active' : '' }}"><a href="{{ url() }}">Home <span
+                                class="sr-only">(current)</span></a>
+                </li>
+                <li class="{{ url('tuition') === Request::url() ? 'active' : '' }}"><a href="{{ url('tuition') }}">Tuition
+                        <span class="sr-only">(current)</span></a></li>
+                <li class="{{ url('tutors') === Request::url() ? 'active' : '' }}"><a href="{{ url('tutors') }}">Tutors
+                        <span class="sr-only">(current)</span></a></li>
+                <li class="{{ url('blog') === Request::url() ? 'active' : '' }}"><a href="{{ url('blog') }}">Blog <span
+                                class="sr-only">(current)</span></a></li>
 
                 @if(auth()->check())
                     <li>
@@ -93,7 +98,7 @@
                         </ul>
                     </li>
                 @else
-                    <li><a href="{{ route('login') }}">Login <span class="sr-only">(current)</span></a></li>
+                    <li class="{{ route('login') === Request::url() ? 'active' : '' }}"><a href="{{ route('login') }}">Login <span class="sr-only">(current)</span></a></li>
                 @endif
 
             </ul>

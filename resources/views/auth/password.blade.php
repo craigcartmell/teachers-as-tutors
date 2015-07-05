@@ -16,10 +16,14 @@
         <form method="post">
             {!! csrf_field() !!}
 
-            <div>
-                <label for="email" class="label label-info">Email</label>
-                <input type="text" name="email" value="{{ old('email') }}" placeholder="bob@smith.co.uk" class="form-control">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" value="{{ old('email') }}" placeholder="bob@smith.co.uk" class="form-control">
+                </div>
             </div>
+
+            <br>
 
             <div>
                 <input type="submit" name="submit" value="Send Password Reset Link" class="form-control-static btn btn-primary">

@@ -26,7 +26,13 @@ class PageController extends Controller
         if (! $page) {
             abort(404);
         }
-        
-        return view('page', ['page' => $page]);
+
+        $data['page'] = $page;
+
+        if ($uri === '/') {
+            $data['blog'] = Page::query()->with('children')->where('name', 'blog')->first();
+        }
+
+        return view('page', $data);
     }
 }
