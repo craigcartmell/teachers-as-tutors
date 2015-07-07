@@ -41,11 +41,21 @@ $factory->defineAs(TeachersAsTutors\User::class, 'parent', function ($faker) use
 
 $factory->define(TeachersAsTutors\Page::class, function ($faker) {
     return [
-        'name'           => '',
-        'uri'            => '',
-        'hero_image_uri' => '',
-        'hero_text'      => $faker->text(700),
-        'content'        => $faker->text(1000),
-        'is_enabled'     => true,
+        'hero_text'  => $faker->text(700),
+        'content'    => $faker->text(1000),
+        'is_enabled' => true,
     ];
+});
+
+$factory->defineAs(TeachersAsTutors\Page::class, 'blog-post', function ($faker) use ($factory) {
+    $page = $factory->raw(TeachersAsTutors\Page::class);
+
+    $name = $faker->text(30);
+
+    return array_merge($page,
+        [
+            'parent_id' => 4,
+            'name'      => $name,
+            'uri'       => 'blog/' . \Carbon\Carbon::now()->format('Y-m-d') . '/' . str_slug($name),
+        ]);
 });

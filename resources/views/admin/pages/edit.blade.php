@@ -42,11 +42,6 @@
                     <label for="uri">Uri (Not including {{ url() }})</label>
                     <input type="text" name="uri" value="{{ old('uri', $page->uri) }}" class="form-control" placeholder="">
                 </div>
-
-                <div class="col-md-6">
-                    <label for="hero_image_uri">Hero Image Uri</label>
-                    <input type="text" name="hero_image_uri" value="{{ old('hero_image_uri', $page->hero_image_uri) }}" class="form-control" placeholder="{{ asset('img/heroes/some_hero_image.jpg') }}">
-                </div>
             </div>
 
             <br>

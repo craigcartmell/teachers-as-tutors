@@ -1,29 +1,9 @@
 @import "variables";
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "jumbotron";
 @import "navbar";
 @import "alerts";
-
-.container.hero {
-  background: url('../../img/heroes/hero_apple.jpg') no-repeat;
-  background-size: 100%;
-  background-position-y: -100px;
-  color: #fff;
-  text-shadow: black 0.1em 0.1em 0.2em;
-  margin-top: 6px;
-  overflow-y: visible;
-  min-height: 300px;
-
-  @media (min-width: $screen-sm-min) {
-    width: 100%;
-  }
-  @media (min-width: $screen-md-min) {
-    width: 100%;
-  }
-  @media (min-width: $screen-lg-min) {
-    width: 100%;
-  }
-}
+@import "carousel";
+@import "pagination";
 
 .recent {
   margin-top: 26px;

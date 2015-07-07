@@ -4,9 +4,7 @@
     {{ $page->name }}
 @endsection
 
-@section('hero')
-    @include('partials.hero', ['hero_image_uri' => $page->hero_image_uri, 'hero_text' => $page->hero_text_formatted])
-@overwrite
+@section('hero_text', $page->hero_text)
 
 @section('content')
     <div class="container">
@@ -33,17 +31,27 @@
                     </ul>
                 </div>
             @endif
+
+            @if(count($page->children))
+                @foreach($page->children_paginated as $child)
+                    <div>
+                        <h3>{{ $child->name }}</h3>
+                        <span class="text-muted">Last updated {{ $child->updated_at->format('d/m/Y H:i:s') }} by {{ $child->creator->name or 'System' }}</span>
+                    </div>
+
+                    <br>
+
+                    {!! str_limit($child->content_formatted, 500, '...<a href="' . url($child->uri) . '">Read More</a>') !!}
+
+                    <hr>
+                @endforeach
+
+                <div class="text-center">
+                    {!! $page->children_paginated->render() !!}
+                </div>
+            @endif
         </div>
 
-        @if(count($page->children))
-            @foreach($page->children as $child)
-                <h3>{{ $child->name }}</h3>
-                <span class="pull-right text-muted">Updated {{ $child->updated_at->format('d/m/Y H:i:s') }} by {{ $child->creator->name }}</span>
-
-                {!! $child->content_formatted !!}
-                <hr>
-            @endforeach
-        @endif
     </div>
     <!-- /container -->
 @endsection

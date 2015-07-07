@@ -45,14 +45,13 @@ class UsersTableSeeder extends Seeder
 {
     public function run()
     {
-        factory('TeachersAsTutors\User', 'admin', 1)->create([
+        factory(TeachersAsTutors\User::class, 'admin', 1)->create([
             'name'     => 'Admin',
             'email'    => env('APP_ADMIN_EMAIL'),
             'password' => bcrypt(env('APP_ADMIN_PASSWORD'))
         ]);
-        factory('TeachersAsTutors\User', 'tutor', 1)->create();
-        factory('TeachersAsTutors\User', 'parent', 1)->create();
-        factory('TeachersAsTutors\User', 1)->create();
+        factory(TeachersAsTutors\User::class, 'tutor', 1)->create();
+        factory(TeachersAsTutors\User::class, 'parent', 1)->create();
     }
 }
 
@@ -60,23 +59,22 @@ class PagesTableSeeder extends Seeder
 {
     public function run()
     {
-        factory('TeachersAsTutors\Page', 1)->create([
+        factory(TeachersAsTutors\Page::class, 1)->create([
             'name' => 'Home',
             'uri'  => '/',
         ]);
-        factory('TeachersAsTutors\Page', 1)->create([
-            'name'           => 'Tuition',
-            'uri'            => 'tuition',
-            'hero_image_uri' => env('APP_URL') . '/img/heroes/hero_reading.jpg'
+        factory(TeachersAsTutors\Page::class, 1)->create([
+            'name' => 'Tuition',
+            'uri'  => 'tuition',
         ]);
-        factory('TeachersAsTutors\Page', 1)->create([
-            'name'           => 'Tutors',
-            'uri'            => 'tutors',
-            'hero_image_uri' => env('APP_URL') . '/img/heroes/hero_coffee.jpg'
+        factory(TeachersAsTutors\Page::class, 1)->create([
+            'name' => 'Tutors',
+            'uri'  => 'tutors',
         ]);
-        factory('TeachersAsTutors\Page', 1)->create([
+        factory(TeachersAsTutors\Page::class, 1)->create([
             'name' => 'Blog',
             'uri'  => 'blog',
         ]);
+        factory(TeachersAsTutors\Page::class, 'blog-post', 10)->create();
     }
 }

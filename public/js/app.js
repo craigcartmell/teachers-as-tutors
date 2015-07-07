@@ -14671,9 +14671,9 @@ $(function () {
         var parent_id = parseInt($(this).val());
 
         if (parent_id > 0) {
-            $('input[name=uri], input[name=hero_image_uri], textarea[name=hero_text]').attr('disabled', 'disabled');
+            $('input[name=uri], textarea[name=hero_text]').attr('disabled', 'disabled');
         } else {
-            $('input[name=uri], input[name=hero_image_uri], textarea[name=hero_text]').removeAttr('disabled');
+            $('input[name=uri], textarea[name=hero_text]').removeAttr('disabled');
         }
     });
 

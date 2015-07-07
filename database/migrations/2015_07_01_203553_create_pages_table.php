@@ -22,7 +22,6 @@ class CreatePagesTable extends Migration
             $table->integer('parent_id')->unsigned()->nullable();
             $table->string('name');
             $table->string('uri')->unique();
-            $table->string('hero_image_uri');
             $table->text('hero_text');
             $table->text('content');
             $table->boolean('is_enabled')->default(0);

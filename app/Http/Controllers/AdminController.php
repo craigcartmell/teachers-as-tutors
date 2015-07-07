@@ -170,7 +170,6 @@ class AdminController extends Controller
         }
 
         $page->name           = $request->input('name');
-        $page->hero_image_uri = $request->input('hero_image_uri', '');
         $page->hero_text      = $request->input('hero_text', '');
         $page->content        = $request->input('content');
         $page->is_enabled     = $request->input('is_enabled');

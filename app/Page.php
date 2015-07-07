@@ -25,14 +25,16 @@ class Page extends Model
      */
     protected $hidden = [];
 
-    protected $appends = ['content_formatted', 'hero_text_formatted'];
+    protected $appends = ['content_formatted', 'hero_text_formatted', 'children_paginated'];
 
     protected $casts = ['is_enabled' => 'boolean'];
 
     protected $parsedown;
 
-    public function __construct()
+    public function __construct(array $attributes = [])
     {
+        parent::__construct($attributes);
+
         $this->parsedown = new \Parsedown();
     }
 
@@ -55,5 +57,10 @@ class Page extends Model
     public function children()
     {
         return $this->hasMany('TeachersAsTutors\Page', 'parent_id', 'id');
+    }
+
+    public function getChildrenPaginatedAttribute()
+    {
+        return $this->children()->paginate(5);
     }
 }

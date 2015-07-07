@@ -5,6 +5,8 @@
 @section('content')
     <div class="container">
 
+        <h1>Reset Password</h1>
+
         @include('partials/errors')
 
         {{ session('status') }}
