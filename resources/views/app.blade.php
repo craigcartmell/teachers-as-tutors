@@ -89,7 +89,7 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="{{ route('account') }}">My Account</a></li>
+                            <li><a href="{{ route('profile') }}">My Profile</a></li>
                             @if(auth()->user()->is_admin)
                                 <li><a href="{{ route('admin') }}">Admin</a></li>
                             @endif

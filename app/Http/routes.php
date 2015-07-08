@@ -46,9 +46,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'enabled']]
     });
 });
 
-Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'enabled']], function () {
-    Route::get('', ['as' => 'account', 'uses' => 'AccountController@index']);
-});
+Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@getProfile']);
+Route::post('profile', ['as' => 'profile', 'uses' => 'ProfileController@postProfile']);
 
 Route::get('contact', 'ContactController@getContact');
 Route::post('contact', 'ContactController@postContact');
