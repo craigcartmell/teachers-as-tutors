@@ -16,18 +16,16 @@
             <div class="col-md-4">
                 <h2>Manage Pages</h2>
 
-                <p>Here you can edit the content of the dynamic pages.</p>
+                <p>Here you can edit the content of the existing pages as well as creating new ones.</p>
 
                 <p><a class="btn btn-default" href="{{ route('admin.pages') }}" role="button">Manage Pages »</a></p>
             </div>
             <div class="col-md-4">
-                <h2>Heading</h2>
+                <h2>Manage Resources</h2>
 
-                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula
-                    porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                    fermentum massa justo sit amet risus.</p>
+                <p>Here you can manage resources such as uploaded pupil reports and billing information.</p>
 
-                <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+                <p><a class="btn btn-default" href="#" role="button">Manage Resources »</a></p>
             </div>
         </div>
     </div>

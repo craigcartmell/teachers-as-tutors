@@ -6767,7 +6767,9 @@ button.close {
   border-top-right-radius: 3px; }
 
 .recent {
-  margin-top: 26px; }
+  margin-top: 0; }
+  .recent > h4 {
+    margin-top: 0; }
 
 .dropdown-toggle {
   cursor: pointer; }

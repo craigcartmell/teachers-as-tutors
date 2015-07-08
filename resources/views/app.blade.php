@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="description" content="Tutors as Teachers">
     <meta name="keywords"
-          content="teachers as tutors, teach, teachers, tutoring">
+          content="teachers as tutors, teach, teachers, tutoring, tutors">
     <meta name="author" content="Teachers as Tutors">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
@@ -18,17 +18,14 @@
 
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,900italic,400,700,900'
           rel='stylesheet' type='text/css'>
-    <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">-->
-
-    <!--<script src="https://www.google.com/recaptcha/api.js"></script>-->
 
     @if(app()->environment() === 'production')
         <script>
             (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
                 i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
                 a = s.createElement(o),
                         m = s.getElementsByTagName(o)[0];
                 a.async = 1;
@@ -81,6 +78,8 @@
                         <span class="sr-only">(current)</span></a></li>
                 <li class="{{ url('blog') === Request::url() ? 'active' : '' }}"><a href="{{ url('blog') }}">Blog <span
                                 class="sr-only">(current)</span></a></li>
+                <li class="{{ url('contact') === Request::url() ? 'active' : '' }}"><a href="{{ url('contact') }}">Contact <span
+                                class="sr-only">(current)</span></a></li>
 
                 @if(auth()->check())
                     <li>
@@ -120,6 +119,13 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <div class="item active">
+                <img src="{{ asset('img/heroes/hero_apple.jpg') }}" alt="{{ env('APP_NAME') }}">
+
+                <div class="carousel-caption">
+                    @yield('hero_text')
+                </div>
+            </div>
+            <div class="item">
                 <img src="{{ asset('img/heroes/hero_child_studying.jpg') }}" alt="{{ env('APP_NAME') }}">
 
                 <div class="carousel-caption">
@@ -127,14 +133,7 @@
                 </div>
             </div>
             <div class="item">
-                <img src="{{ asset('img/heroes/hero_tutor.jpg') }}" alt="{{ env('APP_NAME') }}">
-
-                <div class="carousel-caption">
-                    @yield('hero_text')
-                </div>
-            </div>
-            <div class="item">
-                <img src="{{ asset('img/heroes/hero_apple.jpg') }}" alt="{{ env('APP_NAME') }}">
+                <img src="{{ asset('img/heroes/hero_scribe.jpg') }}" alt="{{ env('APP_NAME') }}">
 
                 <div class="carousel-caption">
                     @yield('hero_text')
@@ -160,6 +159,10 @@
             @include('partials.breadcrumb', ['breadcrumbs' => [['uri' => url(), 'text' => 'Home']]])
         @show
     </div>
+</div>
+
+<div class="container">
+    <h1>@yield('title')</h1>
 </div>
 
 @yield('content')

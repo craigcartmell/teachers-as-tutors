@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
        <div class="alert alert-danger">
-           Uh oh, it looks like this page doesn't exist.
+           Sorry, the page you were looking for doesn't exist
        </div>
     </div>
     <!-- /container -->

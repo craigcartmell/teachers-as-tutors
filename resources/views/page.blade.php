@@ -9,10 +9,8 @@
 @section('content')
     <div class="container">
 
-        <div class="row">
+        <div class="{{ isset($blog) && count($blog->children) ? 'row' : ''}}">
             <div class="{{ isset($blog) && count($blog->children) ? 'col-md-8' : '' }}">
-                <h1>{{ $page->name }}</h1>
-
                 {!! $page->content_formatted !!}
             </div>
 
@@ -27,7 +25,7 @@
                                 <span class="text-muted pull-right">{{ $child->updated_at->diffForHumans() }}</span>
                             </li>
                         @endforeach
-                        <li class="list-group-item text-center"><a href="{{ url('blog') }}">See All Posts</a></li>
+                        <li class="list-group-item text-center"><a href="{{ url('blog') }}">See all posts</a></li>
                     </ul>
                 </div>
             @endif

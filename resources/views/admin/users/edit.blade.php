@@ -1,11 +1,11 @@
 @extends('app')
 
-@section('title', 'Admin - ' . $user->name)
+@section('title')
+    {{ $user->exists ? 'Admin - Edit ' . $user->name : 'Admin - New User' }}
+@endsection
 
 @section('content')
     <div class="container">
-        <h1>{{ $user->name }}</h1>
-
         @include('partials.errors')
 
         @if(session('success'))

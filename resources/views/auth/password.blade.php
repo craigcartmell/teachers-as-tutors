@@ -5,8 +5,6 @@
 @section('content')
     <div class="container">
 
-        <h1>Forgotten Password?</h1>
-
         @include('partials/errors')
 
         @if(session('status'))

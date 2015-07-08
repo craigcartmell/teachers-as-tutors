@@ -50,4 +50,7 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'enabled']], fu
     Route::get('', ['as' => 'account', 'uses' => 'AccountController@index']);
 });
 
+Route::get('contact', 'ContactController@getContact');
+Route::post('contact', 'ContactController@postContact');
+
 Route::any('{uri}', 'PageController@index')->where('uri', '(.*)');

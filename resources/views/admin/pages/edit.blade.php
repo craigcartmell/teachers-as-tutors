@@ -1,6 +1,8 @@
 @extends('app')
 
-@section('title', 'Admin - ' . $page->name)
+@section('title')
+    {{ $page->exists ? 'Admin - Edit ' . $page->name : 'Admin - New Page' }}
+@endsection
 
 @section('css')
     <link href="{{ asset('build/css/bootstrap-markdown.min.css') }}" rel="stylesheet" type="text/css">

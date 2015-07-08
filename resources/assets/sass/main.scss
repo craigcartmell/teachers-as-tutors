@@ -6,7 +6,11 @@
 @import "pagination";
 
 .recent {
-  margin-top: 26px;
+  margin-top: 0;
+
+  > h4 {
+    margin-top: 0;
+  }
 }
 
 .dropdown-toggle {
