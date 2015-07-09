@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserPermissionsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(PagesTableSeeder::class);
+        $this->call(ResourcesTableSeeder::class);
 
         Model::reguard();
     }
@@ -76,5 +77,13 @@ class PagesTableSeeder extends Seeder
             'uri'  => 'blog',
         ]);
         factory(TeachersAsTutors\Page::class, 'blog-post', 10)->create();
+    }
+}
+
+class ResourcesTableSeeder extends Seeder
+{
+    public function run()
+    {
+        factory(TeachersAsTutors\Resource::class, 10)->create();
     }
 }

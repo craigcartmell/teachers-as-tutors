@@ -44,6 +44,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'enabled']]
         Route::get('{id}/enable', ['as' => 'admin.pages.enable', 'uses' => 'AdminController@enablePage']);
         Route::get('{id}/delete', ['as' => 'admin.pages.delete', 'uses' => 'AdminController@deletePage']);
     });
+    Route::group(['prefix' => 'resources'], function () {
+        Route::get('', ['as' => 'admin.resources', 'uses' => 'AdminController@getResources']);
+        Route::get('add', ['as' => 'admin.resources.add', 'uses' => 'AdminController@getEditResource']);
+        Route::post('add', ['as' => 'admin.resources.add', 'uses' => 'AdminController@postEditResource']);
+        Route::get('{id}/edit', ['as' => 'admin.resources.edit', 'uses' => 'AdminController@getEditResource']);
+        Route::post('{id}/edit', ['as' => 'admin.resources.edit', 'uses' => 'AdminController@postEditResource']);
+        Route::get('{id}/enable', ['as' => 'admin.resources.enable', 'uses' => 'AdminController@enableResource']);
+        Route::get('{id}/delete', ['as' => 'admin.resources.delete', 'uses' => 'AdminController@deleteResource']);
+    });
 });
 
 Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@getProfile']);

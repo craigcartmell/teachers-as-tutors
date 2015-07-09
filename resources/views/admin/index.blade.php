@@ -25,7 +25,7 @@
 
                 <p>Here you can manage resources such as uploaded pupil reports and billing information.</p>
 
-                <p><a class="btn btn-default" href="#" role="button">Manage Resources »</a></p>
+                <p><a class="btn btn-default" href="{{ route('admin.resources') }}" role="button">Manage Resources »</a></p>
             </div>
         </div>
     </div>

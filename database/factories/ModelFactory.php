@@ -59,3 +59,15 @@ $factory->defineAs(TeachersAsTutors\Page::class, 'blog-post', function ($faker) 
             'uri'       => 'blog/' . \Carbon\Carbon::now()->format('Y-m-d') . '/' . str_slug($name),
         ]);
 });
+
+$factory->define(TeachersAsTutors\Resource::class, function ($faker) {
+    return [
+        'desc'              => $faker->sentence,
+        'original_filename' => str_slug($faker->text(50)) . '.' . $faker->fileExtension,
+        'filename'          => str_slug($faker->text(50)) . '.' . $faker->fileExtension,
+        'size'              => $faker->randomNumber(),
+        'extension'         => $faker->fileExtension,
+        'mime_type'         => $faker->mimeType,
+        'is_enabled'        => true,
+    ];
+});

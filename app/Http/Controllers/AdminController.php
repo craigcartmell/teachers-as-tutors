@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use TeachersAsTutors\Http\Requests;
 use TeachersAsTutors\Http\Controllers\Controller;
 use TeachersAsTutors\Page;
+use TeachersAsTutors\Resource;
 use TeachersAsTutors\User;
 use TeachersAsTutors\UserPermission;
 
@@ -169,10 +170,10 @@ class AdminController extends Controller
             $page->uri = $request->input('uri');
         }
 
-        $page->name           = $request->input('name');
-        $page->hero_text      = $request->input('hero_text', '');
-        $page->content        = $request->input('content');
-        $page->is_enabled     = $request->input('is_enabled');
+        $page->name       = $request->input('name');
+        $page->hero_text  = $request->input('hero_text', '');
+        $page->content    = $request->input('content');
+        $page->is_enabled = $request->input('is_enabled');
 
         $page->save();
 
@@ -205,6 +206,96 @@ class AdminController extends Controller
         $page->is_enabled = ! $page->is_enabled;
 
         $page->save();
+
+        if ($request->ajax()) {
+            return response();
+        }
+
+        return redirect()->back();
+    }
+
+    public function getResources()
+    {
+        $resources = Resource::all();
+
+        return view('admin.resources.index', ['resources' => $resources]);
+    }
+
+    public function getEditResource(Request $request, $id = 0)
+    {
+        $resource = new Resource();
+
+        if ($id) {
+            $resource = Resource::query()->findOrFail($id);
+        }
+
+        return view('admin.resources.edit', ['resource' => $resource]);
+    }
+
+    public function postEditResource(Request $request, $id = 0)
+    {
+        $resource = new Resource();
+
+        if ($id) {
+            $resource = Resource::query()->findOrFail($id);
+        }
+
+        $this->validate($request, [
+            'desc'              => 'max:255',
+            'original_filename' => ! $id ? 'required|max:' . env('MAX_UPLOAD_SIZE') : ''
+        ],
+            ['original_filename.required' => 'Please select a file to upload.']);
+
+
+        $resource->desc       = $request->input('desc');
+        $resource->is_enabled = $request->input('is_enabled', 0);
+
+        if ($request->file('original_filename')) {
+            $file = $request->file('original_filename');
+
+            $filename = str_slug(basename($file->getClientOriginalName(),
+                        '.' . $file->getClientOriginalExtension()) . '-' . uniqid()) . '.' . $file->getClientOriginalExtension();
+
+            $file->move(storage_path('app/resources'), $filename);
+
+            $resource->original_filename = $file->getClientOriginalName();
+            $resource->filename          = $filename;
+            $resource->size              = $file->getClientSize();
+            $resource->extension         = $file->getClientOriginalExtension();
+            $resource->mime_type         = $file->getClientMimeType();
+        }
+
+        $resource->save();
+
+        if (empty($id)) {
+            return redirect()->route('admin.resources.edit', ['id' => $resource->getKey()])->with([
+                'success' => true,
+            ]);
+        }
+
+        return redirect()->back()->with('success', true);
+    }
+
+    public function deleteResource(Request $request, $id)
+    {
+        $resource = Resource::query()->findOrFail($id);
+
+        $resource->delete();
+
+        if ($request->ajax()) {
+            return response();
+        }
+
+        return redirect()->back();
+    }
+
+    public function enableResource(Request $request, $id)
+    {
+        $resource = Resource::query()->findOrFail($id);
+
+        $resource->is_enabled = ! $resource->is_enabled;
+
+        $resource->save();
 
         if ($request->ajax()) {
             return response();

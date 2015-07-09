@@ -33,7 +33,7 @@
             @if(count($page->children))
                 @foreach($page->children_paginated as $child)
                     <div>
-                        <h3>{{ $child->name }}</h3>
+                        <h3><a href="{{ url($child->uri) }}">{{ $child->name }}</a></h3>
                         <span class="text-muted">Last updated {{ $child->updated_at->format('d/m/Y H:i:s') }} by {{ $child->creator->name or 'System' }}</span>
                     </div>
 
