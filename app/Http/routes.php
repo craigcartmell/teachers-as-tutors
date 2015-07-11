@@ -44,15 +44,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'enabled']]
         Route::get('{id}/enable', ['as' => 'admin.pages.enable', 'uses' => 'AdminController@enablePage']);
         Route::get('{id}/delete', ['as' => 'admin.pages.delete', 'uses' => 'AdminController@deletePage']);
     });
-    Route::group(['prefix' => 'resources'], function () {
-        Route::get('', ['as' => 'admin.resources', 'uses' => 'AdminController@getResources']);
-        Route::get('add', ['as' => 'admin.resources.add', 'uses' => 'AdminController@getEditResource']);
-        Route::post('add', ['as' => 'admin.resources.add', 'uses' => 'AdminController@postEditResource']);
-        Route::get('{id}/edit', ['as' => 'admin.resources.edit', 'uses' => 'AdminController@getEditResource']);
-        Route::post('{id}/edit', ['as' => 'admin.resources.edit', 'uses' => 'AdminController@postEditResource']);
-        Route::get('{id}/enable', ['as' => 'admin.resources.enable', 'uses' => 'AdminController@enableResource']);
-        Route::get('{id}/delete', ['as' => 'admin.resources.delete', 'uses' => 'AdminController@deleteResource']);
-    });
+});
+
+Route::group(['prefix' => 'resources', 'middleware' => ['auth', 'resource', 'enabled']], function () {
+    Route::get('', ['as' => 'resources', 'uses' => 'ResourceController@index']);
+    Route::get('add', ['as' => 'resources.add', 'uses' => 'ResourceController@getEditResource']);
+    Route::post('add', ['as' => 'resources.add', 'uses' => 'ResourceController@postEditResource']);
+    Route::get('{id}/edit', ['as' => 'resources.edit', 'uses' => 'ResourceController@getEditResource']);
+    Route::post('{id}/edit', ['as' => 'resources.edit', 'uses' => 'ResourceController@postEditResource']);
+    Route::get('{id}/enable', ['as' => 'resources.enable', 'uses' => 'ResourceController@enableResource']);
+    Route::get('{id}/delete', ['as' => 'resources.delete', 'uses' => 'ResourceController@deleteResource']);
+    Route::get('{id}/download', ['as' => 'resources.download', 'uses' => 'ResourceController@downloadResource']);
 });
 
 Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@getProfile']);

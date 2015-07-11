@@ -32,6 +32,7 @@ class Kernel extends HttpKernel
             'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
             'guest'      => \TeachersAsTutors\Http\Middleware\RedirectIfAuthenticated::class,
             'admin'      => \TeachersAsTutors\Http\Middleware\Admin::class,
+            'resource'   => \TeachersAsTutors\Http\Middleware\Resource::class,
             'enabled'    => \TeachersAsTutors\Http\Middleware\Enabled::class,
         ];
 }

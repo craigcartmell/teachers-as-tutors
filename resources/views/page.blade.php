@@ -9,6 +9,14 @@
 @section('content')
     <div class="container">
 
+        @if($page->parent_id)
+            <div>
+                <span class="text-muted">Last updated {{ $page->updated_at->format('d/m/Y H:i:s') }} by {{ $page->creator->name or 'System' }}</span>
+            </div>
+
+            <br>
+        @endif
+
         <div class="{{ isset($blog) && count($blog->children) ? 'row' : ''}}">
             <div class="{{ isset($blog) && count($blog->children) ? 'col-md-8' : '' }}">
                 {!! $page->content_formatted !!}

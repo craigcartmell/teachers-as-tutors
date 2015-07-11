@@ -10,8 +10,6 @@
 
 @section('content')
     <div class="container">
-        <h1>{{ $page->name }}</h1>
-
         @include('partials.errors')
 
         @if(session('success'))
