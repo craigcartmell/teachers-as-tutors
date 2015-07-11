@@ -28,11 +28,11 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware
         = [
-            'auth'       => \TeachersAsTutors\Http\Middleware\Authenticate::class,
-            'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-            'guest'      => \TeachersAsTutors\Http\Middleware\RedirectIfAuthenticated::class,
-            'admin'      => \TeachersAsTutors\Http\Middleware\Admin::class,
-            'resource'   => \TeachersAsTutors\Http\Middleware\Resource::class,
-            'enabled'    => \TeachersAsTutors\Http\Middleware\Enabled::class,
+            'auth'           => \TeachersAsTutors\Http\Middleware\Authenticate::class,
+            'auth.basic'     => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+            'guest'          => \TeachersAsTutors\Http\Middleware\RedirectIfAuthenticated::class,
+            'admin'          => \TeachersAsTutors\Http\Middleware\Admin::class,
+            'admin_or_tutor' => \TeachersAsTutors\Http\Middleware\AdminOrTutor::class,
+            'enabled'        => \TeachersAsTutors\Http\Middleware\Enabled::class,
         ];
 }

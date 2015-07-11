@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(PagesTableSeeder::class);
         $this->call(ResourcesTableSeeder::class);
+        $this->call(ReportsTableSeeder::class);
 
         Model::reguard();
     }
@@ -85,5 +86,13 @@ class ResourcesTableSeeder extends Seeder
     public function run()
     {
         factory(TeachersAsTutors\Resource::class, 10)->create();
+    }
+}
+
+class ReportsTableSeeder extends Seeder
+{
+    public function run()
+    {
+        factory(TeachersAsTutors\Report::class, 10)->create();
     }
 }

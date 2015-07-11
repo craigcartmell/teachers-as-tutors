@@ -40,7 +40,7 @@ class Enabled
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('');
+                return view('errors.401');
             }
         }
 

@@ -71,3 +71,12 @@ $factory->define(TeachersAsTutors\Resource::class, function ($faker) {
         'is_enabled'        => true,
     ];
 });
+
+$factory->define(TeachersAsTutors\Report::class, function ($faker) {
+    return [
+        'parent_id'  => 1,
+        'name'       => $faker->sentence,
+        'report'     => $faker->text(1000),
+        'is_enabled' => true,
+    ];
+});

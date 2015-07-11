@@ -46,7 +46,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'enabled']]
     });
 });
 
-Route::group(['prefix' => 'resources', 'middleware' => ['auth', 'resource', 'enabled']], function () {
+Route::group(['prefix' => 'resources', 'middleware' => ['auth', 'admin_or_tutor', 'enabled']], function () {
     Route::get('', ['as' => 'resources', 'uses' => 'ResourceController@index']);
     Route::get('add', ['as' => 'resources.add', 'uses' => 'ResourceController@getEditResource']);
     Route::post('add', ['as' => 'resources.add', 'uses' => 'ResourceController@postEditResource']);
@@ -55,6 +55,16 @@ Route::group(['prefix' => 'resources', 'middleware' => ['auth', 'resource', 'ena
     Route::get('{id}/enable', ['as' => 'resources.enable', 'uses' => 'ResourceController@enableResource']);
     Route::get('{id}/delete', ['as' => 'resources.delete', 'uses' => 'ResourceController@deleteResource']);
     Route::get('{id}/download', ['as' => 'resources.download', 'uses' => 'ResourceController@downloadResource']);
+});
+
+Route::group(['prefix' => 'reports', 'middleware' => ['auth', 'admin_or_tutor', 'enabled']], function () {
+    Route::get('', ['as' => 'reports', 'uses' => 'ReportController@index']);
+    Route::get('add', ['as' => 'reports.add', 'uses' => 'ReportController@getEdit']);
+    Route::post('add', ['as' => 'reports.add', 'uses' => 'ReportController@postEdit']);
+    Route::get('{id}/edit', ['as' => 'reports.edit', 'uses' => 'ReportController@getEdit']);
+    Route::post('{id}/edit', ['as' => 'reports.edit', 'uses' => 'ReportController@postEdit']);
+    Route::get('{id}/enable', ['as' => 'reports.enable', 'uses' => 'ReportController@enable']);
+    Route::get('{id}/delete', ['as' => 'reports.delete', 'uses' => 'ReportController@delete']);
 });
 
 Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@getProfile']);

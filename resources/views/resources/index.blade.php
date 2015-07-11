@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('title', 'Admin - Manage Resources')
+@section('title', 'Resources')
 
 @section('content')
     <div class="container table-responsive">

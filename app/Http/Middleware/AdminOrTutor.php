@@ -5,7 +5,7 @@ namespace TeachersAsTutors\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
-class Resource
+class AdminOrTutor
 {
     /**
      * The Guard implementation.
@@ -40,7 +40,7 @@ class Resource
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('');
+                return view('errors.401');
             }
         }
 

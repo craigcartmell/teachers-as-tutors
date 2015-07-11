@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('title')
-    {{ $resource->exists ? 'Admin - Edit ' . $resource->original_filename : 'Admin - New Resource' }}
+    {{ $resource->exists ? 'Edit ' . $resource->original_filename : 'New Resource' }}
 @endsection
 
 @section('content')

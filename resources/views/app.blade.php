@@ -91,12 +91,15 @@
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li><a href="{{ route('profile') }}">My Profile</a></li>
                             @if(auth()->user()->is_admin || auth()->user()->is_tutor)
+                                <li><a href="{{ route('reports') }}">My Reports</a></li>
                                 <li><a href="{{ route('resources') }}">Resources</a></li>
                             @endif
                             @if(auth()->user()->is_admin)
+                                <li class="nav-divider"></li>
                                 <li><a href="{{ route('admin.pages') }}">Manage Pages</a></li>
                                 <li><a href="{{ route('admin.users') }}">Manage Users</a></li>
                             @endif
+                            <li class="nav-divider"></li>
                             <li><a href="{{ route('logout') }}">Logout <span class="sr-only">(current)</span></a></li>
                         </ul>
                     </li>
