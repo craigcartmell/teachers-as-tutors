@@ -40,7 +40,6 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <label for="body"></label>
                     <textarea name="body" class="form-control" placeholder="Get in touch..." rows="10">{{ old('body') }}</textarea>
                 </div>
             </div>

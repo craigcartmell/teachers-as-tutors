@@ -2,6 +2,7 @@
 
 namespace TeachersAsTutors\Http\Controllers;
 
+use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Http\Request;
 use TeachersAsTutors\Http\Requests;
 use TeachersAsTutors\Report;
@@ -44,6 +45,10 @@ class ReportController extends Controller
         $report->report     = $request->input('report');
         $report->is_enabled = $request->input('is_enabled');
 
+        if (! $report->exists) {
+            $report->slug = str_slug($report->name);
+        }
+
         $report->save();
 
         if (empty($id)) {
@@ -81,5 +86,37 @@ class ReportController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function getBySlug($slug)
+    {
+        $report = Report::query()->where('slug', $slug)->firstOrFail();
+
+        if (! $report->is_enabled) {
+            abort(404);
+        }
+
+        if (auth()->user()->getKey() !== $report->created_by && auth()->user()->getKey() !== $report->parent_id) {
+            abort(401);
+        }
+
+        return view('reports.report', ['report' => $report]);
+    }
+
+    public function notify(Request $request, Mailer $mailer, $id)
+    {
+        $report = Report::query()->with('parent')->findOrFail($id);
+
+        $mailer->send('emails.notification', ['report' => $report], function ($m) use ($report) {
+            $m->to($report->parent->email,
+                $report->parent->name)->subject($report->creator->name . ' has sent a notification regarding ' . $report->name . '.');
+        });
+
+        if ($request->ajax()) {
+            return response();
+        }
+
+        return redirect()->back()->with('notification_sent',
+            'A notification email has been sent to ' . $report->parent->email);
     }
 }

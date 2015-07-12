@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="name">Name</label>
-                    <input type="text" name="name" value="{{ old('name', $report->name) }}" class="form-control" placeholder="Progres Report for...">
+                    <input type="text" name="name" value="{{ old('name', $report->name) }}" class="form-control" placeholder="Progress Report for...">
                 </div>
 
                 <div class="col-md-6">

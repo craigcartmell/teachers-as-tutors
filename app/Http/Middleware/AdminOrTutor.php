@@ -40,7 +40,7 @@ class AdminOrTutor
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return view('errors.401');
+                abort(401);
             }
         }
 

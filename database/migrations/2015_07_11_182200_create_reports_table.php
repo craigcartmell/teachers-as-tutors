@@ -21,11 +21,13 @@ class CreateReportsTable extends Migration
             $table->integer('id', true)->unsigned();
             $table->integer('parent_id')->unsigned()->nullable();
             $table->string('name');
+            $table->string('slug');
             $table->text('report');
             $table->boolean('is_enabled')->default(0);
             $table->authors();
             $table->timestamps();
 
+            $table->unique(['name', 'slug']);
             $table->foreign('parent_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

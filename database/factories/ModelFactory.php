@@ -75,7 +75,8 @@ $factory->define(TeachersAsTutors\Resource::class, function ($faker) {
 $factory->define(TeachersAsTutors\Report::class, function ($faker) {
     return [
         'parent_id'  => 1,
-        'name'       => $faker->sentence,
+        'name'       => $faker->text(50),
+        'slug'       => str_slug($faker->text(50)),
         'report'     => $faker->text(1000),
         'is_enabled' => true,
     ];
