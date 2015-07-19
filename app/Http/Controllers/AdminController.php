@@ -35,6 +35,7 @@ class AdminController extends Controller
     public function getEditUser(Request $request, $id = 0)
     {
         $user = new User();
+        $user->name = 'New User';
 
         if ($id) {
             $user = User::query()->findOrFail($id);
