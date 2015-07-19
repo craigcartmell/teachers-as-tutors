@@ -2,6 +2,10 @@
 
 @section('title', 'My Reports')
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('reports') !!}
+@endsection
+
 @section('content')
     <div class="container table-responsive">
         @if(session('notification_sent'))

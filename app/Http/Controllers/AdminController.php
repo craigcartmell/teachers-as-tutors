@@ -128,6 +128,7 @@ class AdminController extends Controller
     public function getEditPage(Request $request, $id = 0)
     {
         $page = new Page();
+        $page->name = 'New Page';
 
         if ($id) {
             $page = Page::query()->findOrFail($id);

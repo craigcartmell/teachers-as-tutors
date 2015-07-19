@@ -1,6 +1,10 @@
 @extends('app')
 
-@section('title', 'Admin - Manage Users')
+@section('title', 'Manage Users')
+
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('users') !!}
+@endsection
 
 @section('content')
     <div class="container table-responsive">

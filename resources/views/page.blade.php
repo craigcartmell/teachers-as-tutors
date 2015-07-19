@@ -6,6 +6,10 @@
 
 @section('hero_text', $page->hero_text)
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('page', $page) !!}
+@endsection
+
 @section('content')
     <div class="container">
 

@@ -1,7 +1,9 @@
 @extends('app')
 
-@section('title')
-    {{ $report->name }}
+@section('title', $report->name)
+
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('view-report', $report) !!}
 @endsection
 
 @section('content')

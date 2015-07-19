@@ -2,6 +2,10 @@
 
 @section('title', 'Resources')
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('resources') !!}
+@endsection
+
 @section('content')
     <div class="container table-responsive">
         <a href="{{ route('resources.add') }}" class="btn btn-primary">Add New</a>

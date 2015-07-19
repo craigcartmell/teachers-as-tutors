@@ -51,7 +51,7 @@ class Page extends Model
     // TODO: Check relationship works
     public function parent()
     {
-        return $this->belongsTo('TeachersAsTutors\Page', 'id', 'parent_id');
+        return $this->belongsTo('TeachersAsTutors\Page', 'parent_id', 'id');
     }
 
     public function children()

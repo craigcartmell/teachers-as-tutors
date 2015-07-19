@@ -20,6 +20,7 @@ class ReportController extends Controller
     public function getEdit(Request $request, $id = 0)
     {
         $report = new Report();
+        $report->name = 'New Report';
 
         if ($id) {
             $report = Report::query()->findOrFail($id);

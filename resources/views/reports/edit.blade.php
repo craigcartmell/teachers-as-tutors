@@ -8,6 +8,10 @@
     <link href="{{ asset('build/css/bootstrap-markdown.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('edit-report', $report) !!}
+@endsection
+
 @section('content')
     <div class="container">
         @include('partials.errors')

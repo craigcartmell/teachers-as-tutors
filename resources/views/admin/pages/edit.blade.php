@@ -1,11 +1,15 @@
 @extends('app')
 
 @section('title')
-    {{ $page->exists ? 'Admin - Edit ' . $page->name : 'Admin - New Page' }}
+    {{ $page->exists ? 'Edit ' . $page->name : 'New Page' }}
 @endsection
 
 @section('css')
     <link href="{{ asset('build/css/bootstrap-markdown.min.css') }}" rel="stylesheet" type="text/css">
+@endsection
+
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('edit-page', $page) !!}
 @endsection
 
 @section('content')

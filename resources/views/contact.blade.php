@@ -6,6 +6,10 @@
 
 @section('hero_text', '')
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('contact') !!}
+@endsection
+
 @section('content')
     <div class="container">
         @include('partials.errors')

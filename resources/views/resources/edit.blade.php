@@ -4,6 +4,10 @@
     {{ $resource->exists ? 'Edit ' . $resource->original_filename : 'New Resource' }}
 @endsection
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('edit-resource', $resource) !!}
+@endsection
+
 @section('content')
     <div class="container">
         @include('partials.errors')

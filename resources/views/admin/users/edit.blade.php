@@ -1,8 +1,13 @@
 @extends('app')
 
 @section('title')
-    {{ $user->exists ? 'Admin - Edit ' . $user->name : 'Admin - New User' }}
+    {{ $user->exists ? 'Edit ' . $user->name : 'New User' }}
 @endsection
+
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('edit-user', $user) !!}
+@endsection
+
 
 @section('content')
     <div class="container">

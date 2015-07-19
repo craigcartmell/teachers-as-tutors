@@ -2,6 +2,10 @@
 
 @section('title', 'My Profile')
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('profile') !!}
+@endsection
+
 @section('content')
     <div class="container">
         @include('partials.errors')

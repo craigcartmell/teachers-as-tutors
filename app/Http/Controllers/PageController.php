@@ -18,6 +18,7 @@ class PageController extends Controller
     public function index($uri)
     {
         $page = Page::with([
+            'parent',
             'children' => function ($query) {
                 $query->where('is_enabled', true)->orderBy('id', 'desc');
             }
@@ -30,7 +31,7 @@ class PageController extends Controller
         $data['page'] = $page;
 
         if ($uri === '/') {
-            $data['blog'] = Page::query()->with('children')->where('name', 'blog')->first();
+            $data['blog'] = Page::query()->with(['parent', 'children'])->where('name', 'blog')->first();
         }
 
         return view('page', $data);
