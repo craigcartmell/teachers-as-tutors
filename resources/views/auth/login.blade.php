@@ -2,6 +2,10 @@
 
 @section('title', 'Login')
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('login') !!}
+@endsection
+
 @section('content')
     <div class="container">
 

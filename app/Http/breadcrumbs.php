@@ -85,3 +85,21 @@ Breadcrumbs::register('page', function ($breadcrumbs, $page) {
 
     $breadcrumbs->push($page->name, url($page->uri, $page->uri));
 });
+
+Breadcrumbs::register('login', function ($breadcrumbs) {
+    $breadcrumbs->parent('/');
+
+    $breadcrumbs->push('Login', url('auth/login'));
+});
+
+Breadcrumbs::register('forgotten-password', function ($breadcrumbs) {
+    $breadcrumbs->parent('login');
+
+    $breadcrumbs->push('Forgotten Password');
+});
+
+Breadcrumbs::register('reset-password', function ($breadcrumbs) {
+    $breadcrumbs->parent('login');
+
+    $breadcrumbs->push('Reset Password');
+});

@@ -2,6 +2,11 @@
 
 @section('title', 'Forgotten Password')
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('forgotten-password') !!}
+@endsection
+
+
 @section('content')
     <div class="container">
 

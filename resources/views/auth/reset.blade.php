@@ -2,6 +2,10 @@
 
 @section('title', 'Reset Password')
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('reset-password') !!}
+@endsection
+
 @section('content')
     <div class="container">
         @include('partials/errors')
