@@ -27,7 +27,7 @@
             </div>
 
             @if(isset($blog) && count($blog->children))
-                <div class="col-md-4 pull-right recent">
+                <div class="col-md-4 recent">
                     <h4>Recent Blog Posts</h4>
 
                     <ul class="list-group">
