@@ -14,4 +14,16 @@ $(function () {
     });
 
     $('select[name=parent_id]').change();
+
+    $('#calendar').fullCalendar({
+        dayClick: function () {
+            $('#event-modal').modal('show');
+        }
+    });
+
+    $('.clockpicker').clockpicker()
+        .find('input').change(function () {
+            // TODO: time changed
+            console.log(this.value);
+        });
 });

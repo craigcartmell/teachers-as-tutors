@@ -20,6 +20,11 @@ class CreateForeignKeys extends Migration
         $this->schema->table('users', function (Blueprint $table) {
             $table->foreign('permission_id')->references('id')->on('user_permissions')->onDelete('set null');
         });
+
+        $this->schema->table('lessons', function (Blueprint $table) {
+            $table->foreign('tutor_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('parent_id')->references('id')->on('users')->onDelete('set null');
+        });
     }
 
     /**
@@ -53,6 +58,17 @@ class CreateForeignKeys extends Migration
                 $table->dropForeign('pages_created_by_foreign');
                 $table->dropForeign('pages_updated_by_foreign');
                 $table->dropForeign('pages_parent_id_foreign');
+            });
+        } catch (Exception $e) {
+
+        }
+
+        try {
+            $this->schema->table('lessons', function (Blueprint $table) {
+                $table->dropForeign('lessons_created_by_foreign');
+                $table->dropForeign('lessons_updated_by_foreign');
+                $table->dropForeign('lessons_tutor_id_foreign');
+                $table->dropForeign('lessons_parent_id_foreign');
             });
         } catch (Exception $e) {
 

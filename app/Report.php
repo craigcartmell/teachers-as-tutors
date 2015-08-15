@@ -10,7 +10,7 @@ class Report extends Model
 
     public function parent()
     {
-        return $this->belongsTo('TeachersAsTutors\User', 'parent_id', 'id');
+        return $this->belongsTo(User::class, 'parent_id', 'id');
     }
 
     public function __construct(array $attributes = [])

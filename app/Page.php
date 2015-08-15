@@ -51,16 +51,17 @@ class Page extends Model
     // TODO: Check relationship works
     public function parent()
     {
-        return $this->belongsTo('TeachersAsTutors\Page', 'parent_id', 'id');
+        return $this->belongsTo(Page::class, 'parent_id', 'id');
     }
 
     public function children()
     {
-        return $this->hasMany('TeachersAsTutors\Page', 'parent_id', 'id');
+        return $this->hasMany(Page::class, 'parent_id', 'id');
     }
 
     public function getChildrenPaginatedAttribute()
     {
+        // TODO: Add this to config
         return $this->children()->paginate(5);
     }
 }

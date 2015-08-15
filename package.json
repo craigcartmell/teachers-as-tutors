@@ -1,14 +1,16 @@
 {
   "private": true,
   "devDependencies": {
-    "bootstrap-markdown": "^2.9.0",
-    "gulp": "^3.8.8",
-    "markdown": "^0.5.0"
+    "gulp": "^3.8.8"
   },
   "dependencies": {
+    "bootstrap-markdown": "^2.9.0",
     "bootstrap-sass": "^3.3.4",
-    "gulp": "^3.8.8",
+    "clockpicker": "0.0.7",
+    "fullcalendar": "^2.3.1",
     "jquery": "^2.1.4",
-    "laravel-elixir": "^2.0.0"
+    "laravel-elixir": "^2.0.0",
+    "markdown": "^0.5.0",
+    "moment": "^2.10.6"
   }
 }

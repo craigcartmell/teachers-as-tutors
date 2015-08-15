@@ -17,17 +17,3 @@ if (! function_exists('human_filesize')) {
         return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
     }
 }
-
-if (! function_exists('generate_breadcrumbs')) {
-    /**
-     * Returns a filesize in human readable format
-     *
-     * @param  array $breacrumbs
-     *
-     * @return string
-     */
-    function generate_breadcrumbs(array $breacrumbs = [])
-    {
-        return 'Test';
-    }
-}

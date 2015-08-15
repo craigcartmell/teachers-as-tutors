@@ -16,6 +16,7 @@
 
     @yield('css')
 
+
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,900italic,400,700,900'
           rel='stylesheet' type='text/css'>
 
@@ -92,6 +93,7 @@
                             <li><a href="{{ route('profile') }}">My Profile</a></li>
                             @if(auth()->user()->is_admin || auth()->user()->is_tutor)
                                 <li><a href="{{ route('reports') }}">My Reports</a></li>
+                                <li><a href="{{ route('calendar') }}">My Calendar</a></li>
                                 <li><a href="{{ route('resources') }}">Resources</a></li>
                             @endif
                             @if(auth()->user()->is_admin)
@@ -117,11 +119,11 @@
 @section('hero')
     <div id="carousel-hero" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
-        <ol class="carousel-indicators">
+        <!--<ol class="carousel-indicators">
             <li data-target="#carousel-hero" data-slide-to="0" class="active"></li>
             <li data-target="#carousel-hero" data-slide-to="1"></li>
             <li data-target="#carousel-hero" data-slide-to="2"></li>
-        </ol>
+        </ol>-->
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">

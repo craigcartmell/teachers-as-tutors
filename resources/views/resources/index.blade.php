@@ -18,7 +18,7 @@
                     <th>Extension</th>
                     <th>Type</th>
                     <th>Created</th>
-                    <th colspan="4">Updated</th>
+                    <th colspan="5">Updated</th>
                 </tr>
                </thead>
                <tbody>

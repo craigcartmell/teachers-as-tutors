@@ -44,7 +44,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function permission()
     {
-        return $this->hasOne('TeachersAsTutors\UserPermission', 'id', 'permission_id');
+        return $this->hasOne(UserPermission::class, 'id', 'permission_id');
     }
 
     // TODO: Don't hardcode keys!

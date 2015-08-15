@@ -26,6 +26,12 @@ Breadcrumbs::register('reports', function ($breadcrumbs) {
     $breadcrumbs->push('My Reports', url('reports'));
 });
 
+Breadcrumbs::register('calendar', function ($breadcrumbs) {
+    $breadcrumbs->parent('/');
+
+    $breadcrumbs->push('My Calendar', url('calendar'));
+});
+
 Breadcrumbs::register('edit-report', function ($breadcrumbs, $report) {
     $breadcrumbs->parent('reports');
 

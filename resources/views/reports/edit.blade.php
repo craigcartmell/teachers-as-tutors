@@ -30,7 +30,7 @@
 
                 <div class="col-md-6">
                     <label for="parent_id">Assign to Parent</label>
-                    <select name="parent_id" class="form-control">
+                    <select id="parent_id" name="parent_id" class="form-control">
                         <option value="0">-- Please Select --</option>
                         @foreach($parents as $p)
                             <option value="{{ $p->getKey() }}" {{ $p->getKey() === $report->parent_id ? 'selected' : '' }}>{{ $p->name }}</option>

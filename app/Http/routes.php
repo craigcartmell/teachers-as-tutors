@@ -72,6 +72,10 @@ Route::group(['prefix' => 'reports', 'middleware' => ['auth', 'admin_or_tutor', 
 Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@getProfile']);
 Route::post('profile', ['as' => 'profile', 'uses' => 'ProfileController@postProfile']);
 
+Route::group(['prefix' => 'calendar', 'middleware' => ['auth', 'admin_or_tutor', 'enabled']], function () {
+    Route::get('', ['as' => 'calendar', 'uses' => 'CalendarController@index']);
+});
+
 Route::get('contact', 'ContactController@getContact');
 Route::post('contact', 'ContactController@postContact');
 
