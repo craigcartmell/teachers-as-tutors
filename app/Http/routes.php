@@ -76,6 +76,11 @@ Route::group(['prefix' => 'calendar', 'middleware' => ['auth', 'admin_or_tutor',
     Route::get('', ['as' => 'calendar', 'uses' => 'CalendarController@index']);
 });
 
+Route::group(['prefix' => 'lessons', 'middleware' => ['auth', 'enabled']], function () {
+    Route::get('{id}', ['as' => 'lesson.find', 'uses' => 'LessonController@find']);
+    Route::get('tutor/{tutorId}', ['as' => 'lesson.find', 'uses' => 'LessonController@getByTutorId']);
+});
+
 Route::get('contact', 'ContactController@getContact');
 Route::post('contact', 'ContactController@postContact');
 

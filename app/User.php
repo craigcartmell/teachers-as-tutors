@@ -36,15 +36,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     protected $casts
         = [
-            'is_admin'   => 'boolean',
-            'is_tutor'   => 'boolean',
-            'is_parent'  => 'boolean',
+            'is_admin' => 'boolean',
+            'is_tutor' => 'boolean',
+            'is_parent' => 'boolean',
             'is_enabled' => 'boolean',
         ];
 
     public function permission()
     {
         return $this->hasOne(UserPermission::class, 'id', 'permission_id');
+    }
+
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class, 'tutor_id', 'id');
     }
 
     // TODO: Don't hardcode keys!

@@ -1,4 +1,8 @@
+var App = App || {};
+
 $(function () {
+    window.siteUrl = $('body').data('site-url');
+
     $('.delete-record').on('click', function () {
         return confirm('Are you sure you wish to delete this record?');
     });
@@ -14,16 +18,4 @@ $(function () {
     });
 
     $('select[name=parent_id]').change();
-
-    $('#calendar').fullCalendar({
-        dayClick: function () {
-            $('#event-modal').modal('show');
-        }
-    });
-
-    $('.clockpicker').clockpicker()
-        .find('input').change(function () {
-            // TODO: time changed
-            console.log(this.value);
-        });
 });

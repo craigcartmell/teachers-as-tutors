@@ -3,16 +3,16 @@
 @section('title', 'My Calendar')
 
 @section('css')
-    <link href="{{ asset('build/css/fullcalendar.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('build/css/bootstrap-clockpicker.min.css') }}" rel="stylesheet" type="text/css">
+        <!-- TODO: Add to one css file -->
+<link href="{{ asset('build/css/fullcalendar.min.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('build/css/bootstrap-clockpicker.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('content')
     <div class="container">
-        <div id='calendar'></div>
+        <div id="calendar" data-tutor-id="{{ auth()->user()->getKey() }}"></div>
     </div>
 
-    <!-- Modal -->
     <div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -65,4 +65,13 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        var Calendar = App.Calendar;
+        Calendar.init();
+
+        console.log(Calendar);
+    </script>
 @endsection

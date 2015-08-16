@@ -5,6 +5,7 @@
 @import "carousel";
 @import "pagination";
 @import "breadcrumbs";
+@import "dropdowns";
 
 .recent {
   margin-top: 0;
@@ -12,8 +13,4 @@
   > h4 {
     margin-top: 0;
   }
-}
-
-.dropdown-toggle {
-  cursor: pointer;
 }

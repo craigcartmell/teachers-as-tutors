@@ -33,7 +33,9 @@ elixir(function (mix) {
             paths.moment + 'min/moment.min.js',
             paths.fullcalendar + 'dist/fullcalendar.min.js',
             paths.clockpicker + 'dist/bootstrap-clockpicker.min.js',
-            'resources/assets/js/main.js'
+            'resources/assets/js/main.js',
+            'resources/assets/js/lesson.js',
+            'resources/assets/js/calendar.js'
         ], 'public/js/app.js', './')
         .version(['css/all.css', 'js/app.js']);
 });

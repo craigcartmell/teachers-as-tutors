@@ -2,8 +2,6 @@
 
 namespace TeachersAsTutors;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Lesson extends Model
 {
     /**
@@ -29,13 +27,15 @@ class Lesson extends Model
 
     protected $casts = ['is_completed' => 'boolean'];
 
+    protected $dates = ['started_at', 'ended_at'];
+
     public function parent()
     {
-        return $this->belongsTo(User::class, 'id', 'parent_id');
+        return $this->belongsTo(User::class, 'parent_id', 'id');
     }
 
     public function tutor()
     {
-        return $this->belongsTo(User::class, 'id', 'tutor_id');
+        return $this->belongsTo(User::class, 'tutor_id', 'id');
     }
 }

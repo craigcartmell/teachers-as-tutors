@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PagesTableSeeder::class);
         $this->call(ResourcesTableSeeder::class);
         $this->call(ReportsTableSeeder::class);
+        $this->call(LessonTableSeeder::class);
 
         Model::reguard();
     }
@@ -48,8 +49,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         factory(TeachersAsTutors\User::class, 'admin', 1)->create([
-            'name'     => 'Admin',
-            'email'    => env('APP_ADMIN_EMAIL'),
+            'name' => 'Admin',
+            'email' => env('APP_ADMIN_EMAIL'),
             'password' => bcrypt(env('APP_ADMIN_PASSWORD'))
         ]);
         factory(TeachersAsTutors\User::class, 'tutor', 1)->create();
@@ -63,19 +64,19 @@ class PagesTableSeeder extends Seeder
     {
         factory(TeachersAsTutors\Page::class, 1)->create([
             'name' => 'Home',
-            'uri'  => '/',
+            'uri' => '/',
         ]);
         factory(TeachersAsTutors\Page::class, 1)->create([
             'name' => 'Tuition',
-            'uri'  => 'tuition',
+            'uri' => 'tuition',
         ]);
         factory(TeachersAsTutors\Page::class, 1)->create([
             'name' => 'Tutors',
-            'uri'  => 'tutors',
+            'uri' => 'tutors',
         ]);
         factory(TeachersAsTutors\Page::class, 1)->create([
             'name' => 'Blog',
-            'uri'  => 'blog',
+            'uri' => 'blog',
         ]);
         factory(TeachersAsTutors\Page::class, 'blog-post', 10)->create();
     }
@@ -94,5 +95,14 @@ class ReportsTableSeeder extends Seeder
     public function run()
     {
         factory(TeachersAsTutors\Report::class, 10)->create();
+    }
+}
+
+class LessonTableSeeder extends Seeder
+{
+    public function run()
+    {
+        factory(TeachersAsTutors\Lesson::class, 1)->create(['started_at' => \Carbon\Carbon::now(), 'ended_at' => \Carbon\Carbon::now()->addHours(3)]);
+        factory(TeachersAsTutors\Lesson::class, 1)->create(['started_at' => \Carbon\Carbon::now()->addHours(4), 'ended_at' => \Carbon\Carbon::now()->addHours(5)]);
     }
 }

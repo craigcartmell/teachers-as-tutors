@@ -16,7 +16,7 @@
 
     @yield('css')
 
-
+    <!--TODO: Uncomment -->
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,900italic,400,700,900'
           rel='stylesheet' type='text/css'>
 
@@ -174,6 +174,9 @@
 </div>
 
 <script src="{{ elixir('js/app.js') }}" type="text/javascript"></script>
+
+@yield('scripts')
+
 </body>
 
 </html>
