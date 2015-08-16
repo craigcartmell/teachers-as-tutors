@@ -11,7 +11,7 @@ class LessonController extends Controller
 {
     public function find($id = 0)
     {
-        $lesson = Lesson::query()->findOrFail($id);
+        $lesson = Lesson::query()->with(['tutor', 'parent'])->findOrFail($id);
 
         return $lesson;
     }
@@ -39,23 +39,20 @@ class LessonController extends Controller
      *
      * @return View
      */
-    public function save(Request $request)
+    public function save(Request $request, $id = 0)
     {
         $lesson = new Lesson();
 
-        $id = $request->get('id');
-
         if ($id) {
-            $lesson->query()->findOrFail($id);
+            $lesson = Lesson::query()->findOrFail($id);
         }
 
-        $lesson->tutor_id = $request->get('tutor_id');
-        $lesson->parent_id = $request->get('parent_id');
-        $lesson->started_at = $request->get('started_at');
-        $lesson->ended_at = $request->get('ended_at');
+        $lesson->parent_id = $request->input('parent_id');
+        $lesson->started_at = $request->input('started_at');
+        $lesson->ended_at = $request->input('ended_at');
 
         $lesson->save();
 
-        return response($lesson, 201);
+        return response($lesson, $id ? 200 : 201);
     }
 }

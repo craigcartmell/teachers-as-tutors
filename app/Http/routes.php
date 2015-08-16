@@ -79,6 +79,8 @@ Route::group(['prefix' => 'calendar', 'middleware' => ['auth', 'admin_or_tutor',
 Route::group(['prefix' => 'lessons', 'middleware' => ['auth', 'enabled']], function () {
     Route::get('{id}', ['as' => 'lesson.find', 'uses' => 'LessonController@find']);
     Route::get('tutor/{tutorId}', ['as' => 'lesson.find', 'uses' => 'LessonController@getByTutorId']);
+    Route::post('/', ['as' => 'lesson.save', 'uses' => 'LessonController@save']);
+    Route::put('{id}', ['as' => 'lesson.save', 'uses' => 'LessonController@save']);
 });
 
 Route::get('contact', 'ContactController@getContact');

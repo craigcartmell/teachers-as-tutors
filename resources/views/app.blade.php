@@ -9,6 +9,7 @@
           content="teachers as tutors, teach, teachers, tutoring, tutors">
     <meta name="author" content="Teachers as Tutors">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="_token" content="{{ csrf_token() }}">
 
     @yield('meta')
 
@@ -16,7 +17,7 @@
 
     @yield('css')
 
-    <!--TODO: Uncomment -->
+            <!--TODO: Uncomment -->
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,900italic,400,700,900'
           rel='stylesheet' type='text/css'>
 

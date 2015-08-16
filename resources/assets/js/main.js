@@ -3,6 +3,10 @@ var App = App || {};
 $(function () {
     window.siteUrl = $('body').data('site-url');
 
+    $.ajaxSetup({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+    });
+
     $('.delete-record').on('click', function () {
         return confirm('Are you sure you wish to delete this record?');
     });

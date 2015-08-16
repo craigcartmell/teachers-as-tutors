@@ -14688,6 +14688,10 @@ var App = App || {};
 $(function () {
     window.siteUrl = $('body').data('site-url');
 
+    $.ajaxSetup({
+        headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+    });
+
     $('.delete-record').on('click', function () {
         return confirm('Are you sure you wish to delete this record?');
     });
@@ -14704,42 +14708,56 @@ $(function () {
 
     $('select[name=parent_id]').change();
 });
-App.Lesson = function (id) {
-    id = parseInt(id);
-
-    this.id = id ? id : 0;
-    this.tutorId = 0;
-    this.parentId = 0;
-    this.startedAt = null;
-    this.endedAt = null;
-    this.isComplete = null;
-
-    if (this.id) {
-        App.Lesson.prototype.get(this.id);
-    }
+App.Lesson = function () {
+    this.id = 0;
+    this.tutor_id = 0;
+    this.parent_id = 0;
+    this.started_at = null;
+    this.ended_at = null;
+    this.is_complete = null;
 };
 
 App.Lesson.prototype.get = function (id) {
     id = parseInt(id);
 
-    $.ajax($('body').data('site-url') + '/');
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: window.siteUrl + '/lessons/' + id
+        }).done(function (lesson) {
+            resolve(lesson);
+        }).error(function (response) {
+            reject(response);
+        });
+    });
 };
 
-App.Lesson.prototype.save = function () {
-    $.ajax()
+App.Lesson.prototype.save = function (lesson) {
+    $.ajax({
+        url: lesson.id ? window.siteUrl + '/lessons/' + lesson.id : window.siteUrl + '/lessons/',
+        method: lesson.id ? 'PUT' : 'POST',
+        data: lesson
+    }).done(function (lesson) {
+        console.log(lesson);
+    }).error(function (response) {
+        console.log(response);
+    });
+
 };
 App.Calendar = {
     init: function () {
-        var lesson;
+        var lesson = new App.Lesson();
         var tutorId;
 
         $(function () {
-
             tutorId = parseInt($('#calendar').data('tutor-id'));
 
             $('select[name=parent_id]').on('change', function () {
                 lesson.parent_id = parseInt($(this).val());
+            });
+
+            $('#modal-save').on('click', function () {
                 console.log(lesson);
+                App.Lesson.prototype.save(lesson);
             });
 
             $('#calendar').fullCalendar({
@@ -14765,8 +14783,20 @@ App.Calendar = {
                     console.log(lesson);
                     console.log(moment.toString());
                 },
-                eventClick: function (e) {
-                    $('#event-modal').modal('show');
+                eventClick: function (event) {
+                    var promise = App.Lesson.prototype.get(event.id);
+
+                    promise.then(function (response) {
+                        lesson = response;
+                        $('#event-modal .modal-title').html('Lesson booking for ' + lesson.parent.name);
+                        $('#event-modal select#parent_id').val(lesson.parent_id);
+                        $('#event-modal input#started_at').val(event.start.format('HH:mm'));
+                        $('#event-modal input#ended_at').val(event.end.format('HH:mm'));
+                        $('#event-modal').modal('show');
+                    }, function () {
+                        alert('Error fetching lesson details. Please try again.');
+                    });
+
                 }
             });
 

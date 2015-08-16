@@ -37,7 +37,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="input-group clockpicker" data-placement="bottom" data-align="top"
                                      data-autoclose="true">
-                                    <input type="text" class="form-control" value="started">
+                                    <input id="started_at" type="text" class="form-control" value="started_at">
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-time"></span>
                                 </span>
@@ -47,7 +47,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="input-group clockpicker" data-placement="bottom" data-align="top"
                                      data-autoclose="true">
-                                    <input type="text" class="form-control" value="ended">
+                                    <input id="ended_at" type="text" class="form-control" value="ended_at">
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-time"></span>
                                 </span>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
+                    <button id='modal-save' type="button" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
@@ -71,7 +71,5 @@
     <script type="text/javascript">
         var Calendar = App.Calendar;
         Calendar.init();
-
-        console.log(Calendar);
     </script>
 @endsection
