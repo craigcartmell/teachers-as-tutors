@@ -16,7 +16,7 @@ class Lesson extends Model
      *
      * @var array
      */
-    protected $fillable = ['tutor_id', 'parent_id', 'started_at', 'ended_at', 'is_completed', 'created_by', 'updated_by'];
+    protected $fillable = ['tutor_id', 'parent_id', 'started_at', 'ended_at', 'created_by', 'updated_by',];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -25,9 +25,9 @@ class Lesson extends Model
      */
     protected $hidden = [];
 
-    protected $casts = ['is_completed' => 'boolean'];
+    protected $casts = [];
 
-    protected $dates = ['started_at', 'ended_at'];
+    protected $dates = ['started_at', 'ended_at',];
 
     public function parent()
     {

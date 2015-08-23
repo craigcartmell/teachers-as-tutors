@@ -14714,7 +14714,6 @@ App.Lesson = function () {
     this.parent_id = 0;
     this.started_at = null;
     this.ended_at = null;
-    this.is_complete = null;
 };
 
 App.Lesson.prototype.get = function (id) {
@@ -14732,20 +14731,35 @@ App.Lesson.prototype.get = function (id) {
 };
 
 App.Lesson.prototype.save = function (lesson) {
-    $.ajax({
-        url: lesson.id ? window.siteUrl + '/lessons/' + lesson.id : window.siteUrl + '/lessons/',
-        method: lesson.id ? 'PUT' : 'POST',
-        data: lesson
-    }).done(function (lesson) {
-        console.log(lesson);
-    }).error(function (response) {
-        console.log(response);
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: lesson.id ? window.siteUrl + '/lessons/' + lesson.id : window.siteUrl + '/lessons/',
+            method: lesson.id ? 'PUT' : 'POST',
+            data: lesson
+        }).done(function (lesson) {
+            resolve(lesson);
+        }).error(function (response) {
+            reject(response);
+        });
     });
+};
 
+App.Lesson.prototype.delete = function (lesson) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: window.siteUrl + '/lessons/' + lesson.id,
+            method: 'DELETE'
+        }).done(function () {
+            resolve();
+        }).error(function (response) {
+            reject(response);
+        });
+    });
 };
 App.Calendar = {
     init: function () {
         var lesson = new App.Lesson();
+        var lessonDate;
         var tutorId;
 
         $(function () {
@@ -14756,8 +14770,50 @@ App.Calendar = {
             });
 
             $('#modal-save').on('click', function () {
-                console.log(lesson);
-                App.Lesson.prototype.save(lesson);
+                var promise = App.Lesson.prototype.save(lesson);
+
+                $('.alert').html('').addClass('hidden');
+
+                promise.then(function (response) {
+                    lesson = response;
+                    $('#event-modal').modal('hide');
+                    $('#calendar').fullCalendar('refetchEvents');
+                }, function (response) {
+                    var errors = JSON.parse(response.responseText);
+                    var display = '';
+
+                    $.each(errors, function (key, value) {
+                        display = display + '<p>' + value + '</p>';
+                    });
+
+                    $('.alert').html(display).removeClass('hidden');
+                });
+            });
+
+            $('#modal-delete').on('click', function () {
+                var c = confirm('Are you sure you wish to delete this lesson?');
+
+                if (!c) {
+                    return;
+                }
+
+                var promise = App.Lesson.prototype.delete(lesson);
+
+                $('.alert').html('').addClass('hidden');
+
+                promise.then(function () {
+                    $('#event-modal').modal('hide');
+                    $('#calendar').fullCalendar('refetchEvents');
+                }, function (response) {
+                    var errors = JSON.parse(response.responseText);
+                    var display = '';
+
+                    $.each(errors, function (key, value) {
+                        display = display + '<p>' + value + '</p>';
+                    });
+
+                    $('.alert').html(display).removeClass('hidden');
+                });
             });
 
             $('#calendar').fullCalendar({
@@ -14777,13 +14833,15 @@ App.Calendar = {
 
                 ],
                 dayClick: function (moment) {
-                    $('#event-modal').modal('show');
+                    lessonDate = moment;
                     lesson = new App.Lesson();
                     lesson.tutor_id = $('#event-modal').data('tutor-id');
-                    console.log(lesson);
-                    console.log(moment.toString());
+
+                    $('#event-modal').modal('show');
                 },
                 eventClick: function (event) {
+                    lessonDate = event.start;
+
                     var promise = App.Lesson.prototype.get(event.id);
 
                     promise.then(function (response) {
@@ -14801,10 +14859,10 @@ App.Calendar = {
             });
 
             $('.clockpicker').clockpicker()
-                .find('input').change(function () {
-                    // TODO: time changed
-                    console.log(this.value);
-                });
+                .find('input#started_at, input#ended_at').change(function () {
+                    var id = $(this).attr('id');
+                    lesson[id] = lessonDate.format('YYYY-MM-DD') + ' ' + $(this).val() + ':00';
+                })
         });
     }
 };

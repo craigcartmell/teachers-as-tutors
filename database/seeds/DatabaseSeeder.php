@@ -67,7 +67,11 @@ class PagesTableSeeder extends Seeder
             'uri' => '/',
         ]);
         factory(TeachersAsTutors\Page::class, 1)->create([
-            'name' => 'Tuition',
+            'name' => 'Our Philosophy',
+            'uri' => 'philosophy',
+        ]);
+        factory(TeachersAsTutors\Page::class, 1)->create([
+            'name' => 'Private Tuition',
             'uri' => 'tuition',
         ]);
         factory(TeachersAsTutors\Page::class, 1)->create([

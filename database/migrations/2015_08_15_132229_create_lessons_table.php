@@ -23,7 +23,6 @@ class CreateLessonsTable extends Migration
             $table->integer('parent_id', false, true)->nullable();
             $table->dateTime('started_at');
             $table->dateTime('ended_at');
-            $table->boolean('is_complete');
             $table->authors();
             $table->timestamps();
         });

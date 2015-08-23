@@ -3,6 +3,7 @@
 namespace TeachersAsTutors\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use TeachersAsTutors\Lesson;
 use TeachersAsTutors\Page;
 use TeachersAsTutors\Report;
 use TeachersAsTutors\Resource;
@@ -11,7 +12,7 @@ use TeachersAsTutors\UserPermission;
 
 class AppServiceProvider extends ServiceProvider
 {
-    protected $models = [User::class, Page::class, Resource::class, Report::class, UserPermission::class];
+    protected $models = [User::class, Page::class, Resource::class, Report::class, UserPermission::class, Lesson::class];
 
     /**
      * Bootstrap any application services.

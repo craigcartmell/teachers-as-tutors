@@ -22,6 +22,7 @@
                     <h4 class="modal-title" id="myModalLabel">Lesson Booking</h4>
                 </div>
                 <div class="modal-body">
+                    <div class="alert alert-danger hidden"></div>
                     <form>
                         <label for="parent_id">Parent</label>
                         <select id="parent_id" name="parent_id" class="form-control">
@@ -59,6 +60,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
+                    <button id='modal-delete' class="btn btn-danger pull-left">Delete</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button id='modal-save' type="button" class="btn btn-primary">Save</button>
                 </div>

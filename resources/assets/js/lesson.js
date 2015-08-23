@@ -4,7 +4,6 @@ App.Lesson = function () {
     this.parent_id = 0;
     this.started_at = null;
     this.ended_at = null;
-    this.is_complete = null;
 };
 
 App.Lesson.prototype.get = function (id) {
@@ -22,14 +21,28 @@ App.Lesson.prototype.get = function (id) {
 };
 
 App.Lesson.prototype.save = function (lesson) {
-    $.ajax({
-        url: lesson.id ? window.siteUrl + '/lessons/' + lesson.id : window.siteUrl + '/lessons/',
-        method: lesson.id ? 'PUT' : 'POST',
-        data: lesson
-    }).done(function (lesson) {
-        console.log(lesson);
-    }).error(function (response) {
-        console.log(response);
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: lesson.id ? window.siteUrl + '/lessons/' + lesson.id : window.siteUrl + '/lessons/',
+            method: lesson.id ? 'PUT' : 'POST',
+            data: lesson
+        }).done(function (lesson) {
+            resolve(lesson);
+        }).error(function (response) {
+            reject(response);
+        });
     });
+};
 
+App.Lesson.prototype.delete = function (lesson) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: window.siteUrl + '/lessons/' + lesson.id,
+            method: 'DELETE'
+        }).done(function () {
+            resolve();
+        }).error(function (response) {
+            reject(response);
+        });
+    });
 };

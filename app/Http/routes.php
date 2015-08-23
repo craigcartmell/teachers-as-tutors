@@ -81,6 +81,7 @@ Route::group(['prefix' => 'lessons', 'middleware' => ['auth', 'enabled']], funct
     Route::get('tutor/{tutorId}', ['as' => 'lesson.find', 'uses' => 'LessonController@getByTutorId']);
     Route::post('/', ['as' => 'lesson.save', 'uses' => 'LessonController@save']);
     Route::put('{id}', ['as' => 'lesson.save', 'uses' => 'LessonController@save']);
+    Route::delete('{id}', ['as' => 'lesson.delete', 'uses' => 'LessonController@delete']);
 });
 
 Route::get('contact', 'ContactController@getContact');

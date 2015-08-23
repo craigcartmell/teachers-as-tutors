@@ -20,14 +20,14 @@ class LessonController extends Controller
     {
         $lessons = Lesson::query()->where('tutor_id', $tutorId)->get();
 
-        $data = array();
+        $data = [];
 
         foreach ($lessons as $lesson) {
             $data[] = [
-                'id' => $lesson->getKey(),
+                'id'    => $lesson->getKey(),
                 'title' => $lesson->parent->name,
                 'start' => $lesson->started_at->format('Y-m-d H:i:s'),
-                'end' => $lesson->ended_at->format('Y-m-d H:i:s'),
+                'end'   => $lesson->ended_at->format('Y-m-d H:i:s'),
             ];
         }
 
@@ -47,6 +47,15 @@ class LessonController extends Controller
             $lesson = Lesson::query()->findOrFail($id);
         }
 
+        $this->validate($request,
+            [
+                'tutor_id'   => 'required|exists:users,id',
+                'parent_id'  => 'required|exists:users,id',
+                'started_at' => 'required|date',
+                'ended_at'   => 'required|date|after:started_at',
+            ]
+        );
+
         $lesson->parent_id = $request->input('parent_id');
         $lesson->started_at = $request->input('started_at');
         $lesson->ended_at = $request->input('ended_at');
@@ -54,5 +63,12 @@ class LessonController extends Controller
         $lesson->save();
 
         return response($lesson, $id ? 200 : 201);
+    }
+
+    public function delete($id = 0)
+    {
+        Lesson::destroy($id);
+
+        return response(204);
     }
 }

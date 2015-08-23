@@ -74,7 +74,10 @@
                 <li class="{{ url() === Request::url() ? 'active' : '' }}"><a href="{{ url() }}">Home <span
                                 class="sr-only">(current)</span></a>
                 </li>
-                <li class="{{ url('tuition') === Request::url() ? 'active' : '' }}"><a href="{{ url('tuition') }}">Tuition
+                <li class="{{ url('philosophy') === Request::url() ? 'active' : '' }}"><a
+                            href="{{ url('philosophy') }}">Our Philosophy
+                        <span class="sr-only">(current)</span></a></li>
+                <li class="{{ url('tuition') === Request::url() ? 'active' : '' }}"><a href="{{ url('tuition') }}">Private Tuition
                         <span class="sr-only">(current)</span></a></li>
                 <li class="{{ url('tutors') === Request::url() ? 'active' : '' }}"><a href="{{ url('tutors') }}">Tutors
                         <span class="sr-only">(current)</span></a></li>
