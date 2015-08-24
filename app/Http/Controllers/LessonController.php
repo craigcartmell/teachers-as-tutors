@@ -16,9 +16,16 @@ class LessonController extends Controller
         return $lesson;
     }
 
-    public function getByTutorId($tutorId = 0)
+    public function getByTutorId(Request $request, $tutorId = 0)
     {
-        $lessons = Lesson::query()->where('tutor_id', $tutorId)->get();
+        $start = $request->input('start');
+        $end   = $request->input('end');
+
+        if ($start && $end) {
+            $lessons = Lesson::query()->where('tutor_id', $tutorId)->where('started_at', '>=', $start)->where('ended_at', '<=', $end)->get();
+        } else {
+            $lessons = Lesson::query()->where('tutor_id', $tutorId)->get();
+        }
 
         $data = [];
 
@@ -56,10 +63,10 @@ class LessonController extends Controller
             ]
         );
 
-        $lesson->tutor_id = $request->input('tutor_id');
-        $lesson->parent_id = $request->input('parent_id');
+        $lesson->tutor_id   = $request->input('tutor_id');
+        $lesson->parent_id  = $request->input('parent_id');
         $lesson->started_at = $request->input('started_at');
-        $lesson->ended_at = $request->input('ended_at');
+        $lesson->ended_at   = $request->input('ended_at');
 
         $lesson->save();
 
