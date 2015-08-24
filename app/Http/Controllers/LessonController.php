@@ -56,6 +56,7 @@ class LessonController extends Controller
             ]
         );
 
+        $lesson->tutor_id = $request->input('tutor_id');
         $lesson->parent_id = $request->input('parent_id');
         $lesson->started_at = $request->input('started_at');
         $lesson->ended_at = $request->input('ended_at');

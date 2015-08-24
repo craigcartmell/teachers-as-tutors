@@ -14714,48 +14714,59 @@ App.Lesson = function () {
     this.parent_id = 0;
     this.started_at = null;
     this.ended_at = null;
-};
 
-App.Lesson.prototype.get = function (id) {
-    id = parseInt(id);
+    App.Lesson.prototype.get = function (id) {
+        id = parseInt(id);
 
-    return new Promise(function (resolve, reject) {
-        $.ajax({
-            url: window.siteUrl + '/lessons/' + id
-        }).done(function (lesson) {
-            resolve(lesson);
-        }).error(function (response) {
-            reject(response);
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                url: window.siteUrl + '/lessons/' + id
+            }).done(function (lesson) {
+                resolve(lesson);
+            }).error(function (response) {
+                reject(response);
+            });
         });
-    });
+    };
+
+    App.Lesson.prototype.save = function (lesson) {
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                url: typeof lesson !== 'undefined' && lesson.id ? window.siteUrl + '/lessons/' + lesson.id : window.siteUrl + '/lessons',
+                method: typeof lesson !== 'undefined' && lesson.id ? 'PUT' : 'POST',
+                data: {
+                    id: lesson.id,
+                    tutor_id: lesson.tutor_id,
+                    parent_id: lesson.parent_id,
+                    started_at: lesson.started_at,
+                    ended_at: lesson.ended_at
+                }
+            }).done(function (lesson) {
+                resolve(lesson);
+            }).error(function (response) {
+                reject(response);
+            });
+        });
+    };
+
+    App.Lesson.prototype.delete = function (lesson) {
+        return new Promise(function (resolve, reject) {
+            if (typeof lesson === 'undefined') {
+                reject('');
+            }
+
+            $.ajax({
+                url: window.siteUrl + '/lessons/' + lesson.id,
+                method: 'DELETE'
+            }).done(function () {
+                resolve();
+            }).error(function (response) {
+                reject(response);
+            });
+        });
+    };
 };
 
-App.Lesson.prototype.save = function (lesson) {
-    return new Promise(function (resolve, reject) {
-        $.ajax({
-            url: lesson.id ? window.siteUrl + '/lessons/' + lesson.id : window.siteUrl + '/lessons/',
-            method: lesson.id ? 'PUT' : 'POST',
-            data: lesson
-        }).done(function (lesson) {
-            resolve(lesson);
-        }).error(function (response) {
-            reject(response);
-        });
-    });
-};
-
-App.Lesson.prototype.delete = function (lesson) {
-    return new Promise(function (resolve, reject) {
-        $.ajax({
-            url: window.siteUrl + '/lessons/' + lesson.id,
-            method: 'DELETE'
-        }).done(function () {
-            resolve();
-        }).error(function (response) {
-            reject(response);
-        });
-    });
-};
 App.Calendar = {
     init: function () {
         var lesson = new App.Lesson();
@@ -14835,8 +14846,15 @@ App.Calendar = {
                 dayClick: function (moment) {
                     lessonDate = moment;
                     lesson = new App.Lesson();
-                    lesson.tutor_id = $('#event-modal').data('tutor-id');
 
+                    lesson.tutor_id = $('#calendar').data('tutor-id');
+
+                    $('#event-modal select#parent_id').val(0);
+                    $('#event-modal input#started_at').val('');
+                    $('#event-modal input#ended_at').val('');
+
+                    $('#modal-title').html('Lesson Booking - ' + lessonDate.format('MMMM Do YYYY'));
+                    $('#modal-delete').addClass('hidden');
                     $('#event-modal').modal('show');
                 },
                 eventClick: function (event) {
@@ -14846,13 +14864,15 @@ App.Calendar = {
 
                     promise.then(function (response) {
                         lesson = response;
-                        $('#event-modal .modal-title').html('Lesson booking for ' + lesson.parent.name);
                         $('#event-modal select#parent_id').val(lesson.parent_id);
                         $('#event-modal input#started_at').val(event.start.format('HH:mm'));
                         $('#event-modal input#ended_at').val(event.end.format('HH:mm'));
+
+                        $('#modal-title').html('Lesson Booking - ' + lessonDate.format('MMMM Do YYYY'));
+                        $('#modal-delete').removeClass('hidden');
                         $('#event-modal').modal('show');
                     }, function () {
-                        alert('Error fetching lesson details. Please try again.');
+                        $('.alert').html('Error fetching lesson details. Please close and try again.').removeClass('hidden');
                     });
 
                 }

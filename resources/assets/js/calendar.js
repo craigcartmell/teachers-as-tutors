@@ -77,8 +77,15 @@ App.Calendar = {
                 dayClick: function (moment) {
                     lessonDate = moment;
                     lesson = new App.Lesson();
-                    lesson.tutor_id = $('#event-modal').data('tutor-id');
 
+                    lesson.tutor_id = $('#calendar').data('tutor-id');
+
+                    $('#event-modal select#parent_id').val(0);
+                    $('#event-modal input#started_at').val('');
+                    $('#event-modal input#ended_at').val('');
+
+                    $('#modal-title').html('Lesson Booking - ' + lessonDate.format('MMMM Do YYYY'));
+                    $('#modal-delete').addClass('hidden');
                     $('#event-modal').modal('show');
                 },
                 eventClick: function (event) {
@@ -88,13 +95,15 @@ App.Calendar = {
 
                     promise.then(function (response) {
                         lesson = response;
-                        $('#event-modal .modal-title').html('Lesson booking for ' + lesson.parent.name);
                         $('#event-modal select#parent_id').val(lesson.parent_id);
                         $('#event-modal input#started_at').val(event.start.format('HH:mm'));
                         $('#event-modal input#ended_at').val(event.end.format('HH:mm'));
+
+                        $('#modal-title').html('Lesson Booking - ' + lessonDate.format('MMMM Do YYYY'));
+                        $('#modal-delete').removeClass('hidden');
                         $('#event-modal').modal('show');
                     }, function () {
-                        alert('Error fetching lesson details. Please try again.');
+                        $('.alert').html('Error fetching lesson details. Please close and try again.').removeClass('hidden');
                     });
 
                 }

@@ -19,7 +19,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Lesson Booking</h4>
+                    <h4 class="modal-title" id="modal-title">Lesson Booking</h4>
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-danger hidden"></div>
@@ -35,7 +35,7 @@
                         <label>Lesson</label>
 
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
                                 <div class="input-group clockpicker" data-placement="bottom" data-align="top"
                                      data-autoclose="true">
                                     <input id="started_at" type="text" class="form-control" value="started_at">
@@ -44,8 +44,8 @@
                                 </span>
                                 </div>
                             </div>
-
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-1">to</div>
+                            <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
                                 <div class="input-group clockpicker" data-placement="bottom" data-align="top"
                                      data-autoclose="true">
                                     <input id="ended_at" type="text" class="form-control" value="ended_at">
