@@ -57,16 +57,18 @@ Route::group(['prefix' => 'resources', 'middleware' => ['auth', 'admin_or_tutor'
     Route::get('{id}/download', ['as' => 'resources.download', 'uses' => 'ResourceController@downloadResource']);
 });
 
-Route::group(['prefix' => 'reports', 'middleware' => ['auth', 'admin_or_tutor', 'enabled']], function () {
+Route::group(['prefix' => 'reports', 'middleware' => ['auth', 'enabled']], function () {
     Route::get('', ['as' => 'reports', 'uses' => 'ReportController@index']);
-    Route::get('add', ['as' => 'reports.add', 'uses' => 'ReportController@getEdit']);
-    Route::post('add', ['as' => 'reports.add', 'uses' => 'ReportController@postEdit']);
-    Route::get('{id}/edit', ['as' => 'reports.edit', 'uses' => 'ReportController@getEdit']);
-    Route::post('{id}/edit', ['as' => 'reports.edit', 'uses' => 'ReportController@postEdit']);
-    Route::get('{id}/enable', ['as' => 'reports.enable', 'uses' => 'ReportController@enable']);
-    Route::get('{id}/delete', ['as' => 'reports.delete', 'uses' => 'ReportController@delete']);
-    Route::get('{id}/notify', ['as' => 'reports.notify', 'uses' => 'ReportController@notify']);
     Route::get('{slug}', ['as' => 'reports.view', 'uses' => 'ReportController@getBySlug']);
+    Route::group(['middleware' => ['admin_or_tutor',]], function () {
+        Route::get('add', ['as' => 'reports.add', 'uses' => 'ReportController@getEdit']);
+        Route::post('add', ['as' => 'reports.add', 'uses' => 'ReportController@postEdit']);
+        Route::get('{id}/edit', ['as' => 'reports.edit', 'uses' => 'ReportController@getEdit']);
+        Route::post('{id}/edit', ['as' => 'reports.edit', 'uses' => 'ReportController@postEdit']);
+        Route::get('{id}/enable', ['as' => 'reports.enable', 'uses' => 'ReportController@enable']);
+        Route::get('{id}/delete', ['as' => 'reports.delete', 'uses' => 'ReportController@delete']);
+        Route::get('{id}/notify', ['as' => 'reports.notify', 'uses' => 'ReportController@notify']);
+    });
 });
 
 Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@getProfile']);

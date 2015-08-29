@@ -39,7 +39,7 @@ Breadcrumbs::register('edit-report', function ($breadcrumbs, $report) {
 });
 
 Breadcrumbs::register('view-report', function ($breadcrumbs, $report) {
-    $breadcrumbs->parent('/');
+    $breadcrumbs->parent('reports');
 
     $breadcrumbs->push($report->name);
 });

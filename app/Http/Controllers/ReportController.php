@@ -2,6 +2,7 @@
 
 namespace TeachersAsTutors\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Http\Request;
 use TeachersAsTutors\Http\Requests;
@@ -12,14 +13,20 @@ class ReportController extends Controller
 {
     public function index()
     {
-        $reports = Report::query()->where('created_by', auth()->user()->getKey())->get();
+        $field = auth()->user()->is_parent ? 'parent_id' : 'created_by';
 
-        return view('reports.index', ['reports' => $reports]);
+        $reports = Report::query()->where($field, auth()->user()->getKey());
+
+        if (auth()->user()->is_parent) {
+            $reports = $reports->where('is_enabled', true);
+        }
+
+        return view('reports.index', ['reports' => $reports->get(),]);
     }
 
     public function getEdit(Request $request, $id = 0)
     {
-        $report = new Report();
+        $report       = new Report();
         $report->name = 'New Report';
 
         if ($id) {
@@ -44,10 +51,10 @@ class ReportController extends Controller
         $report->parent_id  = $request->input('parent_id') ?: null;
         $report->name       = $request->input('name');
         $report->report     = $request->input('report');
-        $report->is_enabled = $request->input('is_enabled');
+        $report->is_enabled = $request->input('is_enabled', false);
 
         if (! $report->exists) {
-            $report->slug = str_slug($report->name);
+            $report->slug = Carbon::now()->format('Y-m-d') . '-' . str_slug($report->name);
         }
 
         $report->save();
