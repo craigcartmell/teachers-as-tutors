@@ -31,7 +31,7 @@
                        <td>{{ $resource->mime_type }}</td>
                        <td>{{ $resource->created_at->format('d/m/Y H:i:s') }} by {{ $resource->creator['name'] or 'System' }}</td>
                        <td>{{ $resource->updated_at->format('d/m/Y H:i:s') }} by {{ $resource->updater['name'] or 'System' }}</td>
-                       <td><a href="{{ route('resources.download', ['id' => $resource->id]) }}" class="btn btn-default">Download</a></td>
+                       <td><a href="{{ route('resources.download', ['id' => $resource->id]) }}" class="btn btn-default {{ !$resource->is_enabled ? 'disabled' : ''}}">Download</a></td>
                        <td><a href="{{ route('resources.enable', ['id' => $resource->id]) }}" class="btn btn-default">{{ $resource->is_enabled ? 'Disable' : 'Enable' }}</a></td>
                        <td><a href="{{ route('resources.edit', ['id' => $resource->id]) }}" class="btn btn-default">Edit</a></td>
                        <td><a href="{{ route('resources.delete', ['id' => $resource->id]) }}" class="btn btn-danger delete-record">Delete</a></td>

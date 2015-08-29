@@ -8,9 +8,13 @@
 <link href="{{ asset('build/css/bootstrap-clockpicker.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('calendar') !!}
+@endsection
+
 @section('content')
     <div class="container">
-        <div id="calendar" data-tutor-id="{{ auth()->user()->getKey() }}"></div>
+        <div id="calendar" data-tutor-id="{{ auth()->user()->getKey() }}" data-is-editable="{{ ! auth()->user()->is_parent }}"></div>
     </div>
 
     <div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

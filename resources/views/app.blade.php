@@ -90,16 +90,18 @@
                     <li>
                         <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                            aria-expanded="true">
-                            Welcome {{ auth()->user()->name }}
+                            <span class="glyphicon glyphicon-user"></span> {{ auth()->user()->name_short }}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="">{{ auth()->user()->name }}</a></li>
+                            <li class="nav-divider"></li>
                             <li><a href="{{ route('profile') }}">My Profile</a></li>
                             @if(auth()->user()->is_admin || auth()->user()->is_tutor)
                                 <li><a href="{{ route('reports') }}">My Reports</a></li>
-                                <li><a href="{{ route('calendar') }}">My Calendar</a></li>
                                 <li><a href="{{ route('resources') }}">Resources</a></li>
                             @endif
+                            <li><a href="{{ route('calendar') }}">My Calendar</a></li>
                             @if(auth()->user()->is_admin)
                                 <li class="nav-divider"></li>
                                 <li><a href="{{ route('admin.pages') }}">Manage Pages</a></li>

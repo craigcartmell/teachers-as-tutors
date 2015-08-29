@@ -36,7 +36,7 @@ class ResourceController extends Controller
 
         $this->validate($request, [
             'desc'              => 'max:255',
-            'original_filename' => ! $id ? 'required|max:' . env('MAX_UPLOAD_SIZE') : ''
+            'original_filename' => ! $id ? 'required|max:' . env('MAX_UPLOAD_SIZE') : '',
         ],
             ['original_filename.required' => 'Please select a file to upload.']);
 
@@ -105,6 +105,10 @@ class ResourceController extends Controller
     public function downloadResource(Request $request, $id)
     {
         $resource = Resource::query()->findOrFail($id);
+
+        if (! $resource->is_enabled) {
+            return response();
+        }
 
         return response()->download($resource->full_file_path);
     }

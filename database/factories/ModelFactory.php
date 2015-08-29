@@ -85,7 +85,7 @@ $factory->define(TeachersAsTutors\Report::class, function ($faker) {
 $factory->define(TeachersAsTutors\Lesson::class, function ($faker) {
     return [
         'tutor_id'   => 1,
-        'parent_id'  => 3,
+        'parent_id'  => 10,
         'started_at' => $faker->date,
         'ended_at'   => $faker->date,
     ];

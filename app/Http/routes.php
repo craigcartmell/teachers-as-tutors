@@ -72,16 +72,19 @@ Route::group(['prefix' => 'reports', 'middleware' => ['auth', 'admin_or_tutor', 
 Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@getProfile']);
 Route::post('profile', ['as' => 'profile', 'uses' => 'ProfileController@postProfile']);
 
-Route::group(['prefix' => 'calendar', 'middleware' => ['auth', 'admin_or_tutor', 'enabled']], function () {
+Route::group(['prefix' => 'calendar', 'middleware' => ['auth', 'enabled']], function () {
     Route::get('', ['as' => 'calendar', 'uses' => 'CalendarController@index']);
 });
 
 Route::group(['prefix' => 'lessons', 'middleware' => ['auth', 'enabled']], function () {
-    Route::get('{id}', ['as' => 'lesson.find', 'uses' => 'LessonController@find']);
-    Route::get('tutor/{tutorId}', ['as' => 'lesson.find', 'uses' => 'LessonController@getByTutorId']);
-    Route::post('/', ['as' => 'lesson.save', 'uses' => 'LessonController@save']);
-    Route::put('{id}', ['as' => 'lesson.save', 'uses' => 'LessonController@save']);
-    Route::delete('{id}', ['as' => 'lesson.delete', 'uses' => 'LessonController@delete']);
+    Route::get('', ['as' => 'lessons.index', 'uses' => 'LessonController@get']);
+    Route::get('{id}', ['as' => 'lessons.find', 'uses' => 'LessonController@find']);
+
+    Route::group(['middleware' => ['admin_or_tutor']], function () {
+        Route::post('/', ['as' => 'lessons.save', 'uses' => 'LessonController@save']);
+        Route::put('{id}', ['as' => 'lessons.save', 'uses' => 'LessonController@save']);
+        Route::delete('{id}', ['as' => 'lessons.delete', 'uses' => 'LessonController@delete']);
+    });
 });
 
 Route::get('contact', 'ContactController@getContact');

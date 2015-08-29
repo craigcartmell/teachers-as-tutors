@@ -7039,4 +7039,8 @@ button.close {
   .recent > h4 {
     margin-top: 0; }
 
+.fc[data-is-editable='1'] .fc-day {
+  cursor: pointer;
+  color: green; }
+
 /*# sourceMappingURL=all.css.map */

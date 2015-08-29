@@ -31,15 +31,15 @@ class UserPermissionsTableSeeder extends Seeder
     {
         \TeachersAsTutors\UserPermission::create([
             'name' => 'Admin',
-            'desc' => 'Administrators are granted full access to creating, editing and deleting content as well as managing users.'
+            'desc' => 'Administrators are granted full access to creating, editing and deleting content as well as managing users.',
         ]);
         \TeachersAsTutors\UserPermission::create([
             'name' => 'Tutor',
-            'desc' => 'Tutors are granted access to resources and billing information.'
+            'desc' => 'Tutors are granted access to resources and billing information.',
         ]);
         \TeachersAsTutors\UserPermission::create([
             'name' => 'Parent',
-            'desc' => 'Parents are granted access to pupil progress reports.'
+            'desc' => 'Parents are granted access to pupil progress reports.',
         ]);
     }
 }
@@ -49,12 +49,22 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         factory(TeachersAsTutors\User::class, 'admin', 1)->create([
-            'name' => 'Admin',
-            'email' => env('APP_ADMIN_EMAIL'),
-            'password' => bcrypt(env('APP_ADMIN_PASSWORD'))
+            'name'     => 'Admin',
+            'email'    => env('APP_ADMIN_EMAIL'),
+            'password' => bcrypt(env('APP_ADMIN_PASSWORD')),
         ]);
-        factory(TeachersAsTutors\User::class, 'tutor', 1)->create();
-        factory(TeachersAsTutors\User::class, 'parent', 1)->create();
+
+        if (app()->environment() !== 'production') {
+            factory(TeachersAsTutors\User::class, 'tutor', 1)->create([
+                'name' => 'Test Tutor', 'email' => 'tutor@teachers-as-tutors.co.uk', 'password' => bcrypt('password'),
+            ]);
+            factory(TeachersAsTutors\User::class, 'tutor', 5)->create();
+
+            factory(TeachersAsTutors\User::class, 'parent', 1)->create([
+                'name' => 'Test Parent', 'email' => 'parent@teachers-as-tutors.co.uk', 'password' => bcrypt('password'),
+            ]);
+            factory(TeachersAsTutors\User::class, 'parent', 5)->create();
+        }
     }
 }
 
@@ -64,25 +74,27 @@ class PagesTableSeeder extends Seeder
     {
         factory(TeachersAsTutors\Page::class, 1)->create([
             'name' => 'Home',
-            'uri' => '/',
+            'uri'  => '/',
         ]);
         factory(TeachersAsTutors\Page::class, 1)->create([
             'name' => 'Our Philosophy',
-            'uri' => 'philosophy',
+            'uri'  => 'philosophy',
         ]);
         factory(TeachersAsTutors\Page::class, 1)->create([
             'name' => 'Private Tuition',
-            'uri' => 'tuition',
+            'uri'  => 'tuition',
         ]);
         factory(TeachersAsTutors\Page::class, 1)->create([
             'name' => 'Tutors',
-            'uri' => 'tutors',
+            'uri'  => 'tutors',
         ]);
         factory(TeachersAsTutors\Page::class, 1)->create([
             'name' => 'Blog',
-            'uri' => 'blog',
+            'uri'  => 'blog',
         ]);
-        factory(TeachersAsTutors\Page::class, 'blog-post', 10)->create();
+        if (app()->environment() !== 'production') {
+            factory(TeachersAsTutors\Page::class, 'blog-post', 10)->create();
+        }
     }
 }
 
@@ -90,7 +102,9 @@ class ResourcesTableSeeder extends Seeder
 {
     public function run()
     {
-        factory(TeachersAsTutors\Resource::class, 10)->create();
+        if (app()->environment() !== 'production') {
+            factory(TeachersAsTutors\Resource::class, 10)->create();
+        }
     }
 }
 
@@ -98,7 +112,9 @@ class ReportsTableSeeder extends Seeder
 {
     public function run()
     {
-        factory(TeachersAsTutors\Report::class, 10)->create();
+        if (app()->environment() !== 'production') {
+            factory(TeachersAsTutors\Report::class, 10)->create();
+        }
     }
 }
 
@@ -106,7 +122,15 @@ class LessonTableSeeder extends Seeder
 {
     public function run()
     {
-        factory(TeachersAsTutors\Lesson::class, 1)->create(['started_at' => \Carbon\Carbon::now(), 'ended_at' => \Carbon\Carbon::now()->addHours(3)]);
-        factory(TeachersAsTutors\Lesson::class, 1)->create(['started_at' => \Carbon\Carbon::now()->addHours(4), 'ended_at' => \Carbon\Carbon::now()->addHours(5)]);
+        if (app()->environment() !== 'production') {
+            factory(TeachersAsTutors\Lesson::class, 1)->create([
+                'started_at' => \Carbon\Carbon::now(),
+                'ended_at'   => \Carbon\Carbon::now()->addHours(3),
+            ]);
+            factory(TeachersAsTutors\Lesson::class, 1)->create([
+                'started_at' => \Carbon\Carbon::now()->addHours(4),
+                'ended_at'   => \Carbon\Carbon::now()->addHours(5),
+            ]);
+        }
     }
 }

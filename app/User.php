@@ -32,13 +32,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['password', 'remember_token'];
 
-    protected $appends = ['is_admin', 'is_tutor', 'is_parent'];
+    protected $appends = ['is_admin', 'is_tutor', 'is_parent', 'initial', 'name_short'];
 
     protected $casts
         = [
-            'is_admin' => 'boolean',
-            'is_tutor' => 'boolean',
-            'is_parent' => 'boolean',
+            'is_admin'   => 'boolean',
+            'is_tutor'   => 'boolean',
+            'is_parent'  => 'boolean',
             'is_enabled' => 'boolean',
         ];
 
@@ -66,5 +66,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function getIsParentAttribute()
     {
         return $this->permission_id === 3;
+    }
+
+    public function getInitialAttribute()
+    {
+        return substr($this->name, 0, 1);
+    }
+
+    public function getNameShortAttribute()
+    {
+        $name = explode(' ', $this->name);
+
+        if (count($name) === 1) {
+            return $this->name;
+        }
+
+        return $this->getInitialAttribute() . '. ' . last($name);
     }
 }

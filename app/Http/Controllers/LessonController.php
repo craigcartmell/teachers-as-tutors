@@ -16,15 +16,16 @@ class LessonController extends Controller
         return $lesson;
     }
 
-    public function getByTutorId(Request $request, $tutorId = 0)
+    public function get(Request $request)
     {
         $start = $request->input('start');
         $end   = $request->input('end');
+        $field = ! auth()->user()->is_parent ? 'tutor_id' : 'parent_id';
 
         if ($start && $end) {
-            $lessons = Lesson::query()->where('tutor_id', $tutorId)->where('started_at', '>=', $start)->where('ended_at', '<=', $end)->get();
+            $lessons = Lesson::query()->where($field, auth()->user()->getKey())->where('started_at', '>=', $start)->where('ended_at', '<=', $end)->get();
         } else {
-            $lessons = Lesson::query()->where('tutor_id', $tutorId)->get();
+            $lessons = Lesson::query()->where($field, auth()->user()->getKey())->get();
         }
 
         $data = [];
@@ -32,9 +33,10 @@ class LessonController extends Controller
         foreach ($lessons as $lesson) {
             $data[] = [
                 'id'    => $lesson->getKey(),
-                'title' => $lesson->parent->name,
+                'title' => ! auth()->user()->is_parent ? $lesson->parent->name : $lesson->tutor->name,
                 'start' => $lesson->started_at->format('Y-m-d H:i:s'),
                 'end'   => $lesson->ended_at->format('Y-m-d H:i:s'),
+                'color' => ! $lesson->ended_at->isFuture() ? env('CALENDAR_EVENT_PAST_BACKGROUND_COLOR') : '',
             ];
         }
 

@@ -3,6 +3,7 @@ App.Calendar = {
         var lesson = new App.Lesson();
         var lessonDate;
         var tutorId;
+        var isEditable = $('#calendar').data('is-editable') ? true : false;
 
         $(function () {
             tutorId = parseInt($('#calendar').data('tutor-id'));
@@ -59,22 +60,28 @@ App.Calendar = {
             });
 
             $('#calendar').fullCalendar({
-                eventStartEditable: true,
+                editable: isEditable,
+                eventStartEditable: isEditable,
+                timeFormat: 'H(:mm)',
+                displayEventEnd: true,
                 eventSources: [
 
                     // your event source
                     {
-                        url: window.siteUrl + '/lessons/tutor/' + tutorId,
+                        url: window.siteUrl + '/lessons',
                         type: 'GET',
                         error: function () {
-                            alert('there was an error while fetching events!');
+                            alert('Sorry, there was an error while fetching events!');
                         },
-                        color: 'yellow',   // a non-ajax option
-                        textColor: 'black' // a non-ajax option
+                        color: '#e5e5e5',
+                        textColor: '#000'
                     }
 
                 ],
                 dayClick: function (moment) {
+                    if (!isEditable) {
+                        return;
+                    }
                     lessonDate = moment;
                     lesson = new App.Lesson();
 
@@ -89,6 +96,10 @@ App.Calendar = {
                     $('#event-modal').modal('show');
                 },
                 eventClick: function (event) {
+                    if (!isEditable) {
+                        return;
+                    }
+
                     lessonDate = event.start;
 
                     var promise = App.Lesson.prototype.get(event.id);
