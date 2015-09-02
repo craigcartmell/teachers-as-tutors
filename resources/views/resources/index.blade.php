@@ -8,6 +8,8 @@
 
 @section('content')
     <div class="container table-responsive">
+        @include('partials.errors')
+
         <a href="{{ route('resources.add') }}" class="btn btn-primary">Add New</a>
            <table class="table table-striped">
                <thead>

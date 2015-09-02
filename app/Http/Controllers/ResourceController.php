@@ -74,6 +74,16 @@ class ResourceController extends Controller
     {
         $resource = Resource::query()->findOrFail($id);
 
+        if (! auth()->user()->is_admin && auth()->user()->getKey() !== $resource->created_by) {
+            $errors = ['You do not have permission to delete this resource.'];
+
+            if ($request->ajax()) {
+                return response(['errors' => $errors], 403);
+            }
+
+            return redirect()->back()->withErrors($errors);
+        }
+
         $resource->delete();
 
         if (file_exists($resource->full_file_path)) {
