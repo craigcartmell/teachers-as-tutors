@@ -26,6 +26,7 @@ Route::group(['prefix' => 'password'], function () {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'enabled']], function () {
     Route::get('', ['as' => 'admin', 'uses' => 'AdminController@index']);
+    Route::get('maintenance', ['as' => 'admin.maintenance', 'uses' => 'AdminController@toggleMaintenanceMode']);
     Route::group(['prefix' => 'users'], function () {
         Route::get('', ['as' => 'admin.users', 'uses' => 'AdminController@getUsers']);
         Route::get('add', ['as' => 'admin.users.add', 'uses' => 'AdminController@getEditUser']);

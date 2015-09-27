@@ -6,10 +6,9 @@ use Carbon\Carbon;
 use Illuminate\Auth\Passwords\TokenRepositoryInterface;
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use TeachersAsTutors\Http\Requests;
-use TeachersAsTutors\Http\Controllers\Controller;
 use TeachersAsTutors\Page;
-use TeachersAsTutors\Resource;
 use TeachersAsTutors\User;
 use TeachersAsTutors\UserPermission;
 
@@ -34,7 +33,7 @@ class AdminController extends Controller
 
     public function getEditUser(Request $request, $id = 0)
     {
-        $user = new User();
+        $user       = new User();
         $user->name = 'New User';
 
         if ($id) {
@@ -84,7 +83,7 @@ class AdminController extends Controller
 
             return redirect()->route('admin.users.edit', ['id' => $user->getKey()])->with([
                 'success' => true,
-                'is_new'  => true
+                'is_new'  => true,
             ]);
         }
 
@@ -128,7 +127,7 @@ class AdminController extends Controller
 
     public function getEditPage(Request $request, $id = 0)
     {
-        $page = new Page();
+        $page       = new Page();
         $page->name = 'New Page';
 
         if ($id) {
@@ -152,7 +151,7 @@ class AdminController extends Controller
             'name'       => 'required|unique:pages,name,' . $id,
             'uri'        => 'required|unique:pages,uri,' . $id,
             'content'    => 'required',
-            'is_enabled' => 'boolean'
+            'is_enabled' => 'boolean',
         ];
 
         if (! empty($request->input('parent_id'))) {
@@ -212,6 +211,15 @@ class AdminController extends Controller
         if ($request->ajax()) {
             return response();
         }
+
+        return redirect()->back();
+    }
+
+    public function toggleMaintenanceMode()
+    {
+        $call = app()->isDownForMaintenance() ? 'up' : 'down';
+
+        Artisan::call($call);
 
         return redirect()->back();
     }

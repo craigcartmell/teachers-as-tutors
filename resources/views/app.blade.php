@@ -103,6 +103,7 @@
                             @endif
                             @if(auth()->user()->is_admin)
                                 <li class="nav-divider"></li>
+                                <li><a href="{{ route('admin.maintenance') }}">Turn Maintenance Mode {{ app()->isDownForMaintenance() ? 'Off' : 'On' }}</a></li>
                                 <li><a href="{{ route('admin.pages') }}">Manage Pages</a></li>
                                 <li><a href="{{ route('admin.users') }}">Manage Users</a></li>
                             @endif
