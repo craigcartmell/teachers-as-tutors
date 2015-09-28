@@ -4,8 +4,8 @@
 
 @section('css')
         <!-- TODO: Add to one css file -->
-<link href="{{ asset('build/css/fullcalendar.min.css') }}" rel="stylesheet" type="text/css">
-<link href="{{ asset('build/css/bootstrap-clockpicker.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('build/css/fullcalendar.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('build/css/bootstrap-clockpicker.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('breadcrumbs')
@@ -58,7 +58,11 @@
                                 </span>
                                 </div>
                             </div>
+                        </div>
 
+                        <div>
+                            <label for="hourly_rate">Hourly Rate (£)</label>
+                            <input id="hourly_rate" name="hourly_rate" type="number" class="form-control" placeholder="£">
                         </div>
 
                     </form>

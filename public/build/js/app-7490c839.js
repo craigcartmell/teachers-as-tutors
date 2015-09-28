@@ -14714,6 +14714,7 @@ App.Lesson = function () {
     this.parent_id = 0;
     this.started_at = null;
     this.ended_at = null;
+    this.hourly_rate = 0;
 
     App.Lesson.prototype.get = function (id) {
         id = parseInt(id);
@@ -14739,7 +14740,8 @@ App.Lesson = function () {
                     tutor_id: lesson.tutor_id,
                     parent_id: lesson.parent_id,
                     started_at: lesson.started_at,
-                    ended_at: lesson.ended_at
+                    ended_at: lesson.ended_at,
+                    hourly_rate: lesson.hourly_rate
                 }
             }).done(function (lesson) {
                 resolve(lesson);
@@ -14779,6 +14781,10 @@ App.Calendar = {
 
             $('select[name=parent_id]').on('change', function () {
                 lesson.parent_id = parseInt($(this).val());
+            });
+
+            $('input#hourly_rate').on('keyup', function () {
+                lesson.hourly_rate = parseFloat($(this).val());
             });
 
             $('#modal-save').on('click', function () {
@@ -14834,8 +14840,6 @@ App.Calendar = {
                 timeFormat: 'H(:mm)',
                 displayEventEnd: true,
                 eventSources: [
-
-                    // your event source
                     {
                         url: window.siteUrl + '/lessons',
                         type: 'GET',
@@ -14845,12 +14849,14 @@ App.Calendar = {
                         color: '#e5e5e5',
                         textColor: '#000'
                     }
-
                 ],
                 dayClick: function (moment) {
                     if (!isEditable) {
                         return;
                     }
+
+                    $('.alert').html('').addClass('hidden');
+
                     lessonDate = moment;
                     lesson = new App.Lesson();
 
@@ -14859,6 +14865,7 @@ App.Calendar = {
                     $('#event-modal select#parent_id').val(0);
                     $('#event-modal input#started_at').val('');
                     $('#event-modal input#ended_at').val('');
+                    $('#event-modal input#hourly_rate').val(0);
 
                     $('#modal-title').html('Lesson Booking - ' + lessonDate.format('MMMM Do YYYY'));
                     $('#modal-delete').addClass('hidden');
@@ -14869,6 +14876,8 @@ App.Calendar = {
                         return;
                     }
 
+                    $('.alert').html('').addClass('hidden');
+
                     lessonDate = event.start;
 
                     var promise = App.Lesson.prototype.get(event.id);
@@ -14878,6 +14887,7 @@ App.Calendar = {
                         $('#event-modal select#parent_id').val(lesson.parent_id);
                         $('#event-modal input#started_at').val(event.start.format('HH:mm'));
                         $('#event-modal input#ended_at').val(event.end.format('HH:mm'));
+                        $('#event-modal input#hourly_rate').val(event.hourly_rate);
 
                         $('#modal-title').html('Lesson Booking - ' + lessonDate.format('MMMM Do YYYY'));
                         $('#modal-delete').removeClass('hidden');

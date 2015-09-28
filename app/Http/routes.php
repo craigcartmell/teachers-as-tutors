@@ -77,6 +77,7 @@ Route::post('profile', ['as' => 'profile', 'uses' => 'ProfileController@postProf
 
 Route::group(['prefix' => 'calendar', 'middleware' => ['auth', 'enabled']], function () {
     Route::get('', ['as' => 'calendar', 'uses' => 'CalendarController@index']);
+    Route::get('invoices/{invoiceDate}', ['as' => 'calendar.invoice', 'uses' => 'CalendarController@getInvoice']);
 });
 
 Route::group(['prefix' => 'lessons', 'middleware' => ['auth', 'enabled']], function () {

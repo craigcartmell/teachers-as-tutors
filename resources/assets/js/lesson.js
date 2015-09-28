@@ -4,6 +4,7 @@ App.Lesson = function () {
     this.parent_id = 0;
     this.started_at = null;
     this.ended_at = null;
+    this.hourly_rate = 0;
 
     App.Lesson.prototype.get = function (id) {
         id = parseInt(id);
@@ -29,7 +30,8 @@ App.Lesson = function () {
                     tutor_id: lesson.tutor_id,
                     parent_id: lesson.parent_id,
                     started_at: lesson.started_at,
-                    ended_at: lesson.ended_at
+                    ended_at: lesson.ended_at,
+                    hourly_rate: lesson.hourly_rate
                 }
             }).done(function (lesson) {
                 resolve(lesson);

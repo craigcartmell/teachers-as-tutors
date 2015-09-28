@@ -12,6 +12,10 @@ App.Calendar = {
                 lesson.parent_id = parseInt($(this).val());
             });
 
+            $('input#hourly_rate').on('keyup', function () {
+                lesson.hourly_rate = parseFloat($(this).val());
+            });
+
             $('#modal-save').on('click', function () {
                 var promise = App.Lesson.prototype.save(lesson);
 
@@ -65,8 +69,6 @@ App.Calendar = {
                 timeFormat: 'H(:mm)',
                 displayEventEnd: true,
                 eventSources: [
-
-                    // your event source
                     {
                         url: window.siteUrl + '/lessons',
                         type: 'GET',
@@ -76,12 +78,14 @@ App.Calendar = {
                         color: '#e5e5e5',
                         textColor: '#000'
                     }
-
                 ],
                 dayClick: function (moment) {
                     if (!isEditable) {
                         return;
                     }
+
+                    $('.alert').html('').addClass('hidden');
+
                     lessonDate = moment;
                     lesson = new App.Lesson();
 
@@ -90,6 +94,7 @@ App.Calendar = {
                     $('#event-modal select#parent_id').val(0);
                     $('#event-modal input#started_at').val('');
                     $('#event-modal input#ended_at').val('');
+                    $('#event-modal input#hourly_rate').val(0);
 
                     $('#modal-title').html('Lesson Booking - ' + lessonDate.format('MMMM Do YYYY'));
                     $('#modal-delete').addClass('hidden');
@@ -100,6 +105,8 @@ App.Calendar = {
                         return;
                     }
 
+                    $('.alert').html('').addClass('hidden');
+
                     lessonDate = event.start;
 
                     var promise = App.Lesson.prototype.get(event.id);
@@ -109,6 +116,7 @@ App.Calendar = {
                         $('#event-modal select#parent_id').val(lesson.parent_id);
                         $('#event-modal input#started_at').val(event.start.format('HH:mm'));
                         $('#event-modal input#ended_at').val(event.end.format('HH:mm'));
+                        $('#event-modal input#hourly_rate').val(event.hourly_rate);
 
                         $('#modal-title').html('Lesson Booking - ' + lessonDate.format('MMMM Do YYYY'));
                         $('#modal-delete').removeClass('hidden');

@@ -84,9 +84,10 @@ $factory->define(TeachersAsTutors\Report::class, function ($faker) {
 
 $factory->define(TeachersAsTutors\Lesson::class, function ($faker) {
     return [
-        'tutor_id'   => 1,
-        'parent_id'  => 10,
-        'started_at' => $faker->date,
-        'ended_at'   => $faker->date,
+        'tutor_id'    => 1,
+        'parent_id'   => 10,
+        'started_at'  => $faker->date,
+        'ended_at'    => $faker->date,
+        'hourly_rate' => $faker->randomFloat(2),
     ];
 });
