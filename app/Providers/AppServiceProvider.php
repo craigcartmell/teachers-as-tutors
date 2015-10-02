@@ -2,6 +2,7 @@
 
 namespace TeachersAsTutors\Providers;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use TeachersAsTutors\Lesson;
 use TeachersAsTutors\Page;
@@ -30,6 +31,20 @@ class AppServiceProvider extends ServiceProvider
                 $model->updated_by = auth()->check() ? auth()->user()->getKey() : null;
             });
         }
+
+        Validator::extend('lesson_length', function ($attribute, $value, $parameters) {
+            $accepted_remainders = [0, 0.25, 0.5, 0.75];
+
+            $value = floatval($value);
+
+            if (empty($value)) {
+                return false;
+            }
+
+            $remainder = $value - floor($value);
+
+            return in_array($remainder, $accepted_remainders);
+        });
     }
 
     /**

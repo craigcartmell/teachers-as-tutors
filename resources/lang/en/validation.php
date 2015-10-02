@@ -74,6 +74,7 @@ return [
     'timezone'             => 'The :attribute must be a valid zone.',
     'unique'               => 'The :attribute has already been taken.',
     'url'                  => 'The :attribute format is invalid.',
+    'lesson_length'        => 'Please enter a valid lesson length, e.g. 1, 1.25, 1.5, 1.75 etc.',
 
     /*
     |--------------------------------------------------------------------------
@@ -86,7 +87,7 @@ return [
     |
     */
 
-    'custom' => [
+    'custom'               => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
@@ -103,6 +104,6 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes'           => [],
 
 ];

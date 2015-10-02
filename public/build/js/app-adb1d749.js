@@ -14713,7 +14713,7 @@ App.Lesson = function () {
     this.tutor_id = 0;
     this.parent_id = 0;
     this.started_at = null;
-    this.ended_at = null;
+    this.hours = 0;
     this.hourly_rate = 0;
 
     App.Lesson.prototype.get = function (id) {
@@ -14740,7 +14740,7 @@ App.Lesson = function () {
                     tutor_id: lesson.tutor_id,
                     parent_id: lesson.parent_id,
                     started_at: lesson.started_at,
-                    ended_at: lesson.ended_at,
+                    hours: lesson.hours,
                     hourly_rate: lesson.hourly_rate
                 }
             }).done(function (lesson) {
@@ -14781,6 +14781,11 @@ App.Calendar = {
 
             $('select[name=parent_id]').on('change', function () {
                 lesson.parent_id = parseInt($(this).val());
+            });
+
+
+            $('select[name=hours]').on('change', function () {
+                lesson.hours = parseFloat($(this).val());
             });
 
             $('input#hourly_rate').on('keyup', function () {
@@ -14864,7 +14869,7 @@ App.Calendar = {
 
                     $('#event-modal select#parent_id').val(0);
                     $('#event-modal input#started_at').val('');
-                    $('#event-modal input#ended_at').val('');
+                    $('#event-modal input#hours').val(0);
                     $('#event-modal input#hourly_rate').val(0);
 
                     $('#modal-title').html('Lesson Booking - ' + lessonDate.format('MMMM Do YYYY'));
@@ -14884,9 +14889,10 @@ App.Calendar = {
 
                     promise.then(function (response) {
                         lesson = response;
+                        console.log(event);
                         $('#event-modal select#parent_id').val(lesson.parent_id);
                         $('#event-modal input#started_at').val(event.start.format('HH:mm'));
-                        $('#event-modal input#ended_at').val(event.end.format('HH:mm'));
+                        $('#event-modal select#hours').val(event.hours);
                         $('#event-modal input#hourly_rate').val(event.hourly_rate);
 
                         $('#modal-title').html('Lesson Booking - ' + lessonDate.format('MMMM Do YYYY'));
@@ -14900,7 +14906,7 @@ App.Calendar = {
             });
 
             $('.clockpicker').clockpicker()
-                .find('input#started_at, input#ended_at').change(function () {
+                .find('input#started_at').change(function () {
                     var id = $(this).attr('id');
                     lesson[id] = lessonDate.format('YYYY-MM-DD') + ' ' + $(this).val() + ':00';
                 })

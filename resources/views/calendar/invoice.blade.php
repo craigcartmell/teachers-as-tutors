@@ -14,9 +14,8 @@
             <td>{{ $lesson->started_at->format('l jS') }}</td>
         </tr>
         <tr>
-            <td>Private tuition with {{ $lesson->tutor->name }} from {{ $lesson->started_at->format('H:i') }}
-                to {{ $lesson->ended_at->format('H:i') }}</td>
-            <td>{{ $lesson->total_hours }} hour(s) x £{{ $lesson->hourly_rate }} = £{{ $lesson->cost }}</td>
+            <td>Private tuition with {{ $lesson->tutor->name }} @ {{ $lesson->started_at->format('H:i') }}
+            <td>{{ $lesson->hours }} hour(s) x £{{ $lesson->hourly_rate }} = £{{ $lesson->cost }}</td>
 
         </tr>
     @endforeach

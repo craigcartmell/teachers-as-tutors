@@ -19,7 +19,7 @@ class CalendarController extends Controller
     {
         $parents = User::query()->where('permission_id', 3)->get();
 
-        return view('calendar.index', ['parents' => $parents]);
+        return view('calendar.index', ['parents' => $parents, 'hours' => get_lesson_hour_options()]);
     }
 
     public function getInvoice($invoiceDate)

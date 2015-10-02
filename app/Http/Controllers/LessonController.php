@@ -23,7 +23,7 @@ class LessonController extends Controller
         $field = ! auth()->user()->is_parent ? 'tutor_id' : 'parent_id';
 
         if ($start && $end) {
-            $lessons = Lesson::query()->where($field, auth()->user()->getKey())->where('started_at', '>=', $start)->where('ended_at', '<=', $end)->get();
+            $lessons = Lesson::query()->where($field, auth()->user()->getKey())->where('started_at', '>=', $start)->get();
         } else {
             $lessons = Lesson::query()->where($field, auth()->user()->getKey())->get();
         }
@@ -35,8 +35,10 @@ class LessonController extends Controller
                 'id'          => $lesson->getKey(),
                 'title'       => ! auth()->user()->is_parent ? $lesson->parent->name : $lesson->tutor->name,
                 'start'       => $lesson->started_at->format('Y-m-d H:i:s'),
-                'end'         => $lesson->ended_at->format('Y-m-d H:i:s'),
-                'color'       => ! $lesson->ended_at->isFuture() ? env('CALENDAR_EVENT_PAST_BACKGROUND_COLOR') : '',
+                // TODO: Work out end
+                //'end'         => $lesson->hours,
+                'color'       => ! $lesson->started_at->isFuture() ? env('CALENDAR_EVENT_PAST_BACKGROUND_COLOR') : '',
+                'hours'       => $lesson->hours,
                 'hourly_rate' => $lesson->hourly_rate,
             ];
         }
@@ -62,7 +64,7 @@ class LessonController extends Controller
                 'tutor_id'    => 'required|exists:users,id',
                 'parent_id'   => 'required|exists:users,id',
                 'started_at'  => 'required|date',
-                'ended_at'    => 'required|date|after:started_at',
+                'hours'       => 'required|lesson_length',
                 'hourly_rate' => 'required|numeric',
             ]
         );
@@ -70,7 +72,7 @@ class LessonController extends Controller
         $lesson->tutor_id    = $request->input('tutor_id');
         $lesson->parent_id   = $request->input('parent_id');
         $lesson->started_at  = $request->input('started_at');
-        $lesson->ended_at    = $request->input('ended_at');
+        $lesson->hours       = $request->input('hours');
         $lesson->hourly_rate = $request->input('hourly_rate');
 
         $lesson->save();

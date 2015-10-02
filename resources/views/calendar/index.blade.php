@@ -36,29 +36,23 @@
                             @endforeach
                         </select>
 
-                        <label>Lesson</label>
+                        <label>When</label>
 
-                        <div class="row">
-                            <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
-                                <div class="input-group clockpicker" data-placement="bottom" data-align="top"
-                                     data-autoclose="true">
-                                    <input id="started_at" type="text" class="form-control" value="started_at">
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-time"></span>
-                                </span>
-                                </div>
-                            </div>
-                            <div class="col-lg-1">to</div>
-                            <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
-                                <div class="input-group clockpicker" data-placement="bottom" data-align="top"
-                                     data-autoclose="true">
-                                    <input id="ended_at" type="text" class="form-control" value="ended_at">
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-time"></span>
-                                </span>
-                                </div>
-                            </div>
+                        <div class="input-group clockpicker" data-placement="bottom" data-align="top"
+                             data-autoclose="true">
+                            <input id="started_at" type="text" class="form-control" value="started_at">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time"></span>
+                        </span>
                         </div>
+
+                        <label for="hours">Hours</label>
+                        <select id="hours" name="hours" class="form-control">
+                            <option value="0">-- Please Select --</option>
+                            @foreach($hours as $hour)
+                                <option value="{{ $hour }}">{{ $hour }}</option>
+                            @endforeach
+                        </select>
 
                         <div>
                             <label for="hourly_rate">Hourly Rate (£)</label>

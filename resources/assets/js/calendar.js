@@ -12,6 +12,11 @@ App.Calendar = {
                 lesson.parent_id = parseInt($(this).val());
             });
 
+
+            $('select[name=hours]').on('change', function () {
+                lesson.hours = parseFloat($(this).val());
+            });
+
             $('input#hourly_rate').on('keyup', function () {
                 lesson.hourly_rate = parseFloat($(this).val());
             });
@@ -93,7 +98,7 @@ App.Calendar = {
 
                     $('#event-modal select#parent_id').val(0);
                     $('#event-modal input#started_at').val('');
-                    $('#event-modal input#ended_at').val('');
+                    $('#event-modal input#hours').val(0);
                     $('#event-modal input#hourly_rate').val(0);
 
                     $('#modal-title').html('Lesson Booking - ' + lessonDate.format('MMMM Do YYYY'));
@@ -113,9 +118,10 @@ App.Calendar = {
 
                     promise.then(function (response) {
                         lesson = response;
+                        console.log(event);
                         $('#event-modal select#parent_id').val(lesson.parent_id);
                         $('#event-modal input#started_at').val(event.start.format('HH:mm'));
-                        $('#event-modal input#ended_at').val(event.end.format('HH:mm'));
+                        $('#event-modal select#hours').val(event.hours);
                         $('#event-modal input#hourly_rate').val(event.hourly_rate);
 
                         $('#modal-title').html('Lesson Booking - ' + lessonDate.format('MMMM Do YYYY'));
@@ -129,7 +135,7 @@ App.Calendar = {
             });
 
             $('.clockpicker').clockpicker()
-                .find('input#started_at, input#ended_at').change(function () {
+                .find('input#started_at').change(function () {
                     var id = $(this).attr('id');
                     lesson[id] = lessonDate.format('YYYY-MM-DD') + ' ' + $(this).val() + ':00';
                 })

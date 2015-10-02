@@ -125,11 +125,9 @@ class LessonTableSeeder extends Seeder
         if (app()->environment() !== 'production') {
             factory(TeachersAsTutors\Lesson::class, 1)->create([
                 'started_at' => \Carbon\Carbon::now(),
-                'ended_at'   => \Carbon\Carbon::now()->addHours(3),
             ]);
             factory(TeachersAsTutors\Lesson::class, 1)->create([
                 'started_at' => \Carbon\Carbon::now()->addHours(4),
-                'ended_at'   => \Carbon\Carbon::now()->addHours(5),
             ]);
         }
     }

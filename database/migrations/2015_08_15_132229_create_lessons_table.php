@@ -22,7 +22,7 @@ class CreateLessonsTable extends Migration
             $table->integer('tutor_id', false, true)->nullable();
             $table->integer('parent_id', false, true)->nullable();
             $table->dateTime('started_at');
-            $table->dateTime('ended_at');
+            $table->decimal('hours')->default(0);
             $table->decimal('hourly_rate');
             $table->authors();
             $table->timestamps();

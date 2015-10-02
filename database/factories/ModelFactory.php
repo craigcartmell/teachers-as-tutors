@@ -87,7 +87,7 @@ $factory->define(TeachersAsTutors\Lesson::class, function ($faker) {
         'tutor_id'    => 1,
         'parent_id'   => 10,
         'started_at'  => $faker->date,
-        'ended_at'    => $faker->date,
+        'hours'       => $faker->randomElement($array = ['1', '1.25', '1.5', '1.75', '2', '2.25', '2.5', '3']),
         'hourly_rate' => $faker->randomFloat(2),
     ];
 });
