@@ -40,23 +40,18 @@
 
                         <div class="input-group clockpicker" data-placement="bottom" data-align="top"
                              data-autoclose="true">
-                            <input id="started_at" type="text" class="form-control" value="started_at">
+                            <input id="started_at" type="text" class="form-control" value="started_at" placeholder="e.g. 12:30">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                         </span>
                         </div>
 
                         <label for="hours">Hours</label>
-                        <select id="hours" name="hours" class="form-control">
-                            <option value="0">-- Please Select --</option>
-                            @foreach($hours as $hour)
-                                <option value="{{ $hour }}">{{ $hour }}</option>
-                            @endforeach
-                        </select>
+                        <input id="hours" type="text" class="form-control" type="number" placeholder="e.g. 1.5">
 
                         <div>
                             <label for="hourly_rate">Hourly Rate (£)</label>
-                            <input id="hourly_rate" name="hourly_rate" type="number" class="form-control" placeholder="£">
+                            <input id="hourly_rate" name="hourly_rate" type="number" class="form-control" placeholder="e.g. 30">
                         </div>
 
                     </form>

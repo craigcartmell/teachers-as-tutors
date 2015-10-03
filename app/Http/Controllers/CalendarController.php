@@ -19,22 +19,13 @@ class CalendarController extends Controller
     {
         $parents = User::query()->where('permission_id', 3)->get();
 
-        return view('calendar.index', ['parents' => $parents, 'hours' => get_lesson_hour_options()]);
+        return view('calendar.index', ['parents' => $parents,]);
     }
 
-    public function getInvoice($invoiceDate)
+    public function getInvoice($parentSlug, $parentID, $invoiceDate)
     {
         $invoiceDate = Carbon::createFromFormat('Y-m', $invoiceDate);
-
-        if (auth()->user()->is_parent) {
-            $parent_id = auth()->user()->getAuthIdentifier();
-            $tutor_id  = 0;
-        } else {
-            $parent_id = 0;
-            $tutor_id  = auth()->user()->getAuthIdentifier();
-        }
-
-        $invoice = new Invoice($invoiceDate, $tutor_id, $parent_id);
+        $invoice     = new Invoice($invoiceDate, intval($parentID));
 
         return $invoice->generate();
     }
