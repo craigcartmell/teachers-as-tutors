@@ -14,7 +14,13 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
+
+// disable DOMPDF's internal autoloader if you are using Composer
+define('DOMPDF_ENABLE_AUTOLOAD', false);
+
+// include DOMPDF's default configuration
+require_once __DIR__ . '/../vendor/dompdf/dompdf/dompdf_config.inc.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +33,7 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
-$compiledPath = __DIR__.'/cache/compiled.php';
+$compiledPath = __DIR__ . '/cache/compiled.php';
 
 if (file_exists($compiledPath)) {
     require $compiledPath;

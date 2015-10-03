@@ -32,7 +32,7 @@ class Invoice
         $lessons = Lesson::query()->where('parent_id', $this->parentID)->whereRaw("'" . $this->invoiceDate->format('Y-m') . "' = DATE_FORMAT(started_at, '%Y-%m')")->orderBy('started_at')->get();
         $total   = collect($lessons)->sum('cost');
 
-        return view('calendar.invoice', ['invoice_date' => $this->invoiceDate, 'parent' => $this->parent, 'lessons' => $lessons, 'total' => $total]);
+        return ['invoice_date' => $this->invoiceDate, 'parent' => $this->parent, 'lessons' => $lessons, 'total' => $total];
     }
 
 }
