@@ -14,17 +14,19 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \TeachersAsTutors\Console\Commands\Inspire::class,
+        \TeachersAsTutors\Console\Commands\Invoice::class,
     ];
 
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
+     *
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('inspire')
-                 ->hourly();
+            ->hourly();
     }
 }
