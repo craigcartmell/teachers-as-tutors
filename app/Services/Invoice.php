@@ -3,6 +3,7 @@
 namespace TeachersAsTutors\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use TeachersAsTutors\Lesson;
 use TeachersAsTutors\User;
 
@@ -45,6 +46,20 @@ class Invoice
         $dompdf->load_html(view('invoice.pdf', $this->generate())->render());
         $dompdf->set_paper('a4', 'portrait');
         $dompdf->render();
-        $dompdf->stream($this->getInvoiceNumber() . '.pdf');
+
+        Storage::makeDirectory('invoices');
+
+        return Storage::put($this->getInvoiceFilepath(), $dompdf->output());
     }
+
+    public function getInvoiceFilepath()
+    {
+        return 'invoices/' . $this->getInvoiceFilename();
+    }
+
+    public function getInvoiceFilename()
+    {
+        return 'teachers_as_tutors_invoice_' . $this->getInvoiceNumber() . '.pdf';
+    }
+
 }

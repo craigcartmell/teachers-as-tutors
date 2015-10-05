@@ -33,10 +33,8 @@ class LessonController extends Controller
         foreach ($lessons as $lesson) {
             $data[] = [
                 'id'          => $lesson->getKey(),
-                'title'       => ! auth()->user()->is_parent ? $lesson->parent->name : $lesson->tutor->name,
+                'title'       => ! auth()->user()->is_parent ? $lesson->parent->name : $lesson->tutor->name . ' (' . $lesson->hours . ' hours)',
                 'start'       => $lesson->started_at->format('Y-m-d H:i:s'),
-                // TODO: Work out end
-                //'end'         => $lesson->hours,
                 'color'       => ! $lesson->started_at->isFuture() ? env('CALENDAR_EVENT_PAST_BACKGROUND_COLOR') : '',
                 'hours'       => $lesson->hours,
                 'hourly_rate' => $lesson->hourly_rate,

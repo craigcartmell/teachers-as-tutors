@@ -3,7 +3,6 @@
 namespace TeachersAsTutors\Http\Controllers;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use TeachersAsTutors\Http\Requests;
 use TeachersAsTutors\Services\Invoice;
@@ -30,6 +29,8 @@ class CalendarController extends Controller
 
         if ($download) {
             $invoice->save();
+
+            return response()->download(storage_path('app/invoices/' . $invoice->getInvoiceFilename()))->deleteFileAfterSend(true);
         }
 
         return view('invoice.full', $invoice->generate());
