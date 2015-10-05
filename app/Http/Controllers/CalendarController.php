@@ -29,14 +29,9 @@ class CalendarController extends Controller
         $invoice     = new Invoice($invoiceDate, intval($parentID));
 
         if ($download) {
-            $dompdf = new \DOMPDF();
-            $dompdf->load_html(view('calendar.invoice', $invoice->generate())->render());
-            $dompdf->set_paper('a4', 'portrait');
-            $dompdf->render();
-            $pdf = $dompdf->output();
-            Storage::put('test.pdf', $pdf);
+            $invoice->save();
         }
 
-        return view('calendar.invoice', $invoice->generate());
+        return view('invoice.full', $invoice->generate());
     }
 }

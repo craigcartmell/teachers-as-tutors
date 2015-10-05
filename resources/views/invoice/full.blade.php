@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ env('APP_NAME') }}</title>
+    <title>{{ env('APP_NAME') }} - Invoice for {{ $invoice_date->format('F Y') }}</title>
 
     <meta charset="UTF-8">
     <meta name="description" content="Tutors as Teachers">
@@ -13,7 +13,6 @@
 
     <link href="{{ elixir('css/all.css') }}" rel="stylesheet" type="text/css">
 </head>
-</html>
 
 <body>
 <div class="container">
@@ -47,7 +46,7 @@
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 <h4>&nbsp;</h4>
 
-                <p>Invoice No: </p>
+                <p>Invoice No: {{ $invoice_no }}</p>
 
                 <p>Invoice Date: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
 
@@ -88,5 +87,5 @@
     </table>
 </div>
 
-
 </body>
+</html>
