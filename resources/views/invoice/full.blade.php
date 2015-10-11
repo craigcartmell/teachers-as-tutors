@@ -50,9 +50,9 @@
 
                 <p>Invoice Date: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
 
-                <p>VAT No: </p>
+                <p>VAT No: {{ $vat_no }}</p>
 
-                <p>Company No: </p>
+                <p>Company No: {{ $company_no }}</p>
             </div>
         </div>
     </div>
@@ -74,6 +74,26 @@
                     = {{ number_format($lesson->cost,2) }}</td>
             </tr>
         @endforeach
+
+        @if($is_vat_charged)
+            <tr>
+                <td>
+                    <h3>Sub Total (GBP)</h3>
+                </td>
+                <td>
+                    <h3>{{ number_format($sub_total,2) }}</h3>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <h3>{{ $vat_perc }}% VAT (GBP)</h3>
+                </td>
+                <td>
+                    <h3>{{ number_format($vat,2) }}</h3>
+                </td>
+            </tr>
+        @endif
 
         <tr>
             <td>

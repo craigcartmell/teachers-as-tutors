@@ -46,13 +46,13 @@
     <tr>
         <td>{{ env('INVOICE_ADDRESS2') }}</td>
         <td>&nbsp;</td>
-        <td>VAT No:</td>
+        <td>VAT No: {{ $vat_no }}</td>
     </tr>
 
     <tr>
         <td>{{ env('INVOICE_ADDRESS3') }}</td>
         <td>&nbsp;</td>
-        <td>Company No:</td>
+        <td>Company No: {{ $company_no }}</td>
     </tr>
 
     <tr>
@@ -86,6 +86,26 @@
                 = {{ number_format($lesson->cost,2) }}</td>
         </tr>
     @endforeach
+
+    @if($is_vat_charged)
+        <tr>
+            <td>
+                <h3>Sub Total (GBP)</h3>
+            </td>
+            <td>
+                <h3>{{ number_format($sub_total,2) }}</h3>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h3>{{ $vat_perc }}% VAT (GBP)</h3>
+            </td>
+            <td>
+                <h3>{{ number_format($vat,2) }}</h3>
+            </td>
+        </tr>
+    @endif
 
     <tr>
         <td>

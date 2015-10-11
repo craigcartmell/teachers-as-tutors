@@ -34,10 +34,31 @@ class Invoice
 
     public function generate()
     {
-        $lessons = Lesson::query()->where('parent_id', $this->parentID)->whereRaw("'" . $this->invoiceDate->format('Y-m') . "' = DATE_FORMAT(started_at, '%Y-%m')")->orderBy('started_at')->get();
-        $total   = collect($lessons)->sum('cost');
+        $lessons        = Lesson::query()->where('parent_id', $this->parentID)->whereRaw("'" . $this->invoiceDate->format('Y-m') . "' = DATE_FORMAT(started_at, '%Y-%m')")->orderBy('started_at')->get();
+        $sub_total      = collect($lessons)->sum('cost');
+        $is_vat_charged = env('INVOICE_VAT_CHARGED', false);
+        $vat_perc       = env('INVOICE_VAT_PERCENTAGE', 20);
 
-        return ['invoice_date' => $this->invoiceDate, 'invoice_no' => $this->getInvoiceNumber(), 'parent' => $this->parent, 'lessons' => $lessons, 'total' => $total];
+        $total = $sub_total;
+        $vat   = 0;
+        if ($is_vat_charged) {
+            $vat   = $sub_total * ($vat_perc / 100);
+            $total = $sub_total + $vat;
+        }
+
+        return [
+            'invoice_date'   => $this->invoiceDate,
+            'invoice_no'     => $this->getInvoiceNumber(),
+            'parent'         => $this->parent,
+            'lessons'        => $lessons,
+            'sub_total'      => $sub_total,
+            'total'          => $total,
+            'company_no'     => env('INVOICE_COMPANY_NO'),
+            'vat_no'         => env('INVOICE_VAT_NO'),
+            'is_vat_charged' => $is_vat_charged,
+            'vat_perc'       => $vat_perc,
+            'vat'            => $vat,
+        ];
     }
 
     public function save()
