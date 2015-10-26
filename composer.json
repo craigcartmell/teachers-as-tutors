@@ -14,7 +14,7 @@
     "google/recaptcha": "^1.1",
     "davejamesmiller/laravel-breadcrumbs": "^3.0",
     "dompdf/dompdf": "^0.6.1",
-    "fzaninotto/faker": "~1.4",
+    "fzaninotto/faker": "~1.4"
   },
   "require-dev": {
     "mockery/mockery": "0.9.*",
