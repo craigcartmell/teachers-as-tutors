@@ -83,13 +83,14 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <img src="{{ asset('img/heroes/hero_apple.jpg') }}" alt="{{ env('APP_NAME') }}">
+                <img src="{{ asset('img/heroes/hero_portrait.jpg') }}" alt="{{ env('APP_NAME') }}">
 
                 <div class="carousel-caption">
                     @yield('hero_text')
                 </div>
             </div>
-            <div class="item">
+            <!-- TODO: Uncomment -->
+            <!--<div class="item">
                 <img src="{{ asset('img/heroes/hero_child_studying.jpg') }}" alt="{{ env('APP_NAME') }}">
 
                 <div class="carousel-caption">
@@ -102,7 +103,7 @@
                 <div class="carousel-caption">
                     @yield('hero_text')
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 @show

@@ -25,6 +25,8 @@
     > a > img {
       @include img-responsive;
       line-height: 1;
+      position: relative;
+      top: -700px;
     }
 
     // WebKit CSS3 transforms for supported devices
@@ -267,5 +269,16 @@
   // Move up the indicators
   .carousel-indicators {
     bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 732px) {
+  .carousel-inner {
+    > .item {
+      > img {
+        position: relative;
+        top: 0;
+      }
+    }
   }
 }

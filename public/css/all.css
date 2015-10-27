@@ -6510,7 +6510,9 @@ button.close {
       display: block;
       max-width: 100%;
       height: auto;
-      line-height: 1; }
+      line-height: 1;
+      position: relative;
+      top: -700px; }
     @media all and (transform-3d), (-webkit-transform-3d) {
       .carousel-inner > .item {
         transition: -webkit-transform 0.6s ease-in-out;
@@ -6677,6 +6679,11 @@ button.close {
     padding-bottom: 30px; }
   .carousel-indicators {
     bottom: 20px; } }
+
+@media screen and (max-width: 732px) {
+  .carousel-inner > .item > img {
+    position: relative;
+    top: 0; } }
 
 .pagination {
   display: inline-block;
