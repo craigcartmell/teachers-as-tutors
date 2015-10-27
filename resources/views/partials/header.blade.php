@@ -18,6 +18,9 @@
     <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,900italic,400,700,900'
           rel='stylesheet' type='text/css'>
 
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300italic,300,400italic,700,700italic,900,900italic'
+          rel='stylesheet' type='text/css'>
+
     @if(app()->environment() === 'production')
         <script>
             (function (i, s, o, g, r, a, m) {
