@@ -52,7 +52,7 @@
 
         <p>We're currently down for maintenance.</p>
 
-        <p>For enquires please email <a
+        <p>For enquiries please email <a
                     href="mailto:{{ env('MAIL_TO') }}">{{ env('MAIL_TO') }}</a>.</p>
     </div>
 </div>
