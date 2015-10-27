@@ -49,6 +49,8 @@ class CheckForMaintenanceMode
             'lessons',
             'lessons/*',
             'profile',
+            'password/*',
+            'contact',
         ];
 
         if ($this->app->isDownForMaintenance()) {
