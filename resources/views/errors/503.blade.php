@@ -48,7 +48,7 @@
         </div>
 
         <p>We're currently down for maintenance. For enquires please email <a
-                    href="mailto:enquires@teachersastutors.org">enquires@teachersastutors.org</a>.</p>
+                    href="mailto:{{ env('MAIL_TO') }}">{{ env('MAIL_TO') }}</a>.</p>
     </div>
 </div>
 </body>
