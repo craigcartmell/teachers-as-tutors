@@ -5,7 +5,8 @@
 
 @include('partials.header')
 
-<link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300italic,300,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300italic,300,400italic,700,700italic,900,900italic'
+      rel='stylesheet' type='text/css'>
 
 <style>
     html, body {
@@ -47,7 +48,11 @@
                  alt="{{ env('APP_NAME') }}">
         </div>
 
-        <p>We're currently down for maintenance. For enquires please email <a
+        <br>
+
+        <p>We're currently down for maintenance.</p>
+
+        <p>For enquires please email <a
                     href="mailto:{{ env('MAIL_TO') }}">{{ env('MAIL_TO') }}</a>.</p>
     </div>
 </div>
