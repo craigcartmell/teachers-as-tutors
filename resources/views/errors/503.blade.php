@@ -18,7 +18,7 @@
         width: 100%;
         color: #000;
         display: table;
-        font-weight: 100;
+        font-weight: 300;
         font-family: 'Lato';
     }
 
