@@ -125,7 +125,7 @@
 <div class="container">
     <footer>
         <p class="text-center">&copy; {{ env('APP_NAME') }} {{ \Carbon\Carbon::now()->year }} - Created by <a
-                    href="http://www.three-oh.com" target="_blank">Three Oh</a></p>
+                    href="mailto:craigcartmell1@gmail.com" target="_blank">Craig Cartmell</a></p>
     </footer>
 </div>
 
