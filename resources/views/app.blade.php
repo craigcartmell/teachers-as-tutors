@@ -30,8 +30,8 @@
                         <span class="sr-only">(current)</span></a></li>
                 <li class="{{ url('tutors') === Request::url() ? 'active' : '' }}"><a href="{{ url('tutors') }}">Tutors
                         <span class="sr-only">(current)</span></a></li>
-                <li class="{{ url('blog') === Request::url() ? 'active' : '' }}"><a href="{{ url('blog') }}">Blog <span
-                                class="sr-only">(current)</span></a></li>
+                <!--<li class="{{ url('blog') === Request::url() ? 'active' : '' }}"><a href="{{ url('blog') }}">Blog <span
+                                class="sr-only">(current)</span></a></li>-->
                 <li class="{{ url('contact') === Request::url() ? 'active' : '' }}"><a href="{{ url('contact') }}">Contact <span
                                 class="sr-only">(current)</span></a></li>
 
