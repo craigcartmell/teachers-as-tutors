@@ -1049,7 +1049,7 @@ html {
   -webkit-tap-highlight-color: transparent; }
 
 body {
-  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-family: "Alegreya", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857;
   color: #333333;
@@ -2772,7 +2772,7 @@ select[multiple].input-lg, .input-group-lg > select[multiple].form-control,
 .btn {
   display: inline-block;
   margin-bottom: 0;
-  font-weight: 300;
+  font-weight: normal;
   text-align: center;
   vertical-align: middle;
   -ms-touch-action: manipulation;
@@ -5367,7 +5367,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-family: "Alegreya", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -5480,7 +5480,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
+  font-family: "Alegreya", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -6150,7 +6150,9 @@ body {
     padding-top: 10px;
     padding-bottom: 10px;
     line-height: 20px;
-    text-transform: capitalize; }
+    text-transform: capitalize;
+    font-family: "Lato";
+    font-weight: 300; }
   @media (max-width: 1199px) {
     .navbar-nav .open .dropdown-menu {
       position: static;
