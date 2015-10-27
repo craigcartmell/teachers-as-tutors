@@ -1,47 +1,55 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Be right back.</title>
 
-        <link href="//fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('title', 'We\'re currently down for maintenance')
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+@include('partials.header')
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+<link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300italic,300,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
+<style>
+    html, body {
+        height: 100%;
+    }
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        color: #000;
+        display: table;
+        font-weight: 100;
+        font-family: 'Lato';
+    }
 
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Be right back.</div>
-            </div>
+    .container {
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .content {
+        text-align: center;
+        display: inline-block;
+    }
+
+    .content img {
+        width: 50%;
+        margin-bottom: 12px;
+    }
+</style>
+
+<body>
+<div class="container">
+    <div class="content">
+        <div>
+            <img src="{{ asset('img/teachers-as-tutors-logo.png') }}" title="{{ env('APP_NAME') }}"
+                 alt="{{ env('APP_NAME') }}">
         </div>
-    </body>
+
+        <p>We're currently down for maintenance. For enquires please email <a
+                    href="mailto:enquires@teachersastutors.org">enquires@teachersastutors.org</a>.</p>
+    </div>
+</div>
+</body>
 </html>
