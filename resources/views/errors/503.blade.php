@@ -34,7 +34,6 @@
     }
 
     .content img {
-        opacity: 0.4;
         width: 50%;
         margin-bottom: 12px;
     }
