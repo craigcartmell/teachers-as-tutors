@@ -16,7 +16,9 @@ if (! function_exists('human_filesize')) {
 
         return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
     }
+}
 
+if (! function_exists('get_lesson_hour_options')) {
     function get_lesson_hour_options()
     {
         $base  = [0.25, 0.5, 0.75];
@@ -30,5 +32,28 @@ if (! function_exists('human_filesize')) {
         }
 
         return $hours;
+    }
+
+}
+
+if (! function_exists('get_hero_image')) {
+    function get_hero_image($uri)
+    {
+        switch ($uri) {
+            case '/':
+                return ['src' => asset('img/heroes/hero_home_hand_writing.jpg'), 'top' => '-500px'];
+                break;
+            case 'philosophy':
+                return ['src' => asset('img/heroes/hero_philosophy_books.jpg'), 'top' => 0];
+                break;
+            case 'tuition':
+                return ['src' => asset('img/heroes/hero_tuition_pencils.jpg'), 'top' => '-500px'];
+                break;
+            case 'tutors':
+                return ['src' => asset('img/heroes/hero_tutors_library.jpg'), 'top' => '-200px'];
+                break;
+            default:
+                return ['src' => asset('img/heroes/hero_home_hand_writing.jpg'), 'top' => '-500px'];
+        }
     }
 }

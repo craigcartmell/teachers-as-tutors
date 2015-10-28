@@ -4,6 +4,7 @@ namespace TeachersAsTutors\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CheckForMaintenanceMode
@@ -35,6 +36,10 @@ class CheckForMaintenanceMode
      */
     public function handle($request, Closure $next)
     {
+        if(auth()->check() && auth()->user()->is_admin) {
+            return $next($request);
+        }
+
         $allowed = [
             'admin',
             'admin/*',

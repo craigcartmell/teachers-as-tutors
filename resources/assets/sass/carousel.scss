@@ -26,7 +26,7 @@
       @include img-responsive;
       line-height: 1;
       position: relative;
-      top: -700px;
+      top: -500px;
     }
 
     // WebKit CSS3 transforms for supported devices
@@ -272,12 +272,23 @@
   }
 }
 
-@media screen and (max-width: 732px) {
+@media screen and (max-width: 1345px) {
   .carousel-inner {
     > .item {
       > img {
         position: relative;
-        top: 0;
+        top: -220px !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .carousel-inner {
+    > .item {
+      > img {
+        position: relative;
+        top: 0 !important;
       }
     }
   }

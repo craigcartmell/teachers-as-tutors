@@ -6,6 +6,10 @@
 
 @section('hero_text', $page->hero_text)
 
+@section('hero_image')
+    <img src="{{ $hero_image['src'] }}" alt="{{ env('APP_NAME') }}" style="top: {{ $hero_image['top'] }}">
+@endsection
+
 @section('breadcrumbs')
     {!! Breadcrumbs::render('page', $page) !!}
 @endsection

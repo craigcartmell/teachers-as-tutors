@@ -6515,7 +6515,7 @@ body {
       height: auto;
       line-height: 1;
       position: relative;
-      top: -700px; }
+      top: -500px; }
     @media all and (transform-3d), (-webkit-transform-3d) {
       .carousel-inner > .item {
         transition: -webkit-transform 0.6s ease-in-out;
@@ -6683,10 +6683,15 @@ body {
   .carousel-indicators {
     bottom: 20px; } }
 
-@media screen and (max-width: 732px) {
+@media screen and (max-width: 1345px) {
   .carousel-inner > .item > img {
     position: relative;
-    top: 0; } }
+    top: -220px !important; } }
+
+@media screen and (max-width: 900px) {
+  .carousel-inner > .item > img {
+    position: relative;
+    top: 0 !important; } }
 
 .pagination {
   display: inline-block;
@@ -7058,7 +7063,7 @@ body {
   padding-right: 0;
   padding-bottom: 0; }
   .navbar-brand.logo img {
-    width: 96px;
-    margin-top: 6px; }
+    width: 86px;
+    margin-top: 8px; }
 
 /*# sourceMappingURL=all.css.map */

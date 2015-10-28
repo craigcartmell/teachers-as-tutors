@@ -6,6 +6,10 @@
     {!! Breadcrumbs::render('login') !!}
 @endsection
 
+@section('hero_image')
+    <img src="{{ asset('img/heroes/hero_login_spiral.jpg') }}" alt="{{ env('APP_NAME') }}">
+@endsection
+
 @section('content')
     <div class="container">
 

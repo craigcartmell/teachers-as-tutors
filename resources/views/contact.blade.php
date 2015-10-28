@@ -4,7 +4,9 @@
     Contact Us
 @endsection
 
-@section('hero_text', '')
+@section('hero_image')
+    <img src="{{ asset('img/heroes/hero_contact_letters.jpg') }}" alt="{{ env('APP_NAME') }}" style="top: 0;">
+@endsection
 
 @section('breadcrumbs')
     {!! Breadcrumbs::render('contact') !!}
