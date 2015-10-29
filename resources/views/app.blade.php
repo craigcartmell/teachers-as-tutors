@@ -55,6 +55,8 @@
                                         Mode {{ app()->isDownForMaintenance() ? 'Off' : 'On' }}</a></li>
                                 <li><a href="{{ route('admin.pages') }}">Manage Pages</a></li>
                                 <li><a href="{{ route('admin.users') }}">Manage Users</a></li>
+                                <li class="nav-divider"></li>
+                                <li><a href="{{ route('admin.help') }}">Help</a></li>
                             @endif
                             <li class="nav-divider"></li>
                             <li><a href="{{ route('logout') }}">Logout <span class="sr-only">(current)</span></a></li>

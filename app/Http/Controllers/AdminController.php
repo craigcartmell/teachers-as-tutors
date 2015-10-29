@@ -223,4 +223,9 @@ class AdminController extends Controller
 
         return redirect()->back();
     }
+
+    public function getHelp()
+    {
+        return view('admin.help.index');
+    }
 }

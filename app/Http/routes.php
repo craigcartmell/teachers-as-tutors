@@ -45,6 +45,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin', 'enabled']]
         Route::get('{id}/enable', ['as' => 'admin.pages.enable', 'uses' => 'AdminController@enablePage']);
         Route::get('{id}/delete', ['as' => 'admin.pages.delete', 'uses' => 'AdminController@deletePage']);
     });
+    Route::get('help', ['as' => 'admin.help', 'uses' => 'AdminController@getHelp']);
 });
 
 Route::group(['prefix' => 'resources', 'middleware' => ['auth', 'admin_or_tutor', 'enabled']], function () {

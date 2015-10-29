@@ -56,8 +56,14 @@ Breadcrumbs::register('edit-resource', function ($breadcrumbs, $resource) {
     $breadcrumbs->push($resource->original_filename);
 });
 
-Breadcrumbs::register('pages', function ($breadcrumbs) {
+Breadcrumbs::register('admin', function ($breadcrumbs) {
     $breadcrumbs->parent('/');
+
+    $breadcrumbs->push('Admin', url('admin'));
+});
+
+Breadcrumbs::register('pages', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin');
 
     $breadcrumbs->push('Manage Pages', url('admin/pages'));
 });
@@ -69,7 +75,7 @@ Breadcrumbs::register('edit-page', function ($breadcrumbs, $page) {
 });
 
 Breadcrumbs::register('users', function ($breadcrumbs) {
-    $breadcrumbs->parent('/');
+    $breadcrumbs->parent('admin');
 
     $breadcrumbs->push('Manage Users', url('admin/users'));
 });
@@ -78,6 +84,12 @@ Breadcrumbs::register('edit-user', function ($breadcrumbs, $user) {
     $breadcrumbs->parent('users');
 
     $breadcrumbs->push($user->name);
+});
+
+Breadcrumbs::register('help', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin');
+
+    $breadcrumbs->push('Help', url('admin/help'));
 });
 
 Breadcrumbs::register('page', function ($breadcrumbs, $page) {

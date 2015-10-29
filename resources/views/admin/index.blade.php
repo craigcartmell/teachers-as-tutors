@@ -2,6 +2,10 @@
 
 @section('title', 'Admin')
 
+@section('breadcrumbs')
+    {!! Breadcrumbs::render('admin') !!}
+@endsection
+
 @section('content')
     <div class="container">
         <!-- Example row of columns -->
