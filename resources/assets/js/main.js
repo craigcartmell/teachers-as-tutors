@@ -22,4 +22,14 @@ $(function () {
     });
 
     $('select[name=parent_id]').change();
+
+    function preload(arrayOfImages) {
+        $(arrayOfImages).each(function(){
+            $('<img/>')[0].src = this;
+        });
+    }
+
+    preload([
+        window.siteUrl + '/img/heroes/hero_home_hand_writing.jpg'
+    ]);
 });
