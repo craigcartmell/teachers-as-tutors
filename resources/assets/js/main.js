@@ -4,7 +4,7 @@ $(function () {
     window.siteUrl = $('body').data('site-url');
 
     $.ajaxSetup({
-        headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+        headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')}
     });
 
     $('.delete-record').on('click', function () {
@@ -24,12 +24,17 @@ $(function () {
     $('select[name=parent_id]').change();
 
     function preload(arrayOfImages) {
-        $(arrayOfImages).each(function(){
+        $(arrayOfImages).each(function () {
             $('<img/>')[0].src = this;
         });
     }
 
     preload([
-        window.siteUrl + '/img/heroes/hero_home_hand_writing.jpg'
+        window.siteUrl + '/img/heroes/hero_home_hand_writing.jpg',
+        window.siteUrl + '/img/heroes/hero_philosophy_books.jpg',
+        window.siteUrl + '/img/heroes/hero_tuition_pencils.jpg',
+        window.siteUrl + '/img/heroes/hero_tutors_library.jpg',
+        window.siteUrl + '/img/heroes/hero_contact_letters.jpg',
+        window.siteUrl + '/img/heroes/hero_login_spiral.jpg'
     ]);
 });
