@@ -56,6 +56,18 @@ Breadcrumbs::register('edit-resource', function ($breadcrumbs, $resource) {
     $breadcrumbs->push($resource->original_filename);
 });
 
+Breadcrumbs::register('folders', function ($breadcrumbs) {
+    $breadcrumbs->parent('resources');
+
+    $breadcrumbs->push('Folders', url('resources/folders'));
+});
+
+Breadcrumbs::register('edit-folder', function ($breadcrumbs, $folder) {
+    $breadcrumbs->parent('folders');
+
+    $breadcrumbs->push($folder->name);
+});
+
 Breadcrumbs::register('admin', function ($breadcrumbs) {
     $breadcrumbs->parent('/');
 

@@ -57,6 +57,15 @@ Route::group(['prefix' => 'resources', 'middleware' => ['auth', 'admin_or_tutor'
     Route::get('{id}/enable', ['as' => 'resources.enable', 'uses' => 'ResourceController@enableResource']);
     Route::get('{id}/delete', ['as' => 'resources.delete', 'uses' => 'ResourceController@deleteResource']);
     Route::get('{id}/download', ['as' => 'resources.download', 'uses' => 'ResourceController@downloadResource']);
+
+    Route::group(['prefix' => 'folders',], function () {
+        Route::get('', ['as' => 'folders', 'uses' => 'FolderController@index']);
+        Route::get('add', ['as' => 'folders.add', 'uses' => 'FolderController@getEditFolder']);
+        Route::post('add', ['as' => 'folders.add', 'uses' => 'FolderController@postEditFolder']);
+        Route::get('{id}/edit', ['as' => 'folders.edit', 'uses' => 'FolderController@getEditFolder']);
+        Route::post('{id}/edit', ['as' => 'folders.edit', 'uses' => 'FolderController@postEditFolder']);
+        Route::get('{id}/delete', ['as' => 'folders.delete', 'uses' => 'FolderController@deleteFolder']);
+    });
 });
 
 Route::group(['prefix' => 'reports', 'middleware' => ['auth', 'enabled']], function () {

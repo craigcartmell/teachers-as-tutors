@@ -20,6 +20,18 @@
             {!! csrf_field() !!}
             <div class="row">
                 <div class="col-md-12">
+                    <label for="folder_id">Folder: </label>
+                    <select id="folder_id" name="folder_id" class="text-right">
+                        <option value="0">All</option>
+                        @foreach($folders as $folder)
+                            <option value="{{ $folder->getKey() }}" {{ $folder->getKey() == $resource->folder_id ? 'selected' : '' }}>{{ $folder->name }}</option>
+                        @endforeach
+                </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
                     <label for="desc">Description</label>
                     <textarea name="desc" class="form-control" placeholder="A useful document...">{{ old('desc', $resource->desc) }}</textarea>
                 </div>

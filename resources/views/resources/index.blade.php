@@ -7,10 +7,30 @@
 @endsection
 
 @section('content')
-    <div class="container table-responsive">
+    <div class  ="container">
         @include('partials.errors')
 
-        <a href="{{ route('resources.add') }}" class="btn btn-primary">Add New</a>
+        <span class="text-left">
+            <a href="{{ route('resources.add') }}" class="btn btn-primary">Add New</a>
+            <a href="{{ route('folders') }}" class="btn btn-default">Manage Folders</a>
+        </span>
+
+        <form class="text-right">
+            <span>
+                <label for="folder_id">Folder: </label>
+                <select id="folder_id" name="folder_id" class="text-right">
+                    <option value="0">-- Please Select --</option>
+                    @foreach($folders as $folder)
+                        <option value="{{ $folder->getKey() }}" {{ $folder->getKey() == $folder_id ? 'selected' : '' }}>{{ $folder->name }} ({{ count($folder->resources) }})</option>
+                    @endforeach
+                </select>
+                <input type="submit" class="btn btn-default btn-xs" value="Filter">
+                <a href="{{ route('resources') }}" class="btn btn-default btn-xs">Reset</a>
+            </span>
+        </form>
+    </div>
+
+    <div class="container table-responsive">
            <table class="table table-striped">
                <thead>
                 <tr>

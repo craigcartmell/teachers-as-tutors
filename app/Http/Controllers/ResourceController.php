@@ -3,6 +3,8 @@
 namespace TeachersAsTutors\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use TeachersAsTutors\Folder;
 use TeachersAsTutors\Http\Requests;
 use TeachersAsTutors\Resource;
 
@@ -10,9 +12,13 @@ class ResourceController extends Controller
 {
     public function index()
     {
-        $resources = Resource::all();
+        $folders   = Folder::all();
+        $folder_id = Input::get('folder_id', 0);
+        $resources = $folder_id
+            ? Resource::query()->where('folder_id', $folder_id)->get()
+            : Resource::all();
 
-        return view('resources.index', ['resources' => $resources]);
+        return view('resources.index', ['resources' => $resources, 'folders' => $folders, 'folder_id' => $folder_id,]);
     }
 
     public function getEditResource(Request $request, $id = 0)
@@ -23,7 +29,9 @@ class ResourceController extends Controller
             $resource = Resource::query()->findOrFail($id);
         }
 
-        return view('resources.edit', ['resource' => $resource]);
+        $folders = Folder::all();
+
+        return view('resources.edit', ['resource' => $resource, 'folders' => $folders,]);
     }
 
     public function postEditResource(Request $request, $id = 0)
@@ -34,13 +42,17 @@ class ResourceController extends Controller
             $resource = Resource::query()->findOrFail($id);
         }
 
+        $folder_id = $request->input('folder_id') ? $request->input('folder_id') : null;
+
         $this->validate($request, [
+            'folder_id'         => $folder_id ? 'exists:folders,id' : '',
             'desc'              => 'max:255',
             'original_filename' => ! $id ? 'required|max:' . env('MAX_UPLOAD_SIZE') : '',
         ],
             ['original_filename.required' => 'Please select a file to upload.']);
 
 
+        $resource->folder_id  = $folder_id;
         $resource->desc       = $request->input('desc');
         $resource->is_enabled = $request->input('is_enabled', 0);
 

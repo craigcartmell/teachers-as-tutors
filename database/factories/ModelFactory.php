@@ -60,6 +60,12 @@ $factory->defineAs(TeachersAsTutors\Page::class, 'blog-post', function ($faker) 
         ]);
 });
 
+$factory->define(TeachersAsTutors\Folder::class, function ($faker) {
+    return [
+        'name' => $faker->name,
+    ];
+});
+
 $factory->define(TeachersAsTutors\Resource::class, function ($faker) {
     return [
         'desc'              => $faker->sentence,

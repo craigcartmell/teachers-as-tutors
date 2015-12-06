@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserPermissionsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(PagesTableSeeder::class);
+        $this->call(FoldersTableSeeder::class);
         $this->call(ResourcesTableSeeder::class);
         $this->call(ReportsTableSeeder::class);
         $this->call(LessonTableSeeder::class);
@@ -94,6 +95,16 @@ class PagesTableSeeder extends Seeder
         ]);
         if (app()->environment() !== 'production') {
             factory(TeachersAsTutors\Page::class, 'blog-post', 10)->create();
+        }
+    }
+}
+
+class FoldersTableSeeder extends Seeder
+{
+    public function run()
+    {
+        if (app()->environment() !== 'production') {
+            factory(TeachersAsTutors\Folder::class, 10)->create();
         }
     }
 }
