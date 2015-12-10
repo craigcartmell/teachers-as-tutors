@@ -70,7 +70,7 @@ Route::group(['prefix' => 'resources', 'middleware' => ['auth', 'admin_or_tutor'
 
 Route::group(['prefix' => 'reports', 'middleware' => ['auth', 'enabled']], function () {
     Route::get('', ['as' => 'reports', 'uses' => 'ReportController@index']);
-    Route::get('{slug}', ['as' => 'reports.view', 'uses' => 'ReportController@getBySlug']);
+    Route::get('other', ['as' => 'reports.other', 'middleware' => 'admin', 'uses' => 'ReportController@getOther']);
     Route::group(['middleware' => ['admin_or_tutor',]], function () {
         Route::get('add', ['as' => 'reports.add', 'uses' => 'ReportController@getEdit']);
         Route::post('add', ['as' => 'reports.add', 'uses' => 'ReportController@postEdit']);
@@ -80,6 +80,7 @@ Route::group(['prefix' => 'reports', 'middleware' => ['auth', 'enabled']], funct
         Route::get('{id}/delete', ['as' => 'reports.delete', 'uses' => 'ReportController@delete']);
         Route::get('{id}/notify', ['as' => 'reports.notify', 'uses' => 'ReportController@notify']);
     });
+    Route::get('{slug}', ['as' => 'reports.view', 'uses' => 'ReportController@getBySlug']);
 });
 
 Route::get('profile', ['as' => 'profile', 'uses' => 'ProfileController@getProfile']);

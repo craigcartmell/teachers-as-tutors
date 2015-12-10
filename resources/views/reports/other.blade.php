@@ -1,11 +1,11 @@
 @extends('app')
 
 @section('title')
-    {{  'My Reports' }}
+    {{  'Other Reports' }}
 @endsection
 
 @section('breadcrumbs')
-    {!! Breadcrumbs::render('reports') !!}
+    {!! Breadcrumbs::render('reports-other') !!}
 @endsection
 
 @include('reports.partials.records')

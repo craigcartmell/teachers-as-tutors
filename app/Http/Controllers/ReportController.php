@@ -4,6 +4,7 @@ namespace TeachersAsTutors\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Mail\Mailer;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use TeachersAsTutors\Http\Requests;
 use TeachersAsTutors\Report;
@@ -126,5 +127,12 @@ class ReportController extends Controller
 
         return redirect()->back()->with('notification_sent',
             'A notification email has been sent to ' . $report->parent->email);
+    }
+
+    public function getOther()
+    {
+        $reports = Report::query()->whereNull('created_by')->orWhere('created_by', '!=', auth()->user()->getKey())->get();
+
+        return view('reports.other', ['reports' => $reports,]);
     }
 }
