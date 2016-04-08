@@ -29,10 +29,9 @@ class ContactController extends Controller
         $email = $request->input('email');
         $name  = $request->input('name');
 
-        $body = "This email was sent via the " . env('APP_NAME') . " contact form.\n\n{$request->input('body')}";
+        $body = "This email was sent from {$name}({$email}) via the " . env('APP_NAME') . " contact form.\n\n{$request->input('body')}";
 
         $mailer->raw($body, function ($m) use ($email, $name) {
-            $m->from($email, $name);
             $m->to(env('MAIL_TO'))->subject(env('APP_NAME') . ' - Contact Form');
         });
 
