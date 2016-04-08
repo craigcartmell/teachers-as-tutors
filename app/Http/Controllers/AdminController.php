@@ -66,9 +66,12 @@ class AdminController extends Controller
 
         $user->name  = $request->input('name');
         $user->email = $request->input('email');
+        
+        $user->password = bcrypt(str_random());
         if (! empty($request->input('password'))) {
             $user->password = bcrypt($request->input('password'));
         }
+        
         $user->permission_id = $request->input('permission_id');
         $user->is_enabled    = $request->input('is_enabled');
 
